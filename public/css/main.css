@@ -1,0 +1,59 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #fff;
+
+    color: #fff;
+    font-family: Arial;
+    font-size: 12px;
+}
+
+
+nav {
+    height: 40px;
+    width: 100%;
+    background: #40C0FF;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    width: 600px;
+    height: 40px;
+}
+
+nav li {
+    display: inline;
+    float: left;
+}
+
+nav a {
+    color: #FFFFFF;
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+    text-decoration: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 40px;
+    text-shadow: 1px 1px 0px #283744;
+}
+
+.startup{
+    margin-top: 20px;
+    
+
+}
+
+.signin{
+    
+    margin-top: 40px;
+}
+
+.formb{
+    background-color: #40C0FF;
+    padding-bottom: 20px;
+
+}

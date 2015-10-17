@@ -1,0 +1,30 @@
+[
+    {
+        "ssid": 101,
+        "tname": "Angular",
+        "pname": "Shiva",
+        "tskills": 3,
+        "pskills": 4
+    },
+    {
+        "ssid": 102,
+        "tname": "ReactJS",
+        "pname": "Ramesh",
+        "tskills": 3,
+        "pskills": 4
+    },
+    {
+        "ssid": 103,
+        "tname": "BackoneJS",
+        "pname": "Pavan",
+        "tskills": 3,
+        "pskills": 4
+    },
+    {
+        "ssid": 104,
+        "tname": "Angular-2",
+        "pname": "Sai",
+        "tskills": 3,
+        "pskills": 4
+    }
+]
