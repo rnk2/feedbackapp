@@ -18,7 +18,7 @@
                 </li>
                 <li><a href="/signin">Login</a></li>
                 <li><a href="/logout">Logout</a></li>
-                <li><a href="/userfeedback/70812">UserFeedback</a></li>
+                <li><a href="/userfeedback/32202">UserFeedback</a></li>
                 <li><a href="/presenter">Presenter</a></li>
                 <!-- <li><a href="/feedback">Feedback</a></li> -->
             </ul>
@@ -27,9 +27,9 @@
         </section>
         <script id="presenterTemplate" type="text/x-handlebars-template">
             <div class="row startup">
-                <div class="col-sm-1 col-md-1" startup>
+            <div class="col-sm-1 col-md-1 startup">
                 </div>
-                <div class="col-sm-8 col-md-8" startup>
+            <div class="col-sm-8 col-md-8 startup">
                     <table class="table table-bordered" id="tblinput">
                         <thead>
                             <tr>
@@ -64,7 +64,23 @@
                         </tr>
                     </table>
                 </div>
+                </div>
+                <div class="row startup">
+                <div class="col-sm-1 col-md-1 startup">
+                </div>
+                <div class="col-sm-8 col-md-8 startup">
+                    <table class="table table-bordered" id="crud">
+                        <tr>
+                            <th width="75">SSID</th>
+                            <th width="75">Topic Name</th>
+                            <th width="75">Participant Name</th>
+                            <th width="75">Email</th>
+                            
+                        </tr>
+                    </table>
+                </div>
             </div>
+            
         </script>
         <script id="homeTemplate" type="text/x-handlebars-template">
             <div class="container startup">
@@ -302,6 +318,14 @@
             <td>{{partcp}}</td>
             <td><a href="/mailto">Send email</a></td>
             <td><a href="/ratingss" class="btn btn-primary btn-lg active ratebtn" data-id="{{ssid}}" role="button">Feedback</a></td>
+        </script>
+        <script type="text/x-handlebars-template" id="parts-template">
+            <td>{{ssid}}</td>
+            <td>{{topic_name}}</td>
+            <td>{{partc_name}}</td>
+            <td>{{email}}</td>
+            
+            
         </script>
         <script type="text/x-handlebars-template" id="rating-template">
             <div class="row">

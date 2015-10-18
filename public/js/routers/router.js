@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'modelBoard', 'collectionBoard', 'presenter','home', 'technologies','mailing','feedview','sessions', 'feedback', 'rating', 'register','signin', 'feedBoard', 'feedsBoard','registrationBoard','registrationsBoard','signinBoard','signinsBoard'], function($, Backbone, Mboard, BaseCollection,PresenterView, HomeView, TechnologiesView,MailingView,FeedView,SessionsView, FeedbackView, RatingView, SignupView,SigninView, FeedModel, FeedCollection, RatingModel, RatingsCollection,RegisterModel,RegisterCollection,SigninModel, SigninCollection) {
+define(['jquery', 'backbone', 'modelBoard', 'collectionBoard','participant','participants','presenter','home','technologies','mailing','feedview','sessions', 'feedback', 'rating', 'register','signin', 'feedBoard', 'feedsBoard','registrationBoard','registrationsBoard','signinBoard','signinsBoard'], function($, Backbone, Mboard, BaseCollection,ParticipantModel,ParticipantsCollection,PresenterView, HomeView, TechnologiesView,MailingView,FeedView,SessionsView, FeedbackView, RatingView, SignupView,SigninView, FeedModel, FeedCollection, RatingModel, RatingsCollection,RegisterModel,RegisterCollection,SigninModel, SigninCollection) {
     var feedapp = Backbone.Router.extend({
 
 
@@ -31,8 +31,9 @@ define(['jquery', 'backbone', 'modelBoard', 'collectionBoard', 'presenter','home
         presenter : function(){
             console.log("presenter page");
             console.log(PresenterView);
+            console.log(ParticipantsCollection);
             if(!this.presenterView){
-                this.presenterView = new PresenterView(); 
+                this.presenterView = new PresenterView({collection:ParticipantsCollection}); 
             }
             $('.displayBoard').html(this.presenterView.render().el);
         },
@@ -60,7 +61,7 @@ define(['jquery', 'backbone', 'modelBoard', 'collectionBoard', 'presenter','home
         },
 
         feedback: function() {
-
+            console.log(BaseCollection);
             console.log('feedback page');
             if (!this.feedbackView) {
                 this.feedbackView = new FeedbackView({
