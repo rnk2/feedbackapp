@@ -1,0 +1,30 @@
+[
+    {
+        "ssid": 101,
+        "tname": "Angular",
+        "pname": "Shiva",
+        "pst_date": "2015-12-25",
+        "partcp": ["Kishore","Suresh","Ramesh","Kiran","Srikanth"]
+    },
+    {
+        "ssid": 102,
+        "tname": "ReactJS",
+        "pname": "Ramesh",
+        "pst_date": "2015-10-25",
+        "partcp": ["Manish","Surya","Rajesh","Kishore","Karthik"]
+    },
+    {
+        "ssid": 103,
+        "tname": "BackoneJS",
+        "pname": "Pavan",
+        "pst_date": "2015-09-20",
+        "partcp": ["Kishore","Suresh","Ramesh","Kiran","Srikanth"]
+    },
+    {
+        "ssid": 104,
+        "tname": "Angular-2",
+        "pname": "Sai",
+        "pst_date": "2016-01-08",
+        "partcp": ["Manish","Surya","Rajesh","Kishore","Karthik"]
+    }
+]
