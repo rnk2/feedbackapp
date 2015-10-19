@@ -14,6 +14,7 @@ exports.init = function(app, passport,smtpTransport) {
 
     app.get('/', home.render);
     app.get('/technologies',home.render);
+    app.get('/presenter',home.render);
 
     app.get('/presenter',home.render);
 
@@ -50,6 +51,13 @@ exports.init = function(app, passport,smtpTransport) {
         console.log("form feedback page");
         db.config.query('SELECT * FROM feedback', function(req, res) {
 
+            response.send(res);
+        });
+    });
+
+    app.get('/partcpates',function(request,response){
+        console.log("from presenter page");
+        db.config.query('select * from participants',function(req,res){
             response.send(res);
         });
     });
@@ -105,6 +113,21 @@ exports.init = function(app, passport,smtpTransport) {
             response.send(res);
         });
 
+        console.log(query.sql);
+    });
+     
+    app.post('/partcpates',function(request,response){
+        console.log("post");
+        console.log(request.body); 
+        var ssid = request.body.ssid;
+        var tname = request.body.topic_name;
+        var pname = request.body.partc_name;
+        var pst_date = request.body.email;
+        
+        var query = db.config.query('insert into participants(ssid,topic_name,partc_name,email) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" +');', function(req, res) {
+            console.log(res);
+            response.send(res);
+        });
         console.log(query.sql);
     });
 
