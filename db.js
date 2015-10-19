@@ -2,10 +2,10 @@ mysql = require('mysql');
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    port: '3306',
+    port: '3309',
     user: 'root',
-    password: 'root',
-    database: 'feedback'
+    password: 'admin',
+    database: 'feedapp'
 });
 
 module.exports = {

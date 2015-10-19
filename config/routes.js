@@ -48,15 +48,8 @@ exports.init = function(app, passport,smtpTransport) {
 
     app.get('/index', function(request, response) {
         console.log("form feedback page");
-        db.config.query('SELECT * FROM feedbacks', function(req, res) {
+        db.config.query('SELECT * FROM feedback', function(req, res) {
 
-            response.send(res);
-        });
-    });
-
-    app.get('/partcpates',function(request,response){
-        console.log("from presenter page");
-        db.config.query('select * from participants',function(req,res){
             response.send(res);
         });
     });
@@ -67,7 +60,7 @@ exports.init = function(app, passport,smtpTransport) {
     app.get('/ratings/:id', function(request, response) {
         console.log("test" + request.params.id);
 
-        db.config.query('select * from registration where ssid =' + request.params.id, function(req, res) {
+        db.config.query('select * from registrations where ssid =' + request.params.id, function(req, res) {
             console.log(res);
             response.send(res);
         });
@@ -87,7 +80,7 @@ exports.init = function(app, passport,smtpTransport) {
 
         console.log(status);
 
-        var query = db.config.query('insert into registration(ssid,user,email,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + email + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status +');', function(req, res) {
+        var query = db.config.query('insert into registrations(ssid,user,email,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + email + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status +');', function(req, res) {
             console.log(res);
             response.send(res);
         });
@@ -105,28 +98,13 @@ exports.init = function(app, passport,smtpTransport) {
         var pst_date = request.body.pst_date;
         var partcp = request.body.partcp;
 
-        var query = db.config.query('insert into feedbacks(ssid,tname,pname,pst_date,partcp) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + "," + "'" + partcp + "'" + ');', function(req, res) {
+        var query = db.config.query('insert into feedback(ssid,tname,pname,pst_date,partcp) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + "," + "'" + partcp + "'" + ');', function(req, res) {
 
 
 
             response.send(res);
         });
 
-        console.log(query.sql);
-    });
-
-    app.post('/partcpates',function(request,response){
-        console.log("post");
-        console.log(request.body); 
-        var ssid = request.body.ssid;
-        var tname = request.body.topic_name;
-        var pname = request.body.partc_name;
-        var pst_date = request.body.email;
-        
-        var query = db.config.query('insert into participants(ssid,topic_name,partc_name,email) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" +');', function(req, res) {
-            console.log(res);
-            response.send(res);
-        });
         console.log(query.sql);
     });
 
@@ -162,26 +140,28 @@ exports.init = function(app, passport,smtpTransport) {
     app.get('/send', function(req, res) {
        
         //var id = new Date().getTime() + Math.random();
-
+        
+        var emailsep = req.query.to.split(',');
+        //console.log(emailsep);
         var ssid =req.query.ssid;
         console.log(ssid);
-        var id= Math.floor(Math.random()*90000) + 10000;
-        console.log("id"+id);
-
-        var query = db.config.query('insert into idgeneration(ssid,timestamp) values('+ssid+"," +id+ ');',function(req,resp){
+        for(var i=0;i<emailsep.length;i++){
+            console.log(emailsep[i]);
+            var id= Math.floor(Math.random()*90000) + 10000;
+             console.log("id"+id);
+            var query = db.config.query('insert into idgeneration(ssid,timestamp) values('+ssid+"," +id+ ');',function(req,resp){
              console.log("response"+resp);
 
+
         });
-         console.log(query.sql);
-        var mailoptions = {
-            to: req.query.to,
+             var mailoptions = {
+            to: emailsep[i],
             subject: req.query.subject,
              html: "<b>please click on below link to submit your feedback</b>"            
             +'<br/><a href="http://localhost:3000/userfeedback/'+id+'">feedback</a>'
             
 
         }
-        console.log(mailoptions);
         smtpTransport.sendMail(mailoptions, function(error, response) {
             if (error) {
                 console.log(error);
@@ -191,6 +171,23 @@ exports.init = function(app, passport,smtpTransport) {
                 res.end("sent");
             }
         });
+
+        }
+        // var id= Math.floor(Math.random()*90000) + 10000;
+        // console.log("id"+id);
+
+        
+         console.log(query.sql);
+        // var mailoptions = {
+        //     to: req.query.to,
+        //     subject: req.query.subject,
+        //      html: "<b>please click on below link to submit your feedback</b>"            
+        //     +'<br/><a href="http://localhost:3000/userfeedback/'+id+'">feedback</a>'
+            
+
+        // }
+        // console.log(mailoptions);
+        
 
     });
 
