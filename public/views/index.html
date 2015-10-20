@@ -18,7 +18,7 @@
                 </li>
                 <li><a href="/signin">Login</a></li>
                 <li><a href="/logout">Logout</a></li>
-                <li><a href="/userfeedback/88691">UserFeedback</a></li>
+                <li><a href="/userfeedback/81764">UserFeedback</a></li>
                 <li><a href="/presenter">Presenter</a></li>
                 <!-- <li><a href="/feedback">Feedback</a></li> -->
             </ul>
@@ -27,9 +27,9 @@
         </section>
         <script id="presenterTemplate" type="text/x-handlebars-template">
             <div class="row startup">
-                <div class="col-sm-1 col-md-1" startup>
+            <div class="col-sm-1 col-md-1 startup">
                 </div>
-                <div class="col-sm-8 col-md-8" startup>
+            <div class="col-sm-8 col-md-8 startup">
                     <table class="table table-bordered" id="tblinput">
                         <thead>
                             <tr>
@@ -56,6 +56,7 @@
                             </td>
                             <td>
                             </td>
+                            
                             <td>
                                 <button id="btnadd">Submit</button>
                                 <button id="btnclear">Reset</button>
@@ -63,7 +64,31 @@
                         </tr>
                     </table>
                 </div>
+                </div>
+                <div class="row startup">
+                <div class="col-sm-1 col-md-1 startup">
+                </div>
+                <div class="col-sm-8 col-md-8 startup">
+                    <table class="table table-bordered" id="crud">
+                        <tr>
+                            <th width="75">SSID</th>
+                            <th width="75">Topic Name</th>
+                            <th width="75">Participant Name</th>
+                            <th width="75">Email</th>
+                            
+                        </tr>
+                    </table>
+                </div>
             </div>
+            
+        </script>
+        <script type="text/x-handlebars-template" id="parts-template">
+            <td>{{ssid}}</td>
+            <td>{{topic_name}}</td>
+            <td>{{partc_name}}</td>
+            <td>{{email}}</td>
+            
+            
         </script>
         <script id="homeTemplate" type="text/x-handlebars-template">
             <div class="container startup">
