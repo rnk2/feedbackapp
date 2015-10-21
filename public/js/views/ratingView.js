@@ -125,7 +125,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard',
             var lineChartData = {
                 labels: names,
                 datasets: [{
-                    label: "My First dataset",
+                    label: "Presentation Skills",
                     fillColor: "rgba(220,220,220,0.2)",
                     strokeColor: "rgba(220,220,220,1)",
                     pointColor: "rgba(220,220,220,1)",
@@ -134,7 +134,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard',
                     pointHighlightStroke: "rgba(220,220,220,1)",
                     data: pskills
                 }, {
-                    label: "My Second dataset",
+                    label: "Technical Skills",
                     fillColor: "rgba(151,187,205,0.2)",
                     strokeColor: "rgba(151,187,205,1)",
                     pointColor: "rgba(151,187,205,1)",
@@ -148,7 +148,8 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard',
             }
             ctx = document.getElementById("canvas").getContext("2d");
             window.myLine = new Chart(ctx).Line(lineChartData, {
-                responsive: true
+                responsive: true,
+                multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
             });
 
 
