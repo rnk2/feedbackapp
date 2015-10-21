@@ -35,10 +35,10 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'signinBoard', 'signinsBoa
                     console.log(response.username);
                     
                     if(response.username){
-                        window.location.href = 'http://localhost:3000/feedback';
+                        window.location.href = 'http://localhost:3000#feedback';
                     }
                     else{
-                        window.location.href = 'http://localhost:3000/signup';
+                        window.location.href = 'http://localhost:3000#signup';
                     }
                     
                 }

@@ -50,4 +50,6 @@ require.config({
 });
 
 
-require(["init"]);
+require(["app"],function(app){
+    app.start();
+});

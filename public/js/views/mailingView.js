@@ -40,7 +40,7 @@ mailView = Backbone.View.extend({
     },
 
     sendData : function(e){
-        alert("naresh send data");
+        // alert("naresh send data");
         to = $("#to").val();
                         subject = $("#subject").val();
                         text = $("#content").val();

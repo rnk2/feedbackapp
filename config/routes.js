@@ -1,5 +1,5 @@
 var home = require('../app/controller/home');
-var profile = require('../app/controller/profile');
+var feedback = require('../app/controller/feedback');
 var db = require('../db');
 
 exports.init = function(app, passport,smtpTransport) {
@@ -22,7 +22,7 @@ exports.init = function(app, passport,smtpTransport) {
 
     app.get('/signin', home.render);
 
-     app.get('/userfeedback/:id',home.render);
+    app.get('/userfeedback/:id',home.render);
 
     // app.get('/userfeedback/:id',function(req,res){
     //      console.log(req.params.id);

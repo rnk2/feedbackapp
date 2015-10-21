@@ -1,5 +1,5 @@
 exports.render = function(req, res, next) {
-    res.render('profile.html', {
+    res.render('feedback.html', {
         msg: "Welcome"
     });
 };

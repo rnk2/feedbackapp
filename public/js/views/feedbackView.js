@@ -98,10 +98,10 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
 
         addtwo : function(e){
             //e.preventDefault();
-            alert("ratings button");
+            // alert("ratings button");
             var target=e.currentTarget.getAttribute('data-id');
             
-            var rating=e.currentTarget.setAttribute('href',"ratingss/"+target);
+            var rating=e.currentTarget.setAttribute('href',"#ratingss/"+target);
             
             // $(".ratbtn").off('click');
 

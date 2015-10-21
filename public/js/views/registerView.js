@@ -29,7 +29,7 @@ SigninView = Backbone.View.extend({
         console.log("signupview");
         var signup = new RegisterModel();
         console.log(signup);
-        alert("signup");
+        // alert("signup");
          signup.set('username',$("#username").val());
          // signup.set('email',$("#email").val());
          signup.set('password',$("#password").val());

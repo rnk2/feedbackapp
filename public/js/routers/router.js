@@ -94,7 +94,7 @@ define(['jquery', 'backbone', 'modelBoard', 'collectionBoard','participant','par
 
         ratings: function(id) {
             console.log("rating page");
-            alert("router with target id");
+            // alert("router with target id");
 
             console.log(id);
             

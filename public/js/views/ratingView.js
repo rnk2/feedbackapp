@@ -155,16 +155,6 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard',
             return this;
         }
 
-        
-        // afterRender : function(){
-        //     alert("hi afterrender");
-        // }
-           
-
-
-
-
-
     });
 
 
