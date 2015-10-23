@@ -185,6 +185,7 @@ exports.init = function(app, passport,smtpTransport) {
             
 
         }
+        
         smtpTransport.sendMail(mailoptions, function(error, response) {
             if (error) {
                 console.log(error);
