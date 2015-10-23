@@ -181,7 +181,7 @@ exports.init = function(app, passport,smtpTransport) {
             to: emailsep[i],
             subject: req.query.subject,
              html: "<b>please click on below link to submit your feedback</b>"            
-            +'<br/><a href="http://localhost:3000/userfeedback/'+id+'">feedback</a>'
+            +'<br/><a href="http://localhost:3000/#userfeedback/'+id+'">feedback</a>'
             
 
         }
