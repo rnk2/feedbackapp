@@ -10,7 +10,7 @@ create table feedback(ssid int(3),tname char(15),pname char(15),pst_date date,pa
 	
 create table idgeneration(ssid int(3),timestamp int(60),foreign key (ssid) references feedback(ssid),primary key (timestamp));
 
-create table registration(ssid int(3),user char(50),email char(50),pskills int(5),tskills int(5),timestamp int(60),status b
+create table registrations(ssid int(3),user char(50),email char(50),pskills int(5),tskills int(5),timestamp int(60),status b
 ool,foreign key (timestamp) references idgeneration(timestamp),foreign key (ssid) references feedback(ssid));
 
 

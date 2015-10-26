@@ -14,22 +14,21 @@
         <nav class="menu">
             <ul class="footer">
                 <li><a href="#">Home</a></li>
-                <li><a href="#technologies">Technologies</a>
+                <li><a href="#Requests">Requests</a>
                 </li>
                 <li><a href="#signin">Login</a></li>
                 <li><a href="#logout">Logout</a></li>
-                
                 <li><a href="#presenter">Presenter</a></li>
-               
+                <li><a href="#user">User</a></li>
             </ul>
         </nav>
         <section class="displayBoard">
         </section>
         <script id="presenterTemplate" type="text/x-handlebars-template">
             <div class="row startup">
-            <div class="col-sm-1 col-md-1 startup">
+                <div class="col-sm-1 col-md-1 startup">
                 </div>
-            <div class="col-sm-8 col-md-8 startup">
+                <div class="col-sm-8 col-md-8 startup">
                     <table class="table table-bordered" id="tblinput">
                         <thead>
                             <tr>
@@ -56,7 +55,6 @@
                             </td>
                             <td>
                             </td>
-                            
                             <td>
                                 <button id="btnadd">Submit</button>
                                 <button id="btnclear">Reset</button>
@@ -64,8 +62,8 @@
                         </tr>
                     </table>
                 </div>
-                </div>
-                <div class="row startup">
+            </div>
+            <div class="row startup">
                 <div class="col-sm-1 col-md-1 startup">
                 </div>
                 <div class="col-sm-8 col-md-8 startup">
@@ -75,20 +73,74 @@
                             <th width="75">Topic Name</th>
                             <th width="75">Participant Name</th>
                             <th width="75">Email</th>
-                            
                         </tr>
                     </table>
                 </div>
             </div>
-            
         </script>
         <script type="text/x-handlebars-template" id="parts-template">
             <td>{{ssid}}</td>
             <td>{{topic_name}}</td>
             <td>{{partc_name}}</td>
             <td>{{email}}</td>
-            
-            
+        </script>
+        <script type="text/x-handlebars-template" id="user-template">
+            <div class="container startup">
+                <div class="row">
+                    <div class="col-sm-2 col-md-2">
+                    </div>
+                    <div class="col-sm-2 col-md-2">
+                        <img class="thumb" alt="upload photo" src="" />
+                    </div>
+                    <div class="col-sm-1 col-md-1">
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <label>Name: </label>
+                        <br/>
+                        <label>Designation:</label>
+                    </div>
+                </div>
+                <div class="row startup">
+                    <div class="col-sm-2 col-md-2">
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <table class="table table-bordered" id="crud">
+                            <tr>
+                                <th>SSID</th>
+                                <th>Topic Name</th>
+                                <th>Date</th>
+                                <th>Get Details</th>
+                                <th>Changes</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-5 col-md-7">
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add New</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Modal Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Some text in the modal.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </script>
         <script id="homeTemplate" type="text/x-handlebars-template">
             <div class="container startup">
@@ -127,7 +179,9 @@
             </div>
         </script>
         <script id="technologiesTemplate" type="text/x-handlebars-template">
-            technologies
+            <div class="row">
+                <h2>Requests and Suggestions</h2>
+            </div>
         </script>
         <script id="mailingTemplate" type="text/x-handlebars-template">
             <div class="form-inline startup">
@@ -141,115 +195,6 @@
                 <span id="message"></span>
             </div>
         </script>
-        <script id="sessionsTemplate" type="text/x-handlebars-template">
-            <div class="row">
-                <div class="col-sm-1 col-md-1">
-                </div>
-                <div class="col-sm-8 col-md-8 startup">
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li>
-                                {{#if user}}
-                                <p class="navbar-text">
-                                    <strong>Hi,</strong>
-                                    <img src="{{user.avatar}}" width="20" height="20"> {{user.username}}
-                                </p>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="/logout">Log Out</a>
-                            </li>
-                            {{else}}
-                            <a href="/logout">Log Out</a>
-                            </li>
-                            {{/if}}
-                        </ul>
-                    </div>
-                    </br>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Session ID</th>
-                                <th>Topic Name</th>
-                                <th>Presenter</th>
-                                <th>Technical Skills</th>
-                                <th>Presentation Skills</th>
-                                <th></th>
-                            </tr>
-                            <tr>
-                                <td>101</td>
-                                <td>ReactJS</td>
-                                <td>Ram</td>
-                                <td>
-                                    <div class="rating">
-                                        <span>rating</span>
-                                        <span><img value="1" src="images/star.png" alt="start" class="img-circle star" width="
-                                              20px" height="20px">
-                                              <img value="2" src="images/star.png" class="img-circle star" width="      20px" height="20px">
-                                              <img value="3" src="images/star.png"class="img-circle star" width="      20px" height="20px">
-                                              <img value="4" src="images/star.png" class="img-circle star" width="      20px" height="20px">
-                                              <img value="5" src="images/star.png" class="img-circle star" width="      20px" height="20px">
-                                                  
-                                              
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="rating">
-                                        <span>rating</span>
-                                        <span class="top" data-original-title="Tooltip on right">
-                                    <img value="1" src="images/star.png" class="img-circle star" width="
-                                              20px" height="20px">
-                                              <img value="2" src="images/star.png" class="img-circle star" width="20px" height="20px">
-                                              <img value="3" src="images/star.png" class="img-circle star" width="      20px" height="20px">
-                                              <img value="4" src="images/star.png" class="img-circle star" width="      20px" height="20px">
-                                              <img value="5" src="images/star.png" class="img-circle star" width="      20px" height="20px">
-                                                  
-                                              
-                                        </span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button id="sbutton" value="Submit">Submit</button>
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="col-sm-2 col-md-2 startup">
-                    <table class="table-responsive table table-bordered">
-                        <thead>
-                            <tr class="active">
-                                <th>Completed Sessions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="success">
-                                <td>BackboneJS</td>
-                            </tr>
-                            <tr class="success">
-                                <td>AngularJS</td>
-                            </tr>
-                            <tr class="success">
-                                <td>NodeJS</td>
-                            </tr>
-                            <tr class="active">
-                                <td><strong>Upcoming Sessions</strong></td>
-                            </tr>
-                            <tr class="success">
-                                <td>Flux</td>
-                            </tr>
-                            <tr class="success">
-                                <td>ReactJS</td>
-                            </tr>
-                            <tr class="success">
-                                <td>Grunt</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-        </script>
         <script id="feedbackTemplate" type="text/x-handlebars-template">
             <div class="row startup">
                 <div class="col-sm-1 col-md-1" startup>
@@ -262,7 +207,6 @@
                                 <th width="75"><strong>Topic Name</strong></th>
                                 <th width="75"><strong>Presenter Name</strong></th>
                                 <th width="75"><strong>Date</strong></th>
-                                <th width="75"><strong>Participants</strong></th>
                             </tr>
                         </thead>
                         <tr>
@@ -274,18 +218,8 @@
                                 <input type="text" id="pname" placeholder="presenter" /> </td>
                             <td>
                                 <input type="date" id="pst_date" placeholder="scheduled time" /> </td>
-                            <td>
-                                <select id="attended">
-                                    <option value="UITEAM">UI TEAM</option>
-                                    <option value="JAVATEAM">JAVA TEAM</option>
-                                    <option value="TESTINGTEAM">TESTING TEAM</option>
-                                    <option value="HRTEAM" selected>HR TEA</option>
-                                </select>
-                            </td>
                         </tr>
                         <tr>
-                            <td>
-                            </td>
                             <td>
                             </td>
                             <td>
@@ -310,7 +244,6 @@
                             <th width="75">Topic Name</th>
                             <th width="75">Presenter</th>
                             <th width="75">Date</th>
-                            <th width="75">Participants</th>
                             <th width="75">Send Mail</th>
                             <th width="75">Get Feedback</th>
                         </tr>
@@ -318,17 +251,24 @@
                 </div>
             </div>
         </script>
+        <script type="text/x-handlebars-template" id="userfeed-template">
+            <td>{{ssid}}</td>
+            <td>{{tname}}</td>
+            <td>{{pst_date}}</td>
+            <td><a href="#sessions" class="btn btn-primary btn-sm active ssbtn" data-id="{{ssid}}" role="button">View Details</a></td>
+            <td>
+                <button id="update">Edit</button>
+            </td>
+        </script>
         <script type="text/x-handlebars-template" id="feed-template">
             <td>{{ssid}}</td>
             <td>{{tname}}</td>
             <td>{{pname}}</td>
             <td>{{pst_date}}</td>
-            <td>{{partcp}}</td>
             <td><a href="#mailto">Send email</a></td>
             <td><a href="#ratingss" class="btn btn-primary btn-lg active ratebtn" data-id="{{ssid}}" role="button">Feedback</a></td>
         </script>
         <script type="text/x-handlebars-template" id="rating-template">
-        
             <div class="row">
                 <div class="col-sm-1 col-md-1">
                 </div>
@@ -345,15 +285,13 @@
                 </div>
             </div>
             <div class="row">
-            <div class="col-sm-1 col-md-1">
+                <div class="col-sm-1 col-md-1">
                 </div>
                 <div class="col-sm-10 col-md-10">
-                <div style="height:450px; width:600px">
+                    <div style="height:450px; width:600px">
                         <canvas id="canvas"></canvas>
+                    </div>
                 </div>
-                </div>
-                
-                
             </div>
         </script>
         <script type="text/x-handlebars-template" id="ratingfeed-template">
@@ -458,8 +396,8 @@
                 </div>
             </div>
         </script>
-        </div>
-        <script data-main="js/main" src="js/lib/require.js"></script>
+    </div>
+    <script data-main="js/main" src="js/lib/require.js"></script>
 </body>
 
 </html>
