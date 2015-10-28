@@ -1,4 +1,31 @@
-define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant','participants','presenter','home', 'technologies','mailing','feedview','sessions', 'feedback', 'rating', 'register','signin', 'feedBoard', 'feedsBoard','registrationBoard','registrationsBoard','signinBoard','signinsBoard'], function($, Backbone,Mboard,BaseCollection,UserView,ParticipantsModel,ParticpantesCollection,PresenterView, HomeView, TechnologiesView,MailingView,FeedView,SessionsView, FeedbackView, RatingView, SignupView,SigninView, FeedModel, FeedCollection, RatingModel, RatingsCollection,RegisterModel,RegisterCollection,SigninModel, SigninCollection) {
+define(['jquery', 'backbone',
+    'modelBoard', 'collectionBoard',
+    'user','mailers','mailer',
+    'mailing','sessionBoard',
+    'sessionsBoard','participant',
+    'participants','presenter',
+    'home', 'technologies',
+    'feedview','sessions', 
+    'feedback', 'rating',
+    'register','signin', 
+    'feedBoard', 'feedsBoard',
+    'registrationBoard','registrationsBoard',
+    'signinBoard','signinsBoard'
+    ], function($,Backbone,
+        Mboard,BaseCollection,
+        UserView,MailingCollection,
+        MailModel,MailingView,SessionModel,
+        SessionCollection,ParticipantsModel,
+        ParticpantesCollection,PresenterView,
+        HomeView, TechnologiesView,
+        FeedView,SessionsView, 
+        FeedbackView, RatingView,
+        SignupView,SigninView, 
+        FeedModel, FeedCollection,
+         RatingModel, RatingsCollection,
+         RegisterModel,RegisterCollection,
+         SigninModel, SigninCollection
+         ) {
     var feedapp = Backbone.Router.extend({
 
 
@@ -6,12 +33,12 @@ define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant
         routes: {
             '': 'home',
             'Requests': 'Requests',
-            'sessions': 'sessions',
+            'sessions/:id': 'sessions',
             'feedback': 'feedback',
             'signup': 'signup',
             'signin' :'signin',
             'ratingss/:id': 'ratings',
-            'mailto':'mailto',
+            'mailto/:id':'mailto',
             'logout' : 'logout',
             'presenter' : 'presenter',
             'userfeedback/:id' : 'userfeedback',
@@ -34,7 +61,9 @@ define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant
             console.log("UserView");
             if (!this.userView) {
                 this.userView = new UserView({
-                    collection: BaseCollection
+                    collection: {
+                        records : new BaseCollection()
+                    }
                 });
             }
             $('.displayBoard').html(this.userView.render().el);
@@ -58,11 +87,17 @@ define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant
             $('.displayBoard').html(this.technologiesView.render().el);
         },
 
-        sessions: function() {
-            console.log("admission page");
-            if (!this.sessionsView) {
-                this.sessionsView = new SessionsView({collection:MailingCollection,mid : id});
-            }
+        sessions: function(id) {
+            
+            
+                this.sessionsView = new SessionsView({
+                    collection : {
+                        partc : new SessionCollection(),
+                        ratings : new FeedCollection()
+                    },
+                    mid : id
+                });
+            
             $('.displayBoard').html(this.sessionsView.render().el);
 
         },
@@ -70,13 +105,13 @@ define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant
         feedback: function() {
 
             console.log('feedback page');
-            if (!this.feedbackView) {
+            
                 this.feedbackView = new FeedbackView({
-                    collection: BaseCollection
+                    collection: {
+                        records: new BaseCollection() }
                 });
                 console.log('feedback router');
-            }
-            //this.feedbackView.render();
+            
             $('.displayBoard').html(this.feedbackView.render().el);
         },
 
@@ -102,7 +137,7 @@ define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant
 
         ratings: function(id) {
             console.log("rating page");
-            // alert("router with target id");
+            alert("ratings");
 
             console.log(id);
             
@@ -116,11 +151,11 @@ define(['jquery', 'backbone','modelBoard', 'collectionBoard','user','participant
             window.location.href = 'http://localhost:3000/logout'
         },
 
-        mailto : function(){
+        mailto : function(id){
             console.log("sending mail");
 
             if(!this.mailView){
-                this.mailView = new MailingView();
+                this.mailView = new MailingView({collection:MailingCollection,mid : id});
 
             }
             $('.displayBoard').html(this.mailView.render().el);

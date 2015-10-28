@@ -24,6 +24,53 @@
         </nav>
         <section class="displayBoard">
         </section>
+        <script id="sessionsTemplate" type="text/x-handlebars-template">
+            <div class="container startup">
+                <div class="row">
+                    <div class="col-sm-1 col-md-1">
+                    </div>
+                    <div class="col-sm-8 col-md-8">
+                        <div id = "titlee">
+                           
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row startup">
+                    <div class="col-sm-1 col-md-1">
+                    </div>
+                    <div class="col-sm-3 col-md-3">
+                        <h5>Participants List</h5>
+                        <table class="table table-bordered" id="feed">
+                            <tr>
+                                <th>SNO</th>
+                                <th>User</th>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">Add New</button>
+                <button type="button" class="btn btn-info btn-sm">send mail</button>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <div class="row">
+                            <h5>Feedback</h5>
+                            <div class="col-sm-10 col-md-10">
+                                <div style="height:450px; width:600px">
+                                    <canvas id="canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                
+
+                </div>
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="sessionfeed-template">
+            <td>{{sno}}</td>
+            <td>{{partc_name}}</td>
+        </script>
         <script id="presenterTemplate" type="text/x-handlebars-template">
             <div class="row startup">
                 <div class="col-sm-1 col-md-1 startup">
@@ -184,16 +231,39 @@
             </div>
         </script>
         <script id="mailingTemplate" type="text/x-handlebars-template">
-            <div class="form-inline startup">
-                <label for="currentsession">Enter current session id:</label>
-                <input id="ssid" type="text" class="form-control" placeholder=" ssid" />
-                <label for="recipient">Enter recipients email-id:</label>
-                <input id="to" type="email" class="form-control" placeholder="" />
-                <label for="subject">Subject:</label>
-                <input id="subject" type="text" class="form-control" placeholder="Write Subject" />
-                <button id="send_email">Send Email</button>
-                <span id="message"></span>
-            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="form-inline startup">
+                        
+                        
+                        <label for="recipient">Enter recipients email-id:</label>
+                        <input id="to" type="email" class="form-control" placeholder="" />
+                        <button class="btn btn-primary btn-sm active ratebtn" value="select All" id="email">select All</button>
+                        <label for="subject">Subject:</label>
+                        <input id="subject" type="text" class="form-control" placeholder="Write Subject" />
+                        <button id="send_email">Send Email</button>
+                        <span id="message"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8 col-md-8 startup">
+                        <table class="table table-bordered" id="crud">
+                            <tr>
+                                <th width="75">SSID</th>
+                                <th width="75">Topic Name</th>
+                                <th width="75">Participant Name</th>
+                                <th width="75">Email</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </div>
+        </script>
+        <script type="text/x-handlebars-template" id="mail-template">
+            <td>{{ssid}}</td>
+            <td>{{topic_name}}</td>
+            <td>{{partc_name}}</td>
+            <td><input type=checkbox name=list value="1">&nbsp{{email}}</td>
         </script>
         <script id="feedbackTemplate" type="text/x-handlebars-template">
             <div class="row startup">
@@ -265,8 +335,8 @@
             <td>{{tname}}</td>
             <td>{{pname}}</td>
             <td>{{pst_date}}</td>
-            <td><a href="#mailto">Send email</a></td>
-            <td><a href="#ratingss" class="btn btn-primary btn-lg active ratebtn" data-id="{{ssid}}" role="button">Feedback</a></td>
+            <td><a href="#mailto" class="emailbtn" data-id="{{ssid}}">Send email</a></td>
+            <td><a href="#sessions" class="btn btn-primary btn-lg active ratebtn" data-id="{{ssid}}" role="button">Feedback</a></td>
         </script>
         <script type="text/x-handlebars-template" id="rating-template">
             <div class="row">

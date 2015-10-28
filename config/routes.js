@@ -55,13 +55,14 @@ exports.init = function(app, passport,smtpTransport) {
         });
     });
 
-    app.get('/partcpates',function(request,response){
+    app.get('/sessions/:id',function(request,response){
         console.log("from presenter page");
-        db.config.query('select * from participants',function(req,res){
+        console.log("test" + request.params.id);
+        db.config.query('select * from participants where ssid ='+request.params.id,function(req,res){
+            console.log(res);
             response.send(res);
         });
     });
-
     app.get('/ratingss/:id',home.render);
 
 

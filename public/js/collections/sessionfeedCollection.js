@@ -1,13 +1,16 @@
-define(['jquery','backbone','router','sessionBoard'], function($, Backbone,BaseRouter,SessionModel) {
+define(['jquery','backbone','router','participant'], function($, Backbone,BaseRouter,ParticipantModel) {
   
 
 
-var Sessions=Backbone.Collection.extend({
-    model:SessionModel,
-    url : '/sessions',
+var Meetings=Backbone.Collection.extend({
+    model:ParticipantModel,
+    url: function () {
+        return '/sessions/' + this.id;
+        
+    },
 
     initialize:function(){
-        console.log("collection created from ratings");
+        console.log("collection created from sessions");
 
         
     }
@@ -15,8 +18,7 @@ var Sessions=Backbone.Collection.extend({
 });
 
 
-  // var meetingsobj= new Meetings();
-  // console.log(meetingsobj);
-  return Sessions;
+  
+  return Meetings;
 
  });

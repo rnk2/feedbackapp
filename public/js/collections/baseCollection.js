@@ -15,8 +15,8 @@ var Meetings=Backbone.Collection.extend({
 });
 
 
-  var meetingsobj= new Meetings();
-  console.log(meetingsobj);
-  return meetingsobj;
+  // var meetingsobj= new Meetings();
+  // console.log(meetingsobj);
+  return Meetings;
 
  });

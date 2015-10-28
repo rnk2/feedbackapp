@@ -15,9 +15,9 @@ require.config({
         'registrationBoard': 'models/registrationModel',
         'signinBoard': 'models/signinModel',
         'participant' : 'models/participantsModel',
-        'sessionBoard' : 'models/mailModel',
+        'sessionBoard' : 'models/sessionfeedModel',
         'collectionBoard': 'collections/baseCollection',
-        'sessionsBoard' : 'collections/mailCollection',
+        'sessionsBoard' : 'collections/sessionfeedCollection',
         'feedsBoard': 'collections/feedCollection',
         'participants' : 'collections/participantsCollection',
         'registrationsBoard': 'collections/registrationCollection',
@@ -31,8 +31,11 @@ require.config({
         'signin': 'views/signinView',
         'feedview': 'views/feedView',
         'router': 'routers/router',
+        'mailers' : 'collections/mailCollection',
+        'mailer' : 'models/mailModel', 
         'mailing': 'views/mailingView',
-        'presenter' : 'views/presenterView'
+        'presenter' : 'views/presenterView',
+        'user' : 'views/userView'
 
     },
 

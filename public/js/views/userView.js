@@ -3,13 +3,21 @@ define(['jquery', 'backbone','handlebars','router','modelBoard', 'collectionBoar
 UserView = Backbone.View.extend({
     id: '#container',
     className: 'home',
+
+     events: {
+            'click button#btnadd': 'addData',
+            'click button#btnclear': 'clearInput',
+            'click .ssbtn' : 'addtwo'
+
+        },
+
     
     
 
     initialize: function() {
 
 
-            this.collection.on("add", this.addone, this);
+            this.collection.records.on("add", this.addone, this);
 
         },
 
@@ -21,7 +29,7 @@ UserView = Backbone.View.extend({
             $(this.el).html(html);
             this.delegateEvents();
 
-            BaseCollection.fetch({
+            this.collection.records.fetch({
                 success: function(collection) {
 
                     collection.each(function(index) {
@@ -96,7 +104,7 @@ UserView = Backbone.View.extend({
             // alert("ratings button");
             var target=e.currentTarget.getAttribute('data-id');
             
-            var rating=e.currentTarget.setAttribute('href',"#ratingss/"+target);
+            var rating=e.currentTarget.setAttribute('href',"#sessions/"+target);
             
             // $(".ratbtn").off('click');
 

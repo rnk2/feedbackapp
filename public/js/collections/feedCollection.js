@@ -20,8 +20,7 @@ define(['jquery','backbone','router','feedBoard'], function($,Backbone,BaseRoute
     });
 
 
-var feedsobj= new FeedBack();
-    console.log(feedsobj);
-    return feedsobj;
+
+    return FeedBack;
 
 });

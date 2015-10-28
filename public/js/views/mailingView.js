@@ -1,29 +1,40 @@
-define(['jquery', 'backbone','handlebars','router','feedBoard','feedsBoard'], function($, Backbone,Hbs,BaseRouter,FeedModel,FeedsCollection) {
-    
-mailView = Backbone.View.extend({
-    tagName: 'div',
-    className: 'home',
-    events: {
+define(['jquery', 'backbone', 'handlebars', 'router', 'mailers', 'mailer'], function($, Backbone, Hbs, BaseRouter, MailingCollection, MailingModel) {
+
+    var mailView = Backbone.View.extend({
+        id: '#container',
+        className: 'home',
+        events: {
             'click button#send_email': 'sendData',
-            
+            'click button#email' : 'addEmail'
+
 
         },
-    render: function () {
-        console.log("from mail view");
-        var template = $("#mailingTemplate").html();
-        var html = Handlebars.compile(template);
-        
-        $(this.el).html(html);
 
-        FeedsCollection.fetch({
+        initialize: function(options) {
+
+
+            this.collection.on("add", this.addone, this);
+            this.collection.id = options.mid;
+
+        },
+        render: function() {
+            var self = this;
+            console.log("from mail view");
+            var template = $("#mailingTemplate").html();
+            var html = Handlebars.compile(template);
+
+            $(this.el).html(html);
+             this.delegateEvents();
+
+            MailingCollection.fetch({
                 success: function(collection) {
-                    console.log('fetch success', this.collection.length);
+
 
 
 
                     collection.each(function(index) {
 
-                        // self.addone(index);
+                        self.addone(index);
 
                         console.log(index.attributes);
                     }, this);
@@ -36,31 +47,71 @@ mailView = Backbone.View.extend({
             });
 
 
-        return this;
-    },
+            return this;
+        },
 
-    sendData : function(e){
-        // alert("naresh send data");
-        to = $("#to").val();
-                        subject = $("#subject").val();
-                        text = $("#content").val();
-                        ssid = $("#ssid").val();
-                        $("#message").text("Sending E-mail...Please wait");
-                        $.get("http://localhost:3000/send", {
-                                to : to,
-                                subject : subject,
-                                text: text,
-                                ssid : ssid
-                            }, function(data) {
-                                if (data == "sent") {
-                                    $("#message").empty().html("Email is been sent at "+to+".Please check inbox!");
-                                    }
+        addone: function(model) {
+            
+            var subview = new feedSub({
+                model: model,
+                collection: this.collection
+            });
 
-                                });
-    }
+            $(this.el).find("#crud").append(subview.el);
+            subview.delegateEvents();
 
-});
+        },
 
-return mailView;
-       
+        addEmail : function(){
+            alert("hello");
+
+        },
+
+
+        sendData: function(e) {
+            // alert("naresh send data");
+            to = $("#to").val();
+            subject = $("#subject").val();
+            text = $("#content").val();
+            ssid = $("#ssid").val();
+            $("#message").text("Sending E-mail...Please wait");
+            $.get("http://localhost:3000/send", {
+                to: to,
+                subject: subject,
+                text: text,
+                ssid: ssid
+            }, function(data) {
+                if (data == "sent") {
+                    $("#message").empty().html("Email is been sent at " + to + ".Please check inbox!");
+                }
+
+            });
+        }
+
+    });
+
+    var feedSub = Backbone.View.extend({
+
+        tagName: 'tr',
+
+        initialize: function() {
+
+            this.render();
+        },
+        render: function() {
+            // console.log('in render');
+            var template = $("#mail-template").html();
+
+            var source = Handlebars.compile(template);
+            var html = source(this.model.toJSON());
+            console.log(html);
+            $(this.el).html(html);
+
+            return this;
+
+        }
+    });
+
+    return mailView;
+
 });

@@ -17,7 +17,7 @@ ool,foreign key (timestamp) references idgeneration(timestamp),foreign key (ssid
 
 create table register(id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,username varchar(20),password varchar(60));
 
-create table participants(ssid int(3),topic_name varchar(30),partc_name varchar(30),email varchar(30),foreign key (ssid) re
+create table participants(sno int(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,ssid int(3),topic_name varchar(30),partc_name varchar(30),email varchar(30),foreign key (ssid) re
 ferences feedback(ssid));
 
 var query = db.config.query('insert into idgeneration(ssid,id) values('+ssid+"," +id+ ');',function(req,resp){
