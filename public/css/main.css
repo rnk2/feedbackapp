@@ -1,13 +1,11 @@
-body{
+body {
     margin: 0;
     padding: 0;
     background: #fff;
-
     color: #fff;
     font-family: Arial;
     font-size: 12px;
 }
-
 
 nav {
     height: 40px;
@@ -41,31 +39,30 @@ nav a {
     text-shadow: 1px 1px 0px #283744;
 }
 
-.startup{
+.startup {
     margin-top: 20px;
-    
-
 }
 
-.signin{
-    
+.signin {
     margin-top: 40px;
 }
 
-.formb{
+.formb {
     background-color: #40C0FF;
     padding-bottom: 20px;
-
 }
 
- .thumb {
-   
-  display: border;
-  height: 120px;
-  width: 100px;
-  margin: 10px 5px 0 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  text-align:center;
-  font-size: 12px;
-    }
+.thumb {
+    display: border;
+    height: 120px;
+    width: 100px;
+    margin: 10px 5px 0 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 12px;
+}
+
+body .modal-dialog {
+  width: 900px;
+}

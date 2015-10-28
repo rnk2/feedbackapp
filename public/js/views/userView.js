@@ -1,14 +1,14 @@
-define(['jquery', 'backbone','handlebars','router','modelBoard', 'collectionBoard'], function($, Backbone,Hbs,BaseRouter, BaseModel, BaseCollection) {
+define(['jquery', 'backbone','handlebars','router','modelBoard'], function($, Backbone,Hbs,BaseRouter, BaseModel) {
     
 UserView = Backbone.View.extend({
     id: '#container',
     className: 'home',
-
+    
      events: {
             'click button#btnadd': 'addData',
             'click button#btnclear': 'clearInput',
-            'click .ssbtn' : 'addtwo'
-
+            'click .ssbtn' : 'addtwo',
+            
         },
 
     
@@ -51,9 +51,10 @@ UserView = Backbone.View.extend({
         },
 
         addData: function(e) {
+            alert("adding new records");
             console.log("adding record");
             var meet = new BaseModel();
-            
+            var collection = this.collection.records;
             var id = $(e.currentTarget).data("id");
             meet.set('ssid', $("#ssid").val());
             meet.set('tname', $("#tname").val());
@@ -68,7 +69,7 @@ UserView = Backbone.View.extend({
 
                     //console.log( this.collection.base);
 
-                     BaseCollection.add(model);
+                     collection.add(model);
                 },
                 error: function() {
                     console.log("Something went wrong while saving the model");
@@ -78,6 +79,8 @@ UserView = Backbone.View.extend({
             });
 
         },
+
+         
 
 
         clearInput: function() {
@@ -120,6 +123,10 @@ UserView = Backbone.View.extend({
     var feedSub = Backbone.View.extend({
 
         tagName: 'tr',
+        events:{    
+        
+         'click #btnedt': 'editData'
+    },
 
         initialize: function() {
 
@@ -135,6 +142,44 @@ UserView = Backbone.View.extend({
             $(this.el).html(html);
 
             return this;
+
+        },
+
+        editData : function(e) {
+            alert("updates");
+            console.log(this.model);
+            var target = e.currentTarget.value;
+            console.log(target);
+        if(target === "Edit"){
+            console.log($(this.el));
+            $(this.el).find("td").slice(0, 4).each(function(){
+                console.log($(this).text());
+               $(this).html('<input type="text" value="'+ $(this).text() +'" />');
+            });
+            e.currentTarget.value = "Update";
+        }
+
+        if(target === "Update"){
+            var arr = [];
+            $(this.el).find("input[type=text]").each(function(){
+               arr.push($(this).val());
+               $(this).parent().html($(this).val());
+            });
+           console.log(arr);
+               
+               var ssid= arr[0];
+               var tname=arr[1];
+               var pname=arr[2];
+               var date=arr[3];
+              console.log(this.model);
+               this.model.set('ssid', ssid);
+               this.model.set('tname',tname);
+               this.model.set('pname',pname);
+               this.model.set('pst_date',date);
+            this.model.save();
+            console.log(this.model);
+            e.currentTarget.value = "Edit";
+        }
 
         }
     });

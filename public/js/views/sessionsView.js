@@ -1,11 +1,12 @@
-define(['jquery', 'backbone', 'handlebars', 'router', 'sessionsBoard', 'sessionBoard','feedBoard','feedsBoard', 'chart'], function($, Backbone, Hbs, BaseRouter, SessionCollection, SessionModel,FeedModel,FeedCollection,charts) {
+define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard', 'sessionBoard','feedBoard','feedsBoard', 'chart'], function($, Backbone, Hbs,Bootstrap,BaseRouter, SessionCollection, SessionModel,FeedModel,FeedCollection,charts) {
 
     SessionView = Backbone.View.extend({
          id: '#container',
         className: 'home',
 
         events: {
-            'click button #nusebtn': 'addData'
+            'click button#nusebtn': 'addData',
+            'click .emailbtn': 'emailid'
         },
 
         initialize: function(options) {
@@ -60,9 +61,41 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'sessionsBoard', 'sessionB
             return this;
         },
 
-        addData: function() {
-            var newuser = new SessionModel();
-            console.log("after adding bootstrap modal");
+        addData: function(e) {
+            alert("adding new records");
+            console.log("adding record");
+            var meet = new SessionModel();
+            var collection = this.collection.partc;
+            // var id = $(e.currentTarget).data("id");
+            meet.set('ssid', $("#ssid").val());
+            meet.set('topic_name', $("#topic_name").val());
+            meet.set('partc_name', $("#partc_name").val());
+            meet.set('email', $("#email").val());
+            meet.save({
+                wait: true
+            }, {
+                success: function(model, respose) {
+                    console.log("success");
+
+                    //console.log( this.collection.base);
+
+                     collection.add(model);
+                },
+                error: function() {
+                    console.log("Something went wrong while saving the model");
+                }
+
+
+            });
+
+        },
+
+        emailid : function(e){
+
+            var target=e.currentTarget.getAttribute('data-id');
+            
+            var rating=e.currentTarget.setAttribute('href',"#mailto/"+target);
+
         },
 
         addone: function(model) {

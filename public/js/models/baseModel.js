@@ -6,8 +6,8 @@ var Meeting = Backbone.Model.extend({
         ssid :'null',
         tname :'unknown',
         pname :'unknown',
-        pst_date:'unknown',
-        partcp : 'unknown'       
+        pst_date:'unknown'
+              
     },
 
     initialize:function(){

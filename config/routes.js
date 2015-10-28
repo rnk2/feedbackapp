@@ -49,8 +49,8 @@ exports.init = function(app, passport,smtpTransport) {
 
     app.get('/index', function(request, response) {
         console.log("form feedback page");
-        db.config.query('SELECT * FROM feedback', function(req, res) {
-
+        db.config.query('SELECT * FROM sessions', function(req, res) {
+            console.log(res);
             response.send(res);
         });
     });
@@ -69,7 +69,7 @@ exports.init = function(app, passport,smtpTransport) {
     app.get('/ratings/:id', function(request, response) {
         console.log("test" + request.params.id);
 
-        db.config.query('select * from registrations where ssid =' + request.params.id, function(req, res) {
+        db.config.query('select * from feedback where ssid =' + request.params.id, function(req, res) {
             console.log(res);
             response.send(res);
         });
@@ -81,7 +81,7 @@ exports.init = function(app, passport,smtpTransport) {
 
         var ssid = request.body.ssid;
         var user = request.body.user;
-        var email = request.body.email;
+        // var email = request.body.email;
         var pskills = request.body.pskills;
         var tskills = request.body.tskills;
         var timestamp = request.body.timestamp;
@@ -89,7 +89,7 @@ exports.init = function(app, passport,smtpTransport) {
 
         console.log(status);
 
-        var query = db.config.query('insert into registrations(ssid,user,email,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + email + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status +');', function(req, res) {
+        var query = db.config.query('insert into feedback(ssid,user,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + ","+ "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status +');', function(req, res) {
             console.log(res);
             response.send(res);
         });
@@ -105,19 +105,41 @@ exports.init = function(app, passport,smtpTransport) {
         var tname = request.body.tname;
         var pname = request.body.pname;
         var pst_date = request.body.pst_date;
-        var partcp = request.body.partcp;
+        
 
-        var query = db.config.query('insert into feedback(ssid,tname,pname,pst_date,partcp) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + "," + "'" + partcp + "'" + ');', function(req, res) {
+        var query = db.config.query('insert into sessions(ssid,tname,pname,pst_date) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
 
 
-
+            console.log(res);
             response.send(res);
         });
 
         console.log(query.sql);
     });
+
+    app.put('/index/:id', function(request, response) {
+        console.log("inside put");
+        console.log(request.body.ssid);
+        console.log(request.body.tname);
+        var ssid = request.body.ssid;
+        var tname = request.body.tname;
+        var pname = request.body.pname;
+        var pst_date = request.body.pst_date;
+        
+
+        var query = db.config.query('insert into sessions(ssid,tname,pname,pst_date) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
+
+
+            console.log(res);
+            response.send(res);
+        });
+
+        console.log(query.sql);
+    });
+
+
      
-    app.post('/partcpates',function(request,response){
+    app.post('/sessions/:id',function(request,response){
         console.log("post");
         console.log(request.body); 
         var ssid = request.body.ssid;

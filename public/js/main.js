@@ -6,7 +6,7 @@ require.config({
         'backbone': 'lib/backbone',
         'underscore': 'lib/underscore',
         'handlebars': 'lib/handlebars',
-        'bootstrap': 'lib/bootstap',
+        'bootstrap': 'lib/bootstrap',
         'chart': 'lib/chart',
         'feedstar': 'feedstar',
         'dateformat': 'lib/jquery-dateFormat-1.0.js',

@@ -14,7 +14,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
 
         initialize: function() {
 
-
+            console.log(this.collection.records);
             this.collection.records.on("add", this.addone, this);
 
         },
@@ -50,23 +50,23 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
 
         addData: function(e) {
             console.log("adding record");
+             console.log(this.collection.records.length);
             var meet = new BaseModel();
-            
+            var collection = this.collection.records;
             var id = $(e.currentTarget).data("id");
             meet.set('ssid', $("#ssid").val());
             meet.set('tname', $("#tname").val());
             meet.set('pname', $("#pname").val());
             meet.set('pst_date', $("#pst_date").val());
-            meet.set('partcp', $("#attended").val());
+            
             meet.save({
                 wait: true
             }, {
                 success: function(model, respose) {
-                    console.log("success");
 
-                    //console.log( this.collection.base);
+                    console.log(collection);                    
 
-                     BaseCollection.add(model);
+                     collection.add(model);
                 },
                 error: function() {
                     console.log("Something went wrong while saving the model");

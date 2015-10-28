@@ -58,7 +58,7 @@ define(['jquery', 'backbone',
 
         user: function() {
            
-            console.log("UserView");
+            //console.log(new BaseCollection());
             if (!this.userView) {
                 this.userView = new UserView({
                     collection: {
@@ -105,7 +105,7 @@ define(['jquery', 'backbone',
         feedback: function() {
 
             console.log('feedback page');
-            
+            //console.log(new BaseCollection());
                 this.feedbackView = new FeedbackView({
                     collection: {
                         records: new BaseCollection() }
