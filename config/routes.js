@@ -106,7 +106,7 @@ exports.init = function(app, passport,smtpTransport) {
         var pname = request.body.pname;
         var pst_date = request.body.pst_date;
         
-
+        // 407 --- 
         var query = db.config.query('insert into sessions(ssid,tname,pname,pst_date) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
 
 
@@ -127,7 +127,7 @@ exports.init = function(app, passport,smtpTransport) {
         var pst_date = request.body.pst_date;
         
 
-        var query = db.config.query('insert into sessions(ssid,tname,pname,pst_date) values(' + ssid + "," + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
+        var query = db.config.query('update sessions set tname = ?,pname = ?,pst_date = ? where ssid = ?',[tname,pname,pst_date,ssid], function(req, res) {
 
 
             console.log(res);

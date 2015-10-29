@@ -5,7 +5,8 @@ var connection = mysql.createConnection({
     port: '3309',
     user: 'root',
     password: 'admin',
-    database: 'feedapp'
+    database: 'feedapp',
+    dateStrings:'date'
 });
 
 module.exports = {

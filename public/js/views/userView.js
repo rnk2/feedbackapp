@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','handlebars','router','modelBoard'], function($, Backbone,Hbs,BaseRouter, BaseModel) {
+define(['jquery', 'backbone','handlebars','router','modelBoard','dateformat'], function($, Backbone,Hbs,BaseRouter, BaseModel,Dateformat) {
     
 UserView = Backbone.View.extend({
     id: '#container',
@@ -128,8 +128,7 @@ UserView = Backbone.View.extend({
          'click #btnedt': 'editData'
     },
 
-        initialize: function() {
-
+        initialize: function() {            
             this.render();
         },
         render: function() {
@@ -146,13 +145,12 @@ UserView = Backbone.View.extend({
         },
 
         editData : function(e) {
-            alert("updates");
-            console.log(this.model);
+            
             var target = e.currentTarget.value;
             console.log(target);
         if(target === "Edit"){
             console.log($(this.el));
-            $(this.el).find("td").slice(0, 4).each(function(){
+            $(this.el).find("td").slice(1, 4).each(function(){
                 console.log($(this).text());
                $(this).html('<input type="text" value="'+ $(this).text() +'" />');
             });
@@ -165,19 +163,18 @@ UserView = Backbone.View.extend({
                arr.push($(this).val());
                $(this).parent().html($(this).val());
             });
-           console.log(arr);
-               
-               var ssid= arr[0];
-               var tname=arr[1];
-               var pname=arr[2];
-               var date=arr[3];
-              console.log(this.model);
-               this.model.set('ssid', ssid);
-               this.model.set('tname',tname);
-               this.model.set('pname',pname);
-               this.model.set('pst_date',date);
-            this.model.save();
-            console.log(this.model);
+           console.log(arr);               
+               //var ssidd= arr[0];
+               var tnamee=arr[0];
+               var pnamee=arr[1];
+               var datee=arr[2];
+              //console.log(this.model.ssid);
+               this.model.set('tname',tnamee);
+               this.model.set('pname',pnamee);
+               this.model.set('pst_date',datee);
+                console.log(this.model);
+            this.model.save({});
+            //console.log(this.model);
             e.currentTarget.value = "Edit";
         }
 

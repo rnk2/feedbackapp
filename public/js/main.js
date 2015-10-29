@@ -9,7 +9,7 @@ require.config({
         'bootstrap': 'lib/bootstrap',
         'chart': 'lib/chart',
         'feedstar': 'feedstar',
-        'dateformat': 'lib/jquery-dateFormat-1.0.js',
+        'dateformat': 'lib/jquery-dateFormat-1.0',
         'modelBoard': 'models/baseModel',
         'feedBoard': 'models/feedModel',
         'registrationBoard': 'models/registrationModel',
