@@ -93,7 +93,8 @@ define(['jquery', 'backbone',
                 this.sessionsView = new SessionsView({
                     collection : {
                         partc : new SessionCollection(),
-                        ratings : new FeedCollection()
+                        ratings : new FeedCollection(),
+                        sessions : new BaseCollection()
                     },
                     mid : id
                 });

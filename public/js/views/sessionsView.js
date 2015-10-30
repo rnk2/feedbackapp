@@ -13,8 +13,10 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
 
             this.collection.partc.on("add", this.addone, this);
             this.collection.ratings.on("add",this.addtwo,this);
+
             this.collection.partc.id = options.mid;
             this.collection.ratings.id = options.mid;
+            this.collection.sessions.id = options.mid;
 
         },
 
@@ -53,6 +55,21 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
                 error : function(){
                     console.log('something went wrong!');
                 }
+            });
+
+            this.collection.sessions.fetch({
+                success : function(collection){
+                    collection.each(function(index){
+                        // self.addthree(index);
+                        console.log(index.attributes.tname);
+
+                        
+                    },this);
+                },
+                error :function(){
+                    console.log('something went wrong');
+                }
+                
             });
 
 

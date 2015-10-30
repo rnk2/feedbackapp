@@ -14,31 +14,15 @@ exports.init = function(app, passport,smtpTransport) {
 
     app.get('/', home.render);
     app.get('/technologies',home.render);
-    app.get('/presenter',home.render);
+    
 
-    app.get('/presenter',home.render);
-
-    app.get('/feedback', isLoggedIn, home.render);
+    app.get('/feedback',isAdmin, home.render);
 
     app.get('/signin', home.render);
 
     app.get('/userfeedback/:id',home.render);
 
-    // app.get('/userfeedback/:id',function(req,res){
-    //      console.log(req.params.id);
-    //      res.send(req.params.id);
-         
-    // });
-    
-
-    // app.get('/userfeedback/:id',function(request,response){
-    //     db.config.query('select * from idgeneration where timestamp =' + request.params.id, function(req, res) {
-    //         console.log(res);
-    //         response.send(res);
-    //     });
-    // });
-    
-
+   
     app.get('/signup', home.render);
     app.get('/sessions', isLoggedIn, home.render);
    
@@ -220,22 +204,9 @@ exports.init = function(app, passport,smtpTransport) {
         });
 
         }
-        // var id= Math.floor(Math.random()*90000) + 10000;
-        // console.log("id"+id);
-
-        
+       
          console.log(query.sql);
-        // var mailoptions = {
-        //     to: req.query.to,
-        //     subject: req.query.subject,
-        //      html: "<b>please click on below link to submit your feedback</b>"            
-        //     +'<br/><a href="http://localhost:3000/userfeedback/'+id+'">feedback</a>'
-            
-
-        // }
-        // console.log(mailoptions);
         
-
     });
 
 
@@ -259,24 +230,6 @@ exports.init = function(app, passport,smtpTransport) {
     });
 
 
-
-
-    // app.post('/signup', passport.authenticate('local-signup', {
-    //     successRedirect: '/feedback', // redirect to the secure profile section
-    //     failureRedirect: '/signup', // redirect back to the signup page if there is an error
-    //     failureFlash: true // allow flash messages
-    // }));
-
-
-
-
-
-
-
-
-
-
-
     // route middleware to make sure a user is logged in
     function isLoggedIn(req, res, next) {
         //console.log(req);
@@ -288,6 +241,24 @@ exports.init = function(app, passport,smtpTransport) {
         // if they aren't redirect them to the home page
         res.redirect('/signin');
     }
+
+    // route middleware to make sure a admin is logged in
+    function isAdmin(req, res, next) {
+
+    // if user is authenticated in the session, carry on
+    if (req.isAuthenticated()) {
+       // if user is admin, go next
+       if (req.user.role == 1) {
+         return next();
+       } else {
+         res.redirect('/');
+       }
+    } else {
+      res.redirect('/');
+    }
+}
+
+
 
 
 
