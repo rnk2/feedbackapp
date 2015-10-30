@@ -103,13 +103,12 @@ UserView = Backbone.View.extend({
         },
 
         addtwo : function(e){
-            //e.preventDefault();
-            // alert("ratings button");
+            
             var target=e.currentTarget.getAttribute('data-id');
             
             var rating=e.currentTarget.setAttribute('href',"#sessions/"+target);
             
-            // $(".ratbtn").off('click');
+            
 
         }
 
@@ -123,10 +122,7 @@ UserView = Backbone.View.extend({
     var feedSub = Backbone.View.extend({
 
         tagName: 'tr',
-        events:{    
         
-         'click #btnedt': 'editData'
-    },
 
         initialize: function() {            
             this.render();
@@ -142,43 +138,9 @@ UserView = Backbone.View.extend({
 
             return this;
 
-        },
-
-        editData : function(e) {
-            
-            var target = e.currentTarget.value;
-            console.log(target);
-        if(target === "Edit"){
-            console.log($(this.el));
-            $(this.el).find("td").slice(1, 4).each(function(){
-                console.log($(this).text());
-               $(this).html('<input type="text" value="'+ $(this).text() +'" />');
-            });
-            e.currentTarget.value = "Update";
         }
 
-        if(target === "Update"){
-            var arr = [];
-            $(this.el).find("input[type=text]").each(function(){
-               arr.push($(this).val());
-               $(this).parent().html($(this).val());
-            });
-           console.log(arr);               
-               //var ssidd= arr[0];
-               var tnamee=arr[0];
-               var pnamee=arr[1];
-               var datee=arr[2];
-              //console.log(this.model.ssid);
-               this.model.set('tname',tnamee);
-               this.model.set('pname',pnamee);
-               this.model.set('pst_date',datee);
-                console.log(this.model);
-            this.model.save({});
-            //console.log(this.model);
-            e.currentTarget.value = "Edit";
-        }
-
-        }
+        
     });
 
 

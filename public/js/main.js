@@ -34,7 +34,6 @@ require.config({
         'mailers' : 'collections/mailCollection',
         'mailer' : 'models/mailModel', 
         'mailing': 'views/mailingView',
-        'presenter' : 'views/presenterView',
         'user' : 'views/userView'
 
     },

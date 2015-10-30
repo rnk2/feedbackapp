@@ -114,10 +114,8 @@
         <script type="text/x-handlebars-template" id="sessionfeed-template">
             <td>{{sno}}</td>
             <td>{{partc_name}}</td>
-        </script>
-        
-        
-        <script type="text/x-handlebars-template" id="user-template">
+        </script>  
+        <script id="user-template" type="text/x-handlebars-template" >
             <div class="container startup">
                 <div class="row">
                     <div class="col-sm-2 col-md-2">
@@ -275,7 +273,7 @@
                 </div>
             </div>
         </script>
-        <script type="text/x-handlebars-template" id="mail-template">
+        <script id="mail-template"   type="text/x-handlebars-template" >
             <td>{{ssid}}</td>
             <td>{{topic_name}}</td>
             <td>{{partc_name}}</td>
@@ -338,14 +336,7 @@
                 </div>
             </div>
         </script>
-        <script type="text/x-handlebars-template" id="userfeed-template">
-            <td>{{ssid}}</td>
-            <td>{{tname}}</td>
-            <td>{{pname}}</td>
-            <td>{{pst_date}}</td>
-            <td><a href="#sessions" class="btn btn-primary btn-sm active ssbtn" data-id="{{ssid}}" role="button">View Details</a></td>
-        </script>
-        <script type="text/x-handlebars-template" id="feed-template">
+        <script id="feed-template" type="text/x-handlebars-template" >
             <td>{{ssid}}</td>
             <td>{{tname}}</td>
             <td>{{pname}}</td>
@@ -356,7 +347,7 @@
                 <input id="btnedt" type="button" value="Edit" />
             </td>
         </script>
-        <script type="text/x-handlebars-template" id="rating-template">
+        <script id="rating-template" type="text/x-handlebars-template" >
             <div class="row">
                 <div class="col-sm-1 col-md-1">
                 </div>
@@ -381,7 +372,7 @@
                 </div>
             </div>
         </script>
-        <script type="text/x-handlebars-template" id="ratingfeed-template">
+        <script id="ratingfeed-template" type="text/x-handlebars-template" >
             <td>{{ssid}}</td>
             <td>{{user}}</td>
             <td>{{pskills}}</td>
@@ -423,7 +414,14 @@
                 </div>
             </div>
         </script>
-        <script type="text/x-handlebars-template" id="feeds-template">
+        <script id="userfeed-template" type="text/x-handlebars-template" >
+            <td>{{ssid}}</td>
+            <td>{{tname}}</td>
+            <td>{{pname}}</td>
+            <td>{{pst_date}}</td>
+            <td><a href="#sessions" class="btn btn-primary btn-sm active ssbtn" data-id="{{ssid}}" role="button">View Details</a></td>
+        </script>
+        <script id="feeds-template" type="text/x-handlebars-template" >
             <div class="row startup">
                 <div class="col-sm-3 col-md-3 col-lg-3">
                 </div>
