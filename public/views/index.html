@@ -18,7 +18,7 @@
                 </li>
                 <li><a href="#signin">Login</a></li>
                 <li><a href="#logout">Logout</a></li>
-                <li><a href="#user">User</a></li>
+                
             </ul>
         </nav>
         <section class="displayBoard">
@@ -36,12 +36,12 @@
                 <div class="row startup">
                     <div class="col-sm-1 col-md-1">
                     </div>
-                    <div class="col-sm-3 col-md-3">
+                    <div class="col-sm-2 col-md-3 sessionid">
                         <h5>Participants List</h5>
                         <table class="table table-bordered" id="feed">
                             <tr>
-                                <th>SNO</th>
-                                <th>User</th>
+                                
+                                <th>Names</th>
                             </tr>
                         </table>
                         <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Add New</button>
@@ -58,27 +58,20 @@
                                         <table class="table table-bordered" id="tblinput">
                                             <thead>
                                                 <tr>
-                                                    <th width="75"><strong>Session ID</strong></th>
-                                                    <th width="75"><strong>Topic Name</strong></th>
+                                                    
                                                     <th width="75"><strong>Participant Name</strong></th>
                                                     <th width="75"><strong>Email</strong></th>
                                                 </tr>
                                             </thead>
                                             <tr>
-                                                <td>
-                                                    <input type="text" id="ssid" placeholder="sessions id" /> </td>
-                                                <td>
-                                                    <input type="text" id="topic_name" placeholder="topic name" /> </td>
+                                                
                                                 <td>
                                                     <input type="text" id="partc_name" placeholder="presenter" /> </td>
                                                 <td>
                                                     <input type="text" id="email" placeholder="email" /> </td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                </td>
-                                                <td>
-                                                </td>
+                                                
                                                 <td>
                                                 </td>
                                                 <td>
@@ -94,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#mailto" class="btn btn-default emailbtn" data-id=101>Send Mail</a>
+                         <a href="#mailto" class="btn btn-default btn-md emailbtn" id="ssid" value="">Send Mail</a>
                     </div>
                     <div class="col-sm-5 col-md-5">
                         <div class="row">
@@ -112,8 +105,9 @@
             </div>
         </script>
         <script type="text/x-handlebars-template" id="sessionfeed-template">
-            <td>{{sno}}</td>
+           
             <td>{{partc_name}}</td>
+
         </script>  
         <script id="user-template" type="text/x-handlebars-template" >
             <div class="container startup">
@@ -121,9 +115,9 @@
                     <div class="col-sm-2 col-md-2">
                     </div>
                     <div class="col-sm-2 col-md-2">
-                        <label>Name: </label>
-                        <br/>
-                        <label>Designation:</label>
+                        
+                        <h4 id="presenter" value="hello"></h4>
+                       
                     </div>
                     <div class="col-sm-1 col-md-1">
                     </div>
@@ -136,9 +130,9 @@
                     <div class="col-sm-6 col-md-6">
                         <table class="table table-bordered" id="crud">
                             <tr>
-                                <th>SSID</th>
+                                
                                 <th>Topic Name</th>
-                                <th>Presenter Name</th>
+                                
                                 <th>Date</th>
                                 <th>Get Details</th>
                             </tr>
@@ -163,27 +157,22 @@
                                         <table class="table table-bordered" id="tblinput">
                                             <thead>
                                                 <tr>
-                                                    <th>Session ID</th>
+                                                    
                                                     <th>Topic Name</th>
-                                                    <th>Presenter Name</th>
+                                                    
                                                     <th>Date</th>
                                                 </tr>
                                             </thead>
                                             <tr>
-                                                <td>
-                                                    <input type="text" id="ssid" placeholder="topic name" /> </td>
-                                                <td>
-                                                    <input type="text" id="tname" placeholder="topic name" /> </td>
-                                                <td>
-                                                    <input type="text" id="pname" placeholder="presenter" /> </td>
+                                                
+                                                   <td> <input type="text" id="tname" placeholder="topic name" /> </td>
+                                                
                                                 <td>
                                                     <input type="date" id="pst_date" placeholder="scheduled time" /> </td>
                                             </tr>
                                             <tr>
-                                                <td>
-                                                </td>
-                                                <td>
-                                                </td>
+                                               
+                                               
                                                 <td>
                                                 </td>
                                                 <td>
@@ -202,6 +191,13 @@
                     </div>
                 </div>
             </div>
+        </script>
+        <script id="userfeed-template" type="text/x-handlebars-template" >
+            
+            <td>{{tname}}</td>
+            
+            <td>{{pst_date}}</td>
+            <td><a href="#/sessions" class="btn btn-primary btn-sm active ssbtn" data-id="{{ssid}}" role="button">View Details</a></td>
         </script>
         <script id="homeTemplate" type="text/x-handlebars-template">
             <div class="container startup">
@@ -248,8 +244,7 @@
             <div class="container">
                 <div class="row">
                     <div class="form-inline startup">
-                        <label for="ssid">Session ID</label>
-                        <input id="ssid" type="text" class="form-control" placeholder="" />
+                        
                         <label for="recipient">Enter recipients email-id:</label>
                         <input id="to" type="email" class="form-control" placeholder="" />
                         <button class="btn btn-primary btn-sm active ratebtn" value="select All" id="email">select All</button>
@@ -264,7 +259,7 @@
                         <table class="table table-bordered" id="crud">
                             <tr>
                                 <th width="75">SSID</th>
-                                <th width="75">Topic Name</th>
+                                
                                 <th width="75">Participant Name</th>
                                 <th width="75">Email</th>
                             </tr>
@@ -275,7 +270,7 @@
         </script>
         <script id="mail-template"   type="text/x-handlebars-template" >
             <td>{{ssid}}</td>
-            <td>{{topic_name}}</td>
+            
             <td>{{partc_name}}</td>
             <td>
                 <input type=checkbox name=list value="1">&nbsp{{email}}</td>
@@ -288,19 +283,17 @@
                     <table class="table table-bordered" id="tblinput">
                         <thead>
                             <tr>
-                                <th width="75"><strong>Session ID</strong></th>
-                                <th width="75"><strong>Topic Name</strong></th>
                                 <th width="75"><strong>Presenter Name</strong></th>
+                                <th width="75"><strong>Topic Name</strong></th>
+                                
                                 <th width="75"><strong>Date</strong></th>
                             </tr>
                         </thead>
                         <tr>
                             <td>
-                                <input type="text" id="ssid" placeholder="topic name" /> </td>
-                            <td>
-                                <input type="text" id="tname" placeholder="topic name" /> </td>
-                            <td>
                                 <input type="text" id="pname" placeholder="presenter" /> </td>
+                                <td><input type="text" id="tname" placeholder="topic name" /> </td>
+                            
                             <td>
                                 <input type="date" id="pst_date" placeholder="scheduled time" /> </td>
                         </tr>
@@ -309,8 +302,7 @@
                             </td>
                             <td>
                             </td>
-                            <td>
-                            </td>
+                            
                             <td>
                                 <button id="btnadd">Submit</button>
                                 <button id="btnclear">Reset</button>
@@ -325,9 +317,9 @@
                 <div class="col-sm-8 col-md-8" startup>
                     <table class="table table-bordered" id="crud">
                         <tr>
-                            <th width="75">SSID</th>
-                            <th width="75">Topic Name</th>
                             <th width="75">Presenter</th>
+                            <th width="75">Topic Name</th>
+                            
                             <th width="75">Date</th>
                             <th width="75">Send Mail</th>
                             <th width="75">Get Feedback</th>
@@ -337,14 +329,15 @@
             </div>
         </script>
         <script id="feed-template" type="text/x-handlebars-template" >
-            <td>{{ssid}}</td>
-            <td>{{tname}}</td>
             <td>{{pname}}</td>
+            <td>{{tname}}</td>
+            
             <td>{{pst_date}}</td>
             <td><a href="#mailto" class="emailbtn" data-id="{{ssid}}">Send email</a></td>
             <td><a href="#sessions" class="btn btn-primary btn-lg active ratebtn" data-id="{{ssid}}" role="button">Feedback</a></td>
             <td>
                 <input id="btnedt" type="button" value="Edit" />
+                <input id="btndl" type="button" value="Remove"/>
             </td>
         </script>
         <script id="rating-template" type="text/x-handlebars-template" >
@@ -392,7 +385,7 @@
                         <input type="password" class="form-control" id="password" placeholder="Password">
                     </div>
                     <button id="login">Submit</button>
-                    <a href="/signup" title="register"> signup </a>
+                    <a href="#/signup" title="register"> signup </a>
                 </div>
             </div>
         </script>
@@ -413,13 +406,6 @@
                     <a href="/signin" title="register"> signin </a>
                 </div>
             </div>
-        </script>
-        <script id="userfeed-template" type="text/x-handlebars-template" >
-            <td>{{ssid}}</td>
-            <td>{{tname}}</td>
-            <td>{{pname}}</td>
-            <td>{{pst_date}}</td>
-            <td><a href="#sessions" class="btn btn-primary btn-sm active ssbtn" data-id="{{ssid}}" role="button">View Details</a></td>
         </script>
         <script id="feeds-template" type="text/x-handlebars-template" >
             <div class="row startup">

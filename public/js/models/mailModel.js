@@ -1,9 +1,10 @@
 define(['jquery', 'backbone'], function($, Backbone) {
     
 var Meeting = Backbone.Model.extend({
-	urlRoot : '/sessions/:id',
+	urlRoot : '/sessions/',
+    idAttribute : 'id',
     defaults: {
-        ssid :'null',
+        
         topic_name :'unknown',
         partc_name :'unknown',
         email :'unknown'

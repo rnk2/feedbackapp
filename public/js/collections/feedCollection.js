@@ -5,6 +5,7 @@ define(['jquery','backbone','router','feedBoard'], function($,Backbone,BaseRoute
     var FeedBack = Backbone.Collection.extend({
         model: FeedModel,
         url: function () {
+            console.log(this.id);
         return '/ratings/' + this.id;
         
     },

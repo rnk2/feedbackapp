@@ -54,7 +54,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
             var meet = new BaseModel();
             var collection = this.collection.records;
             var id = $(e.currentTarget).data("id");
-            meet.set('ssid', $("#ssid").val());
+            // meet.set('ssid', $("#ssid").val());
             meet.set('tname', $("#tname").val());
             meet.set('pname', $("#pname").val());
             meet.set('pst_date', $("#pst_date").val());
@@ -126,7 +126,8 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
         tagName: 'tr',
         events:{    
         
-         'click #btnedt': 'editData'
+         'click #btnedt': 'editData',
+         'click #btndl': 'deleteData'
     },
 
         initialize: function() {
@@ -152,7 +153,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
             console.log(target);
         if(target === "Edit"){
             console.log($(this.el));
-            $(this.el).find("td").slice(1, 4).each(function(){
+            $(this.el).find("td").slice(1, 3).each(function(){
                 console.log($(this).text());
                $(this).html('<input type="text" value="'+ $(this).text() +'" />');
             });
@@ -161,18 +162,21 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
 
         if(target === "Update"){
             var arr = [];
+            console.log(arr);
             $(this.el).find("input[type=text]").each(function(){
                arr.push($(this).val());
                $(this).parent().html($(this).val());
             });
            console.log(arr);               
-               //var ssidd= arr[0];
+               //var ssid= arr[0];
+               
+               //var pnamee=arr[2];
                var tnamee=arr[0];
-               var pnamee=arr[1];
-               var datee=arr[2];
+               var datee=arr[1];
               //console.log(this.model.ssid);
+               //this.model.set('ssid',ssid)
                this.model.set('tname',tnamee);
-               this.model.set('pname',pnamee);
+               //this.model.set('pname',pnamee);
                this.model.set('pst_date',datee);
                 console.log(this.model);
             this.model.save({});
@@ -180,6 +184,22 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
             e.currentTarget.value = "Edit";
         }
 
+
+},
+
+deleteData : function(e){
+    //alert("delete button");
+    console.log(this.model);
+    this.model.destroy({
+            success:function(){
+                console.log("success");
+                $(e.target).closest("tr").remove();
+                //studentCollection.remove();
+            },
+            error:function(){
+                console.log("here");
+            }
+        });
 
 }
 

@@ -1,8 +1,8 @@
-define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard', 'sessionBoard','feedBoard','feedsBoard', 'chart'], function($, Backbone, Hbs,Bootstrap,BaseRouter, SessionCollection, SessionModel,FeedModel,FeedCollection,charts) {
+define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoard', 'sessionBoard', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone, Hbs, Bootstrap, BaseRouter, SessionCollection, SessionModel, FeedModel, FeedCollection, charts) {
 
     SessionView = Backbone.View.extend({
-         id: '#container',
-        className: 'home',
+        id: '#container',
+        className: 'sessionid',
 
         events: {
             'click button#nusebtn': 'addData',
@@ -12,17 +12,18 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
         initialize: function(options) {
 
             this.collection.partc.on("add", this.addone, this);
-            this.collection.ratings.on("add",this.addtwo,this);
+            this.collection.ratings.on("add", this.addtwo, this);
 
             this.collection.partc.id = options.mid;
             this.collection.ratings.id = options.mid;
             this.collection.sessions.id = options.mid;
+            this.collection.id = options.mid;
 
         },
 
         render: function() {
             var self = this;
-            
+
             var template = $("#sessionsTemplate").html();
             var html = Handlebars.compile(template);
 
@@ -31,11 +32,11 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
             this.collection.partc.fetch({
                 success: function(collection) {
 
-                collection.each(function(index) {
+                    collection.each(function(index) {
 
                         self.addone(index);
-                         
-                        
+
+
                     }, this);
                 },
                 error: function() {
@@ -46,30 +47,38 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
             });
 
             this.collection.ratings.fetch({
-                success:function(collection){
-                    collection.each(function(index){
+                success: function(collection) {
+                    collection.each(function(index) {
                         self.addtwo(index);
-                        
-                    },this);
+
+                    }, this);
                 },
-                error : function(){
+                error: function() {
                     console.log('something went wrong!');
                 }
             });
 
             this.collection.sessions.fetch({
-                success : function(collection){
-                    collection.each(function(index){
+                success: function(collection) {
+                    console.log(collection.id);
+                    collection.each(function(index) {
                         // self.addthree(index);
-                        console.log(index.attributes.tname);
+                        //console.log(index.id);
+                        if (index.id == collection.id) {
+                            var title = index.attributes.tname;
+                            var ssid = index.id;
+                            document.getElementById("titlee").innerHTML = "Session Name : " + title;
+                            $("#ssid").attr("value", ssid);
+                        }
 
-                        
-                    },this);
+
+
+                    }, this);
                 },
-                error :function(){
+                error: function() {
                     console.log('something went wrong');
                 }
-                
+
             });
 
 
@@ -80,12 +89,16 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
 
         addData: function(e) {
             alert("adding new records");
+            var url = Backbone.history.getFragment().split('/');
+            var timestamp = url[1]
+            console.log(timestamp);
             console.log("adding record");
+
             var meet = new SessionModel();
             var collection = this.collection.partc;
             // var id = $(e.currentTarget).data("id");
-            meet.set('ssid', $("#ssid").val());
-            meet.set('topic_name', $("#topic_name").val());
+            meet.set('ssid', timestamp);
+
             meet.set('partc_name', $("#partc_name").val());
             meet.set('email', $("#email").val());
             meet.save({
@@ -96,7 +109,7 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
 
                     //console.log( this.collection.base);
 
-                     collection.add(model);
+                    collection.add(model);
                 },
                 error: function() {
                     console.log("Something went wrong while saving the model");
@@ -107,11 +120,12 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
 
         },
 
-        emailid : function(e){
+        emailid: function(e) {
+            alert("mail");
+            var target = e.currentTarget.getAttribute('value');
+            console.log(target);
 
-            var target=e.currentTarget.getAttribute('data-id');
-            
-            var rating=e.currentTarget.setAttribute('href',"#mailto/"+target);
+            var rating = e.currentTarget.setAttribute('href', "#mailto/" + target);
 
         },
 
@@ -121,52 +135,40 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
                 model: model,
                 collection: this.collection
             });
-            
+
             $(this.el).find("#feed").append(participants.el);
-            this.titleName();
-          
+
+
         },
 
 
 
-        addtwo : function(model){
+        addtwo: function(model) {
             var ratingss = new prating({
-                model : model,
-                collection : this.collection
+                model: model,
+                collection: this.collection
             });
             $(this.el).find("#feeds").append(ratingss.el);
-            
+
             this.afterRender();
         },
 
-        titleName : function(model){
-            //console.log("title");
-            var ttx,title = [];
 
-            this.collection.partc.each(function(index){
-                title = index.attributes.topic_name;
-                console.log(title);
-                document.getElementById("titlee").innerHTML = "Session Name : " + title;
-                
-            },this);
-        },
-            
+        afterRender: function(model) {
 
-        afterRender : function(model){
-            
             var names = [];
             var pskills = [];
             var tskills = [];
-            
+
             this.collection.ratings.each(function(index) {
 
-                       names.push(index.attributes.user);
-                       pskills.push(index.attributes.pskills);
-                       tskills.push(index.attributes.tskills);
+                names.push(index.attributes.user);
+                pskills.push(index.attributes.pskills);
+                tskills.push(index.attributes.tskills);
 
-                        // console.log(index.attributes);
-                    }, this);
-            
+                // console.log(index.attributes);
+            }, this);
+
             var ctx;
             var randomScalingFactor = function() {
                 return Math.round(Math.random() * 100)
@@ -190,18 +192,18 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(151,187,205,1)",
-                    data:tskills
+                    data: tskills
                 }]
 
 
             }
-             ctx = document.getElementById("canvas").getContext("2d");
+            ctx = document.getElementById("canvas").getContext("2d");
             window.myLine = new Chart(ctx).Line(lineChartData, {
                 responsive: true,
                 multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
             });
 
-             return this;
+            return this;
 
         }
 
@@ -227,12 +229,12 @@ define(['jquery', 'backbone', 'handlebars','bootstrap','router', 'sessionsBoard'
 
 
     var prating = Backbone.View.extend({
-        tagName : 'tr',
-        initialize : function() {
+        tagName: 'tr',
+        initialize: function() {
             var template = $("#ratingfeed-template").html();
             var source = Handlebars.compile(template);
             var html = source(this.model.toJSON());
-            
+
             $(this.el).html(html);
             return this;
         }

@@ -35,7 +35,7 @@ module.exports = function(passport) {
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
-        function(request, username, password, done) {
+        function(request, username, password,done) {
             console.log("local-signup");
             db.config.query("select * from register where username = '" + username + "'", function(err, user) {
 
@@ -47,11 +47,12 @@ module.exports = function(passport) {
                 } else {
                     var newUserMysql = {
                         username: username,
-                        password: bcrypt.hashSync(password, null, null)  // use the generateHash function in our user model
+                        password: bcrypt.hashSync(password, null, null),  // use the generateHash function in our user model
+                        role :1
                     };
-                   var insertQuery = "INSERT INTO register ( username, password ) values (?,?)"; 
+                   var insertQuery = "INSERT INTO register ( username, password,role ) values (?,?,?)"; 
                    //console.log(insertQuery);
-                   db.config.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
+                   db.config.query(insertQuery,[newUserMysql.username, newUserMysql.password,newUserMysql.role],function(err, rows) {
                         newUserMysql.id = rows.insertId;
 
                         return done(null, newUserMysql);

@@ -1,7 +1,7 @@
 define(['jquery', 'backbone'], function($, Backbone) {
     
 var Rating = Backbone.Model.extend({
-	urlRoot : '/ratings/:id',
+	urlRoot : '/ratings/:mid',
     defaults: {
         ssid :'',
         user :'',

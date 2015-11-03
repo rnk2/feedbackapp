@@ -1,5 +1,6 @@
 define(['jquery', 'backbone',
     'modelBoard', 'collectionBoard',
+    'userSession', 'userSessions',
     'user','mailers','mailer',
     'mailing','sessionBoard',
     'sessionsBoard','participant',
@@ -13,6 +14,7 @@ define(['jquery', 'backbone',
     'signinBoard','signinsBoard'
     ], function($,Backbone,
         Mboard,BaseCollection,
+        UserModel,UserCollection,
         UserView,MailingCollection,
         MailModel,MailingView,SessionModel,
         SessionCollection,ParticipantsModel,
@@ -41,7 +43,7 @@ define(['jquery', 'backbone',
             'mailto/:id':'mailto',
             'logout' : 'logout',
             'userfeedback/:id' : 'userfeedback',
-            'user' : 'user'
+            'user/:uname' : 'user'
 
         },
 
@@ -55,27 +57,14 @@ define(['jquery', 'backbone',
 
         },
 
-        user: function() {
+        user: function(uname) {
            
             //console.log(new BaseCollection());
             if (!this.userView) {
-                this.userView = new UserView({
-                    collection: {
-                        records : new BaseCollection()
-                    }
-                });
+                this.userView = new UserView({collection: UserCollection,mid : uname});
             }
             $('.displayBoard').html(this.userView.render().el);
 
-        },
-
-        presenter : function(){
-            console.log("presenter page");
-            console.log(PresenterView);
-            if(!this.presenterView){
-                this.presenterView = new PresenterView({collection : ParticpantesCollection}); 
-            }
-            $('.displayBoard').html(this.presenterView.render().el);
         },
 
         Requests: function() {
@@ -126,7 +115,7 @@ define(['jquery', 'backbone',
         },
 
         signin : function() {
-            console.log("singin");
+            console.log("singin........");
             if(!this.signinView){
                 this.signinView = new SigninView({collection : SigninCollection});
 

@@ -2,9 +2,9 @@ define(['jquery', 'backbone'], function($, Backbone) {
     
 var Meeting = Backbone.Model.extend({
 	urlRoot : '/index',
-    idAttribute:'ssid',
+    idAttribute :'ssid',
     defaults: {
-        ssid :'null',
+        
         tname :'unknown',
         pname :'unknown',
         pst_date:'unknown'

@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','handlebars','router','modelBoard','dateformat'], function($, Backbone,Hbs,BaseRouter, BaseModel,Dateformat) {
+define(['jquery', 'backbone','handlebars','router','userSession','userSessions','dateformat'], function($, Backbone,Hbs,BaseRouter,UserModel,UserSessions,Dateformat) {
     
 UserView = Backbone.View.extend({
     id: '#container',
@@ -14,11 +14,12 @@ UserView = Backbone.View.extend({
     
     
 
-    initialize: function() {
+    initialize: function(options) {
 
-
-            this.collection.records.on("add", this.addone, this);
-
+            console.log(this.collection);
+            this.collection.on("add", this.addone, this);
+            this.collection.uname = options.mid;
+            
         },
 
         render: function() {
@@ -29,14 +30,13 @@ UserView = Backbone.View.extend({
             $(this.el).html(html);
             this.delegateEvents();
 
-            this.collection.records.fetch({
+            UserSessions.fetch({
                 success: function(collection) {
-
+                    // console.log(collection.uname);
+                    document.getElementById("presenter").innerHTML = "Name : " + collection.uname;
                     collection.each(function(index) {
 
                         self.addone(index);
-
-                        // console.log(index.attributes);
                     }, this);
                 },
                 error: function() {
@@ -48,17 +48,18 @@ UserView = Backbone.View.extend({
 
 
             return this;
-        },
+        },        
+             
 
         addData: function(e) {
-            alert("adding new records");
+            var url = Backbone.history.getFragment().split('/');            
+            var timestamp = url[1]
+            console.log(timestamp);
             console.log("adding record");
-            var meet = new BaseModel();
-            var collection = this.collection.records;
+            var meet = new UserModel();
             var id = $(e.currentTarget).data("id");
-            meet.set('ssid', $("#ssid").val());
             meet.set('tname', $("#tname").val());
-            meet.set('pname', $("#pname").val());
+            meet.set('pname',timestamp);
             meet.set('pst_date', $("#pst_date").val());
             meet.set('partcp', $("#attended").val());
             meet.save({
@@ -66,10 +67,7 @@ UserView = Backbone.View.extend({
             }, {
                 success: function(model, respose) {
                     console.log("success");
-
-                    //console.log( this.collection.base);
-
-                     collection.add(model);
+                     UserSessions.add(model);
                 },
                 error: function() {
                     console.log("Something went wrong while saving the model");
@@ -84,11 +82,9 @@ UserView = Backbone.View.extend({
 
 
         clearInput: function() {
-            
             //Clear all Textboxes 
             $("#tblinput input").val('');
         },
-
 
         addone: function(model) {
 
@@ -107,9 +103,7 @@ UserView = Backbone.View.extend({
             var target=e.currentTarget.getAttribute('data-id');
             
             var rating=e.currentTarget.setAttribute('href',"#sessions/"+target);
-            
-            
-
+           
         }
 
 
@@ -122,8 +116,6 @@ UserView = Backbone.View.extend({
     var feedSub = Backbone.View.extend({
 
         tagName: 'tr',
-        
-
         initialize: function() {            
             this.render();
         },

@@ -1,18 +1,20 @@
 define(['jquery', 'backbone'], function($, Backbone) {
     
 var Meeting = Backbone.Model.extend({
-	urlRoot : '/sessions',
-    idAttribute : 'id',
+	urlRoot : '/usessions',
+    idAttribute : 'uname',
+
+    
     defaults: {
         
-        
-        partc_name :'unknown',
-        email :'unknown'
-       
+        tname :'unknown',
+        pname :'unknown',
+        pst_date:'unknown'
+              
     },
 
     initialize:function(){
-        console.log("inside participants model");
+        console.log("model created from base");
         
     }
     

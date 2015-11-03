@@ -19,8 +19,8 @@ var app = express();
 var smtpTransport = nodemailer.createTransport("SMTP",{
 service: "Gmail",
 auth: {
-user: "xxxxxx",
-pass: "xxxxxx"
+user: "xxxxx",
+pass: "xxxxx"
 }
 });
 
@@ -47,25 +47,7 @@ app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 //app.set('view engine', 'ejs');
 
-// app.use(session({
-//   cookieName: 'session',
-//   secret: 'appsecret',
-//   duration: 30 * 60 * 1000,
-//   activeDuration: 5 * 60 * 1000,
-// }));
 
-
-//required for passport
-// app.use(session({
-//     secret: 'appsecret',
-//     resave: true,
-//     saveUninitialized: true,
-//     cookie: {
-//         secure: true,
-//         maxAge: 2 * 60 * 1000
-//     }
-// })); 
-// required for passport
 app.use(session({
     secret: 'appsecret',
     resave: true,
@@ -86,9 +68,6 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 //Initialize Routes
 require('./config/routes').init(app, passport,smtpTransport);
-//require('./config/routes').init(app, passport);
-
-
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log("Express server listening on port " + app.get('port'));

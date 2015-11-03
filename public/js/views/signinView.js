@@ -32,14 +32,30 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'signinBoard', 'signinsBoa
             signin.save(null,{
                
                 success:function(model,response){
-                    console.log(response.username);
-                    
-                    if(response.username){
-                        window.location.href = 'http://localhost:3000#feedback';
-                    }
-                    else{
+                    console.log(response.role);
+                     var uname = response.username;
+                     console.log(uname);
+
+                    if(uname){
+
+                        if(response.role==1){
+                             
+                             window.location.href = "http://localhost:3000#user/"+uname+"";
+
+
+                        }
+                        else{
+
+                            window.location.href = 'http://localhost:3000#feedback';
+
+                        }
+
+                    }else{
+
                         window.location.href = 'http://localhost:3000#signup';
+
                     }
+                    
                     
                 }
             });            

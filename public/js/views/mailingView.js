@@ -69,16 +69,19 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'mailers', 'mailer'], func
 
 
         sendData: function(e) {
-            // alert("naresh send data");
+            
+            var url = Backbone.history.getFragment().split('/');            
+            var timestamp = url[1]
+            console.log(timestamp);
             to = $("#to").val();
             subject = $("#subject").val();
-            text = $("#content").val();
-            ssid = $("#ssid").val();
+            
+
+            ssid = timestamp;
             $("#message").text("Sending E-mail...Please wait");
             $.get("http://localhost:3000/send", {
                 to: to,
                 subject: subject,
-                text: text,
                 ssid: ssid
             }, function(data) {
                 if (data == "sent") {

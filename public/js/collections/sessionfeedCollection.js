@@ -5,12 +5,13 @@ define(['jquery','backbone','router','participant'], function($, Backbone,BaseRo
 var Meetings=Backbone.Collection.extend({
     model:ParticipantModel,
     url: function () {
+    	console.log(this.id);
         return '/sessions/' + this.id;
         
     },
 
     initialize:function(){
-        console.log("collection created from sessions");
+        console.log("inside participants collection");
 
         
     }

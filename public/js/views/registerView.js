@@ -33,6 +33,7 @@ SigninView = Backbone.View.extend({
          signup.set('username',$("#username").val());
          // signup.set('email',$("#email").val());
          signup.set('password',$("#password").val());
+         signup.set('roll',1);
          signup.save({
                 wait: true
             },{
@@ -40,7 +41,7 @@ SigninView = Backbone.View.extend({
                     
                     console.log(response);
                     if(response.username){
-                        window.location.href = 'http://localhost:3000/signin';
+                        window.location.href = 'http://localhost:3000/#signin';
                     }
                     else{
                         window.location.href = 'http://localhost:3000/signup';
