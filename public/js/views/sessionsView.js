@@ -50,7 +50,10 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
                 success: function(collection) {
                     collection.each(function(index) {
                         self.addtwo(index);
-
+                        
+                        var rstatus = index.attributes.status;
+                        console.log(rstatus);
+                        
                     }, this);
                 },
                 error: function() {
@@ -88,7 +91,7 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
         },
 
         addData: function(e) {
-            alert("adding new records");
+            //alert("adding new records");
             var url = Backbone.history.getFragment().split('/');
             var timestamp = url[1]
             console.log(timestamp);
@@ -121,11 +124,41 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
         },
 
         emailid: function(e) {
-            alert("mail");
-            var target = e.currentTarget.getAttribute('value');
-            console.log(target);
+            
+            var collection = this.collection.partc;
+            
+            this.collection.partc.fetch({
+                success: function(collection) {
 
-            var rating = e.currentTarget.setAttribute('href', "#mailto/" + target);
+                    collection.each(function(index) {
+
+                        //self.addone(index);
+                        //console.log(index.attributes.email);
+                        
+                        to = index.attributes.email;
+                        subject = "New Session"+index.attributes.ssid;
+                        ssid = index.attributes.ssid;
+                        $("#message").text("Sending E-mail...Please wait");
+                        $.get("http://localhost:3000/send", {
+                to: to,
+                subject: subject,
+                ssid: ssid
+            }, function(data) {
+                if (data == "sent") {
+                    $("#message").empty().html("Email is been sent at " + to + ".Please check inbox!");
+                }
+
+            });
+
+
+                    },this);
+                },
+                error: function() {
+
+                    console.log('some thing went wrong!');
+
+                }
+            });
 
         },
 

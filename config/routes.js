@@ -19,7 +19,7 @@ exports.init = function(app, passport,smtpTransport) {
     app.get('/#feedback',isAdmin, home.render);
     app.get('/#user',isLoggedIn,home.render);
 
-    app.get('/#signin', home.render);
+    app.get('/signin', home.render);
 
     app.get('/userfeedback/:id',home.render);
 
@@ -80,6 +80,9 @@ exports.init = function(app, passport,smtpTransport) {
         console.log("inside delete");
         //console.log(request.params.id);
         var ssid = request.params.id; 
+        
+        console.log(ssid);
+        //console.log(sid);
         var query = db.config.query('delete from sessions where ssid = ?',[ssid],function(req,res){
             console.log(res);
             response.send(res);
@@ -217,6 +220,7 @@ exports.init = function(app, passport,smtpTransport) {
             console.log(emailsep[i]);
             var id= Math.floor(Math.random()*90000) + 10000;
              console.log("id"+id);
+
             var query = db.config.query('insert into idgeneration(ssid,timestamp) values('+ssid+"," +id+ ');',function(req,resp){
              console.log("response"+resp);
 

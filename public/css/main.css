@@ -1,16 +1,15 @@
 body {
-    margin: 0;
-    padding: 0;
-    background: #fff;
-    color: #fff;
-    font-family: Arial;
-    font-size: 12px;
-}
+        width: auto;
+    height: auto;
+        background-size: cover;
+    
+    background-image: url("../images/Benifits_of_Training.JPG");
 
+}
 nav {
     height: 40px;
     width: 100%;
-    background: #40C0FF;
+    background: #2F4F4F;
 }
 
 nav ul {
@@ -34,9 +33,20 @@ nav a {
     text-decoration: none;
     font-family: Georgia, "Times New Roman", Times, serif;
     font-style: italic;
-    font-size: 12.5px;
+    font-size: 14px;
     line-height: 40px;
-    text-shadow: 1px 1px 0px #283744;
+    text-shadow: 1px 1px 0px #FFFFFF;
+}
+
+
+
+ .formb a:hover {
+    text-decoration: none;
+    color: #FFFFFF
+}
+
+.formb a{
+    color:#FFFFFF;
 }
 
 .startup {
@@ -48,9 +58,13 @@ nav a {
 }
 
 .formb {
-    background-color: #40C0FF;
+    background-color: #2F4F4F;
     padding-bottom: 20px;
+    color : #FFFFFF;
+    a:hover : #FFFFFF;
 }
+
+
 
 .thumb {
     display: border;
@@ -65,4 +79,8 @@ nav a {
 
 body .modal-dialog {
   width: 600px;
+}
+
+body .jumbotron{
+    background-color: AliceBlue
 }

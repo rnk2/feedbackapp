@@ -126,7 +126,7 @@ define(['jquery', 'backbone',
 
         ratings: function(id) {
             console.log("rating page");
-            alert("ratings");
+            console.log(id);
 
             console.log(id);
             
@@ -153,6 +153,7 @@ define(['jquery', 'backbone',
 
         userfeedback : function(id){
             console.log("userfeedback");
+            console.log(id);
             if(!this.feedView){
                 this.feedView = new FeedView({collection:FeedCollection,mid : id});
             }
