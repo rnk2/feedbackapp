@@ -8,7 +8,8 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
             'click button#btnadd': 'addData',
             'click button#btnclear': 'clearInput',
             'click .ratebtn' : 'addtwo',
-            'click .emailbtn': 'emailid'
+            'click .emailbtn': 'emailid',
+            'click #datetimepicker1' : 'datetime'
 
         },
 
@@ -54,7 +55,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
             var meet = new BaseModel();
             var collection = this.collection.records;
             var id = $(e.currentTarget).data("id");
-            // meet.set('ssid', $("#ssid").val());
+            
             meet.set('tname', $("#tname").val());
             meet.set('pname', $("#pname").val());
             meet.set('pst_date', $("#pst_date").val());
@@ -74,6 +75,8 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
 
 
             });
+            
+            this.clearInput();
 
         },
 
@@ -83,6 +86,13 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
             //Clear all Textboxes 
             $("#tblinput input").val('');
         },
+
+        datetime : function(e){
+
+                $('#datetimepicker1').datetimepicker();
+                 
+       
+     },
 
 
         addone: function(model) {

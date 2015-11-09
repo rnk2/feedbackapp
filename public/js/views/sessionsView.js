@@ -121,6 +121,13 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
 
             });
 
+            this.clearInput();
+
+        },
+
+        clearInput: function() {
+            //Clear all Textboxes 
+            $("#tblinput input").val('');
         },
 
         emailid: function(e) {
@@ -145,7 +152,7 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
                 ssid: ssid
             }, function(data) {
                 if (data == "sent") {
-                    $("#message").empty().html("Email is been sent at " + to + ".Please check inbox!");
+                    $("#message").empty().html("Email is sent participants Please check inbox!");
                 }
 
             });
@@ -159,8 +166,14 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
 
                 }
             });
+         this.removebutton();
 
         },
+
+        removebutton : function(){
+            
+            $("#addrmv").hide(); 
+    },
 
         addone: function(model) {
 

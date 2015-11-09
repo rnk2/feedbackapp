@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Training Pointer</title>
-    
     <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
     <link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css" type="text/css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
 </head>
 
@@ -14,11 +14,11 @@
     <div id="container">
         <nav class="menu">
             <ul class="footer">
-                <li><a href="#">Home</a></li>
-                <li><a href="#Requests">Requests</a>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/Requests">REQUESTS</a>
                 </li>
-                <li><a href="#signin">Login</a></li>
-                <li><a href="#logout">Logout</a></li>
+                <li><a href="/signin">LOGIN</a></li>
+                <li><a href="/logout">LOGOUT</a></li>
             </ul>
         </nav>
         <section class="displayBoard">
@@ -37,20 +37,18 @@
                     <div class="col-sm-1 col-md-1">
                     </div>
                     <div class="col-sm-4 col-md-4 sessionid">
-                    <div class="row">
-                    <div class="col-sm-5 col-md-5">
-                    <h5>Participants List</h5>
-                        <table class="table table-hover" id="feed">
-                            <tr>
-                                <th>Names</th>
-                            </tr>
-                        </table>
+                        <div class="row">
+                            <div class="col-sm-5 col-md-5">
+                                <h5>Participants List</h5>
+                                <table class="table table-hover" id="feed">
+                                    <tr>
+                                        <th>Names</th>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                    </div>
-                        
-                        
+                        <div class="row">
+                        </div>
                         <!-- Modal -->
                         <div id="myModal" class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -87,8 +85,64 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal">Add New</button>
-                        <button type="button" class="btn btn-default btn-md emailbtn">Send Mail</button>
+                        <div id="myModal3" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Add Participants in Team</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-hover" id="tblinput">
+                                            <thead>
+                                                <tr>
+                                                    <th><strong>Participant Name</strong></th>
+                                                    <th><strong>Email</strong></th>
+                                                    <th><strong>Select Team</strong></th>
+                                                </tr>
+                                            </thead>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" id="partc_name" placeholder="participants" /> </td>
+                                                <td>
+                                                    <input type="text" id="email" placeholder="email" /> </td>
+
+                                                    <td>
+                                    
+                                    <select class="form-control">
+                                                <option value="one">UI</option>
+                                                <option value="two">JAVA</option>
+                                                <option value="three">TESTING</option>
+                                                <option value="four">SST</option>
+                                                <option value="five">PAT</option>
+                                            </select>
+                                            
+                                    </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td >
+                                                    <button id="nusebtn" data-dismiss="modal" class="btn-default pull-right">Add New</button>
+                                                    
+                                                    </td>
+                                                    
+                                                    <td>
+                                                    <button id="btnclear" class="btn-default">Send Mail</button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="addrmv">
+                            <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal3">Group Mail</button>
+                            <button type="button" class="btn btn-custom btn-md" data-toggle="modal" data-target="#myModal">Add New</button>
+                            <button type="button" class="btn btn-default btn-md emailbtn">Send Mail</button>
+                        </div>
                         <span id="message"></span>
                     </div>
                     <div class="col-sm-1 col-md-1">
@@ -163,7 +217,17 @@
                                                 <td>
                                                     <input type="text" id="tname" placeholder="topic name" /> </td>
                                                 <td>
-                                                    <input type="date" id="pst_date" placeholder="scheduled time" /> </td>
+                                                    <div class='col-sm-9'>
+                                                        <div class="form-group">
+                                                            <div class='input-group date' id='datetimepicker1'>
+                                                                <input type='text' class="form-control" id="pst_date" />
+                                                                <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -185,7 +249,7 @@
         <script id="userfeed-template" type="text/x-handlebars-template">
             <td>{{tname}}</td>
             <td>{{pst_date}}</td>
-            <td><a href="#/sessions" class="btn btn-primary btn-sm active ssbtn" data-id="{{ssid}}" role="button">View Details</a></td>
+            <td><a href="/sessionss/{{ssid}}" class="btn btn-custom btn-sm active" role="button">View Details</a></td>
         </script>
         <script id="homeTemplate" type="text/x-handlebars-template">
             <div class="container startup">
@@ -211,7 +275,7 @@
                         <h4>Welcome to home page</h4>
                         <p>Sign in and submit your valuable feedback!</p>
                         <p>
-                            <a href="#signin" class="btn btn-primary btn-lg" role="button">
+                            <a href="/signinn" class="btn btn-default btn-sm" role="button">
          
                            Sign in!
                            </a>
@@ -228,38 +292,8 @@
                 <h2>Requests and Suggestions</h2>
             </div>
         </script>
-        <script id="mailingTemplate" type="text/x-handlebars-template">
-            <div class="container">
-                <div class="row">
-                    <div class="form-inline startup">
-                        <label for="recipient">Enter recipients email-id:</label>
-                        <input id="to" type="email" class="form-control" placeholder="" />
-                        <button class="btn btn-primary btn-sm active ratebtn" value="select All" id="email">select All</button>
-                        <label for="subject">Subject:</label>
-                        <input id="subject" type="text" class="form-control" placeholder="Write Subject" />
-                        <button id="send_email">Send Email</button>
-                        <span id="message"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-8 col-md-8 startup">
-                        <table class="table table-bordered" id="crud">
-                            <tr>
-                                <th width="75">SSID</th>
-                                <th width="75">Participant Name</th>
-                                <th width="75">Email</th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </script>
-        <script id="mail-template" type="text/x-handlebars-template">
-            <td>{{ssid}}</td>
-            <td>{{partc_name}}</td>
-            <td>
-                <input type=checkbox name=list value="1">&nbsp{{email}}</td>
-        </script>
+        
+        
         <script id="feedbackTemplate" type="text/x-handlebars-template">
             <div class="row startup">
                 <div class="col-sm-1 col-md-1" startup>
@@ -279,7 +313,17 @@
                             <td>
                                 <input type="text" id="tname" placeholder="topic name" /> </td>
                             <td>
-                                <input type="date" id="pst_date" placeholder="scheduled time" /> </td>
+                                <div class='col-sm-9'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' class="form-control" id="pst_date" />
+                                            <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -313,7 +357,7 @@
             <td>{{pname}}</td>
             <td>{{tname}}</td>
             <td>{{pst_date}}</td>
-            <td><a href="#sessions" class="btn btn-primary btn-lg active ratebtn" data-id="{{ssid}}" role="button">Feedback</a></td>
+            <td><a href="sessionss/{{ssid}}" class="btn btn-primary btn-sm active" role="button">Feedback</a></td>
             <td>
                 <input id="btnedt" type="button" value="Edit" />
                 <input id="btndl" type="button" value="Remove" />
@@ -354,17 +398,15 @@
             <div class="row signin">
                 <div class="col-sm-4 col-md-4">
                 </div>
-                <div class="col-sm-2 col-md-2 formb">
+                <div class="col-sm-3 col-md-3 formb">
                     <div class="form-group">
-                        <label for="user name">User name</label>
                         <input type="text" class="form-control" id="username" placeholder="Enter email">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Password">
                     </div>
-                    <button id="login" class="btn-default">Submit</button>
-                    <a href="#/signup"  title="register"> signup </a>
+                    <button type="button" class="btn btn-default" id="login">signin</button>
+                    <a href="/signup" title="register"> signup </a>
                 </div>
             </div>
         </script>
@@ -381,17 +423,17 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="Password">
                     </div>
-                    <button id="signup" class="btn-default" type="submit">Register</button>
+                    <button type="button" class="btn btn-default" id="signup">Register</button>
                     <a href="/signin" title="register"> signin </a>
                 </div>
             </div>
         </script>
         <script id="feeds-template" type="text/x-handlebars-template">
             <div class="row startup">
-                <div class="col-sm-3 col-md-3 col-lg-3">
+                <div class="col-sm-2 col-md-2col-lg-2">
                 </div>
                 <div>
-                    <p style="color:red">Welcome to Feedback page your ratings must be between 1 to 5</p>
+                    <p style="color:red">***Welcome to Feedback page your ratings must be between 1 to 5 and User Name same as Email</p>
                 </div>
             </div>
             <div class="row">

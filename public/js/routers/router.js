@@ -2,7 +2,7 @@ define(['jquery', 'backbone',
     'modelBoard', 'collectionBoard',
     'userSession', 'userSessions',
     'user','mailers','mailer',
-    'mailing','sessionBoard',
+    'sessionBoard',
     'sessionsBoard','participant',
     'participants',
     'home', 'technologies',
@@ -16,7 +16,7 @@ define(['jquery', 'backbone',
         Mboard,BaseCollection,
         UserModel,UserCollection,
         UserView,MailingCollection,
-        MailModel,MailingView,SessionModel,
+        MailModel,SessionModel,
         SessionCollection,ParticipantsModel,
         ParticpantesCollection,
         HomeView, TechnologiesView,
@@ -35,10 +35,10 @@ define(['jquery', 'backbone',
         routes: {
             '': 'home',
             'Requests': 'Requests',
-            'sessions/:id': 'sessions',
+            'sessionss/:id': 'sessions',
             'feedback': 'feedback',
             'signup': 'signup',
-            'signin' :'signin',
+            'signinn' :'signin',
             'ratingss/:id': 'ratings',
             'mailto/:id':'mailto',
             'logout' : 'logout',
@@ -58,6 +58,7 @@ define(['jquery', 'backbone',
         },
 
         user: function(uname) {
+            console.log(uname);
            
             //console.log(new BaseCollection());
             if (!this.userView) {

@@ -6,7 +6,7 @@ change to default password :root
 
 
 
-create table sessions(ssid int(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,tname char(15),pname char(15),pst_date date);
+create table sessions(ssid int(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,tname char(15),pname char(15),pst_date datetime);
 	
 create table idgeneration(ssid int(3),timestamp int(60),foreign key (ssid) references sessions(ssid),primary key (timestamp));
 
@@ -18,12 +18,3 @@ create table register(id int(5) NOT NULL AUTO_INCREMENT PRIMARY KEY,username var
 
 create table participants(sno int(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,ssid int(3),partc_name varchar(30),email varchar(30),foreign key (ssid) references sessions(ssid));
 
-var query = db.config.query('insert into idgeneration(ssid,id) values('+ssid+"," +id+ ');',function(req,resp){
-             console.log(res);
-
-        });
-
-var query = db.config.query('insert into registration(ssid,user,email,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + email + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status +');', function(req, res) {
-            console.log(res);
-            response.send(res);
-        });

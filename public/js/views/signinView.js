@@ -39,20 +39,28 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'signinBoard', 'signinsBoa
                     if(uname){
 
                         if(response.role==1){
+                             alert("signin");
+                             //window.location.href = "http://localhost:3000/user/"+uname+"";
+                            //Backbone.history.navigate(href.slice(root.length), true);
+                            Backbone.history.navigate('/user/'+uname,{ trigger:true, replace: true })
+                            
                              
-                             window.location.href = "http://localhost:3000#user/"+uname+"";
 
 
                         }
                         else{
-
-                            window.location.href = 'http://localhost:3000#feedback';
+                            Backbone.history.navigate('/feedback',{ trigger:true, replace: true })
+                            //window.location.href ='http://localhost:3000/feedback';
+                           
 
                         }
 
                     }else{
 
-                        window.location.href = 'http://localhost:3000#signup';
+                        
+                        Backbone.history.navigate('/signup',{ trigger:true, replace: true })
+
+
 
                     }
                     

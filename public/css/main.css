@@ -2,14 +2,15 @@ body {
         width: auto;
     height: auto;
         background-size: cover;
-    
-    background-image: url("../images/Benifits_of_Training.JPG");
-
+    background-color: #2F4F4F;
+    color : #8FBC8F;
+    /*background-image: url("../images/Benifits_of_Training.JPG");
+*/
 }
 nav {
     height: 40px;
     width: 100%;
-    background: #2F4F4F;
+    background: aliceblue;
 }
 
 nav ul {
@@ -26,16 +27,21 @@ nav li {
 }
 
 nav a {
-    color: #FFFFFF;
+    color: #8FBC8F;
     display: inline-block;
     width: 100px;
     text-align: left;
     text-decoration: none;
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-style: italic;
+    font-family: verdana;
+    
     font-size: 14px;
     line-height: 40px;
     text-shadow: 1px 1px 0px #FFFFFF;
+}
+
+nav a:hover{
+    text-decoration: none;
+
 }
 
 
@@ -82,5 +88,35 @@ body .modal-dialog {
 }
 
 body .jumbotron{
-    background-color: AliceBlue
+    background-color: #2F4F4F;
 }
+
+
+.btn-custom {
+  background-color: #8FBC8F;
+  border-color: #8FBC8F;
+  color:#FFFFFF;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+  background-color: #7fb27f;
+  border-color: #6fa96f;
+}
+.btn-custom.disabled:hover,
+.btn-custom.disabled:focus,
+.btn-custom.disabled:active,
+.btn-custom.disabled.active,
+.btn-custom[disabled]:hover,
+.btn-custom[disabled]:focus,
+.btn-custom[disabled]:active,
+.btn-custom[disabled].active,
+fieldset[disabled] .btn-custom:hover,
+fieldset[disabled] .btn-custom:focus,
+fieldset[disabled] .btn-custom:active,
+fieldset[disabled] .btn-custom.active {
+  background-color: #8FBC8F;
+  border-color: #8FBC8F;
+}
+

@@ -41,10 +41,12 @@ SigninView = Backbone.View.extend({
                     
                     console.log(response);
                     if(response.username){
-                        window.location.href = 'http://localhost:3000/signin';
+                        //window.location.href = 'http://localhost:3000/signin';
+                        Backbone.history.navigate('/signinn',{ trigger:true, replace: true })
                     }
                     else{
-                        window.location.href = 'http://localhost:3000/signup';
+                        //window.location.href = 'http://localhost:3000/signup';
+                        Backbone.history.navigate('/signup',{ trigger:true, replace: true })
                     }
 
                      //RegisterCollection.add(model);

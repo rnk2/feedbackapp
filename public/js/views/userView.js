@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','handlebars','router','userSession','userSessions','dateformat'], function($, Backbone,Hbs,BaseRouter,UserModel,UserSessions,Dateformat) {
+define(['jquery', 'backbone','handlebars','datepicker','router','userSession','userSessions','dateformat'], function($, Backbone,Hbs,DatePicker,BaseRouter,UserModel,UserSessions,Dateformat) {
     
 UserView = Backbone.View.extend({
     id: '#container',
@@ -7,7 +7,7 @@ UserView = Backbone.View.extend({
      events: {
             'click button#btnadd': 'addData',
             'click button#btnclear': 'clearInput',
-            'click .ssbtn' : 'addtwo',
+            'click #datetimepicker1' : 'datetime'
             
         },
 
@@ -56,11 +56,14 @@ UserView = Backbone.View.extend({
             var timestamp = url[1]
             console.log(timestamp);
             console.log("adding record");
+            var dt = document.getElementById('pst_date').value;
+            console.log(dt);
             var meet = new UserModel();
             var id = $(e.currentTarget).data("id");
             meet.set('tname', $("#tname").val());
             meet.set('pname',timestamp);
             meet.set('pst_date', $("#pst_date").val());
+            
             meet.set('partcp', $("#attended").val());
             meet.save({
                 wait: true
@@ -76,6 +79,8 @@ UserView = Backbone.View.extend({
 
             });
 
+            this.clearInput();
+
         },
 
          
@@ -85,6 +90,16 @@ UserView = Backbone.View.extend({
             //Clear all Textboxes 
             $("#tblinput input").val('');
         },
+
+        datetime : function(e){
+
+                $('#datetimepicker1').datetimepicker();
+                 
+       
+     },
+
+
+
 
         addone: function(model) {
 
@@ -96,14 +111,6 @@ UserView = Backbone.View.extend({
             $(this.el).find("#crud").append(subview.el);
             subview.delegateEvents();
 
-        },
-
-        addtwo : function(e){
-            
-            var target=e.currentTarget.getAttribute('data-id');
-            
-            var rating=e.currentTarget.setAttribute('href',"#sessions/"+target);
-           
         }
 
 
@@ -119,6 +126,13 @@ UserView = Backbone.View.extend({
         initialize: function() {            
             this.render();
         },
+
+        events : {
+         //  'click .ssbtn' : 'addtwo'
+        },
+
+        
+
         render: function() {
             // console.log('in render');
             var template = $("#userfeed-template").html();
@@ -135,6 +149,9 @@ UserView = Backbone.View.extend({
         
     });
 
+    
+
+     
 
 
 
