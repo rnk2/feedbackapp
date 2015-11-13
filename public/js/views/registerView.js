@@ -1,8 +1,9 @@
-define(['jquery', 'backbone', 'handlebars','router','registrationBoard','registrationsBoard'], function($, Backbone,Hbs,BaseRouter,RegisterModel,RegisterCollection) {
+define(['jquery', 'backbone', 'templates','router','registrationBoard','registrationsBoard'], function($, Backbone,Templates,BaseRouter,RegisterModel,RegisterCollection) {
     
 SigninView = Backbone.View.extend({
+    template: Templates['register'],
     tagName: 'div',
-    className: 'signin',
+   
     
     events : {
         'click button#signup': 'signup',
@@ -18,10 +19,10 @@ SigninView = Backbone.View.extend({
 
     render: function () {
         console.log("from signin view");
-        var template = $("#registerTemplate").html();
-        var html = Handlebars.compile(template);
+        // var template = $("#registerTemplate").html();
+        // var html = Handlebars.compile(template);
         
-        $(this.el).html(html);
+        $(this.el).html(this.template);
         return this;
     },
 
@@ -41,8 +42,8 @@ SigninView = Backbone.View.extend({
                     
                     console.log(response);
                     if(response.username){
-                        //window.location.href = 'http://localhost:3000/signin';
-                        Backbone.history.navigate('/signinn',{ trigger:true, replace: true })
+                        window.location.href = 'http://localhost:3000/signinn';
+                        //Backbone.history.navigate('/signinn',{ trigger:true, replace: false })
                     }
                     else{
                         //window.location.href = 'http://localhost:3000/signup';

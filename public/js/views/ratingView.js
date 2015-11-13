@@ -1,7 +1,7 @@
-define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone, Hbs, BaseRouter, FeedModel, FeedsCollection, charts) {
+define(['jquery', 'backbone','templates','router', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone,Templates, BaseRouter, FeedModel, FeedsCollection, charts) {
 
     var RatingView = Backbone.View.extend({
-
+        template: Templates['feedback'],
         id: '#container',
         className: 'home',
 
@@ -27,10 +27,10 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard',
         render: function() {
             var self = this;
 
-            var template = $("#rating-template").html();
-            var html = Handlebars.compile(template);
-            console.log(html);
-            $(this.el).html(html);
+            // var template = $("#rating-template").html();
+            // var html = Handlebars.compile(template);
+            // console.log(html);
+            $(this.el).html(this.template);
 
             FeedsCollection.fetch({
                 success: function(collection) {
@@ -161,16 +161,17 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard', 'feedsBoard',
 
 
     var rateSub = Backbone.View.extend({
+        template: Templates['feedbackSub'],
         tagName: 'tr',
         initialize: function() {
-            var template = $("#ratingfeed-template").html();
-            var source = Handlebars.compile(template);
+            // var template = $("#ratingfeed-template").html();
+            // var source = Handlebars.compile(template);
            
-            var html = source(this.model.toJSON());
+            var source = this.template(this.model.toJSON());
 
-            console.log(html);
+            //console.log(html);
 
-            $(this.el).html(html);
+            $(this.el).html(source);
             return this;
         }
     });

@@ -1,6 +1,7 @@
-define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionBoard'], function($, Backbone,Hbs, BaseRouter, BaseModel, BaseCollection) {
+define(['jquery', 'backbone','templates','router', 'modelBoard', 'collectionBoard'], function($, Backbone,Templates,BaseRouter, BaseModel, BaseCollection) {
 
     var FeedbackView = Backbone.View.extend({
+        template: Templates['adminView'],
         id: '#container',
         className: 'home',
 
@@ -23,9 +24,9 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
         render: function() {
             var self = this;
 
-            var template = $("#feedbackTemplate").html();
-            var html = Handlebars.compile(template);
-            $(this.el).html(html);
+            // var template = $("#feedbackTemplate").html();
+            // var html = Handlebars.compile(template);
+            $(this.el).html(this.template);
             this.delegateEvents();
 
             this.collection.records.fetch({
@@ -132,7 +133,7 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
 
 
     var feedSub = Backbone.View.extend({
-
+        template: Templates['adminSub'],
         tagName: 'tr',
         events:{    
         
@@ -146,12 +147,12 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'modelBoard', 'collectionB
         },
         render: function() {
             // console.log('in render');
-            var template = $("#feed-template").html();
+            // var template = $("#feed-template").html();
 
-            var source = Handlebars.compile(template);
-            var html = source(this.model.toJSON());
+            // var source = Handlebars.compile(template);
+            var source = this.template(this.model.toJSON());
 
-            $(this.el).html(html);
+            $(this.el).html(source);
 
             return this;
 

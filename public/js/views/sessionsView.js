@@ -1,6 +1,7 @@
-define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoard', 'sessionBoard', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone, Hbs, Bootstrap, BaseRouter, SessionCollection, SessionModel, FeedModel, FeedCollection, charts) {
+define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard', 'sessionBoard', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone,Templates,Bootstrap,BaseRouter, SessionCollection, SessionModel, FeedModel, FeedCollection, charts) {
 
     SessionView = Backbone.View.extend({
+        template: Templates['sessions'],
         id: '#container',
         className: 'sessionid',
 
@@ -24,10 +25,10 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
         render: function() {
             var self = this;
 
-            var template = $("#sessionsTemplate").html();
-            var html = Handlebars.compile(template);
+            // var template = $("#sessionsTemplate").html();
+            // var html = Handlebars.compile(template);
 
-            $(this.el).html(html);
+            $(this.el).html(this.template);
 
             this.collection.partc.fetch({
                 success: function(collection) {
@@ -261,27 +262,29 @@ define(['jquery', 'backbone', 'handlebars', 'bootstrap', 'router', 'sessionsBoar
 
 
     var rateSub = Backbone.View.extend({
+        template: Templates['sessionsSub'],
         tagName: 'tr',
         initialize: function() {
-            var template = $("#sessionfeed-template").html();
-            var source = Handlebars.compile(template);
+            // var template = $("#sessionfeed-template").html();
+            // var source = Handlebars.compile(template);
 
-            var html = source(this.model.toJSON());
+            var source = this.template(this.model.toJSON());
 
-            $(this.el).html(html);
+            $(this.el).html(source);
             return this;
         }
     });
 
 
     var prating = Backbone.View.extend({
+        template: Templates['feedback'],
         tagName: 'tr',
         initialize: function() {
-            var template = $("#ratingfeed-template").html();
-            var source = Handlebars.compile(template);
-            var html = source(this.model.toJSON());
+            // var template = $("#ratingfeed-template").html();
+            // var source = Handlebars.compile(template);
+            var source = this.template(this.model.toJSON());
 
-            $(this.el).html(html);
+            $(this.el).html(source);
             return this;
         }
     });

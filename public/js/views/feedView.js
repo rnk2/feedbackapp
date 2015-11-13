@@ -1,7 +1,7 @@
-define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard','feedsBoard'], function($, Backbone,Hbs, BaseRouter,FeedModel,FeedsCollection) {
+define(['jquery', 'backbone','templates', 'router', 'feedBoard','feedsBoard'], function($, Backbone,Templates,BaseRouter,FeedModel,FeedsCollection) {
 
     var FeedView = Backbone.View.extend({
-
+        template: Templates['signin'],
         id: '#container',
         className: 'home',
 
@@ -24,9 +24,9 @@ define(['jquery', 'backbone', 'handlebars', 'router', 'feedBoard','feedsBoard'],
         render: function() {
             var self = this;
             //window.location.href = "http://localhost:3000/userfeedback/101"
-            var template = $("#feeds-template").html();
-            var html = Handlebars.compile(template);
-            $(this.el).html(html);
+            // var template = $("#feeds-template").html();
+            // var html = Handlebars.compile(template);
+            $(this.el).html(this.template);
 
             
 

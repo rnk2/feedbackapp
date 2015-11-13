@@ -1,15 +1,14 @@
-define(['jquery', 'backbone','handlebars','router'], function($, Backbone,Hbs,BaseRouter) {
+define(['jquery', 'backbone','templates','router'], function($, Backbone,Templates,BaseRouter) {
     
 TechView = Backbone.View.extend({
+    template: Templates['technologies'],
     tagName: 'div',
     className: 'home',
-    // template: _.template( $( '#aboutTemplate' ).html()),
+   
     render: function () {
         console.log("from technologies view");
-        var template = $("#technologiesTemplate").html();
-        var html = Handlebars.compile(template);
         
-        $(this.el).html(html);
+        $(this.el).html(this.template);
         return this;
     }
 
