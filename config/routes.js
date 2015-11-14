@@ -193,7 +193,7 @@ exports.init = function(app, passport, smtpTransport) {
     app.get('/ratings/:id', function(request, response) {
         //console.log("test" + request.params.id);
 
-        db.config.query('select * from feedback where ssid =' + request.params.id, function(req, res) {
+        db.config.query('select * from feedbacks where ssid =' + request.params.id, function(req, res) {
             console.log(res);
             response.send(res);
         });
@@ -211,7 +211,7 @@ exports.init = function(app, passport, smtpTransport) {
 
         //console.log(status);
 
-        var query = db.config.query('insert into feedback(ssid,user,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status + ');', function(req, res) {
+        var query = db.config.query('insert into feedbacks(ssid,user,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status + ');', function(req, res) {
             console.log(res);
             response.send(res);
         });
