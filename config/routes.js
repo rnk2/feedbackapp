@@ -1,8 +1,11 @@
-var home = require('../app/controller/home');
-var feedback = require('../app/controller/feedback');
+var index = require('../app/controller/index');
+var user =require('../app/controller/user');
+var admin =require('../app/controller/admin');
+var requests = require('../app/controller/requests');
 var db = require('../db');
 
-exports.init = function(app, passport, smtpTransport) {
+
+exports.init = function(app, passport,auth,smtpTransport) {
     console.log('Initializing Routes');
 
 
@@ -11,37 +14,101 @@ exports.init = function(app, passport, smtpTransport) {
         response.send('Library API is running');
     });
 
-    //home router
-    app.get('/', home.render);
-
-    app.get('/signinn',home.render);
-    //signin router
-    app.post('/signin', function(req, res, next) {
-        // generate the authenticate method and pass the req/res
-        passport.authenticate('local-login', function(err, user, info) {
-
-            if (err) {
-                return next(err);
-            }
-            if (!user) {
-                return res.send(JSON.stringify("user not found"))
-            };
-
-            // req / res held in closure
-            req.logIn(user, function(err) {
-                if (err) {
-
-                    return next(err);
-                }
-                console.log("user logged in");
-                return res.send(JSON.stringify(user));
-                //res.redirect('/users/' + user.username);
-            });
-
-        })(req, res, next);
-
+    // app.all('/auth/*', auth.requiresLogin, auth.user.hasAuthorization);
+    //default route home router
+    app.get('/',index.render);
+    // registration page
+    app.get('/signup',index.register);
+    // app.get('/profile', auth.user.hasAuthorizationToPage, index.profile);
+   
+    //signin page
+    app.get('/signinn',user.signin);
+    //logout page
+    app.get('/logout', function(req, res) {
+        //console.log(req);
+        req.logOut();
+        res.redirect('/');
+    });
+    //login success response
+    app.get('/auth/success', function(req, res) {
+        index.home(req, res);
     });
 
+    app.get('/requests',requests.render);
+
+    //admin module
+    app.get('/adminhome',auth.requiresLogin,auth.user.hasAuthorization,admin.render);
+
+    //user module
+    app.get('/userhome',auth.requiresLogin,auth.user.hasAuthorization,user.userhome);
+
+    // admin rest Mysql
+    app.get('/admin',auth.user.hasAuthorizationToPage, function(request, response) {
+        console.log("form feedback page");
+        console.log("Admin checking"+request.user.username);
+     var query = db.config.query('SELECT * FROM sessions', function(req, res) {
+            console.log(res);
+            response.send(res);
+        });
+        console.log(query.sql);
+    });
+    // user rest Mysql
+    app.get('/usessions',auth.user.hasAuthorizationToPage,function(request, response) {
+        console.log("test" + request.params.pname);
+        console.log(request.user.username);
+        db.config.query("select * from sessions where pname =?", [request.user.username], function(req, res) {
+            //console.log(res);
+            response.send(res);
+        });
+    });
+    // individual session participants rest Mysql for presenter
+    app.get('/participants/:id', function(request, response) {
+        console.log("sessions get request");
+        console.log(request.user.id);
+        console.log("testing participants" + request.params.id);
+        presenter = request.user.username;
+        console.log("presenter in get"+presenter);
+    var query = db.config.query('select * from participants where ssid =? and name_presenter =?',[request.params.id,presenter], function(req, res) {
+            console.log("sss"+res);
+            response.send(res);
+        });
+        
+        console.log(query.sql);
+    });
+
+    // individual session participants rest Mysql for Admin
+    app.get('/aparticipants/:id', function(request, response) {
+        console.log("sessions get request");
+        console.log(request.user.id);
+        console.log("testing participants" + request.params.id);
+        presenter = request.user.username;
+        console.log("presenter in get"+presenter);
+    var query = db.config.query('select * from participants where ssid =?',[request.params.id], function(req, res) {
+            console.log("sss"+res);
+            response.send(res);
+        });
+        
+        console.log(query.sql);
+    });
+
+    //feedback from participants
+    app.get('#/userfeedback/:id',index.feedback);
+
+    // individual session feedback in graph rest Mysql
+    app.get('/ratings/:id', function(request, response) {
+        //console.log("test" + request.params.id);
+
+        db.config.query('select * from feedback where ssid =' + request.params.id, function(req, res) {
+            console.log(res);
+            response.send(res);
+        });
+    });
+
+
+
+
+
+     // new user registration
     app.post('/signup', function(req, res, next) {
 
         // generate the authenticate method and pass the req/res
@@ -61,28 +128,16 @@ exports.init = function(app, passport, smtpTransport) {
 
     });
 
-    app.get('/user/:uname', isLoggedIn, home.render);
+     
+    //user sigin and authentication
+    app.post('/signin',
+        passport.authenticate('local-login', {
+            successRedirect: '/auth/success',
+            failureRedirect: '/',
+            failureFlash: 'failure message...'
+        }));
 
-    app.get('/usessions/:pname', function(request, response) {
-        console.log("test" + request.params.pname);
-        db.config.query("select * from sessions where pname =?", [request.params.pname], function(req, res) {
-            //console.log(res);
-            response.send(res);
-        });
-    });
-
-
-    app.get('/feedback', isAdmin, home.render);
-
-
-    app.get('/index', function(request, response) {
-        console.log("form feedback page");
-        db.config.query('SELECT * FROM sessions', function(req, res) {
-            console.log(res);
-            response.send(res);
-        });
-    });
-
+    //adding new sessions from admin
     app.post('/index', function(request, response) {
         console.log("post");
         // console.log(request.body.ssid);
@@ -91,16 +146,35 @@ exports.init = function(app, passport, smtpTransport) {
         var tname = request.body.tname;
         var pname = request.body.pname;
         var pst_date = request.body.pst_date;
-
-        // 407 --- 
         var query = db.config.query('insert into sessions(tname,pname,pst_date) values(' + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
-            //console.log(res);
+            console.log(res);
             response.send(res);
         });
+        console.log(query.sql);
+    });
+
+    //adding new sessions from user 
+    app.post('/usessions',auth.user.hasAuthorizationToPage,function(request, response) {
+        
+        var tname = request.body.tname;
+        var pname = request.user.username;
+        var pst_date = request.body.pst_date;
+        var query = db.config.query('insert into sessions(tname,pname,pst_date) values(' + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
+            console.log("last insert id"+res.insertId);
+        //response.send(res);
+            db.config.query("select * from sessions where ssid =?", [res.insertId], function(req, res) {
+                console.log(res);
+                response.send(res);
+            });
+
+        });
+
+        
 
         console.log(query.sql);
     });
 
+    //new updates of scheduled sessions before date
     app.put('/index/:id', function(request, response) {
         console.log("inside put");
         //console.log(request.params.id);
@@ -118,68 +192,26 @@ exports.init = function(app, passport, smtpTransport) {
 
         //console.log(query.sql);
     });
-
+    //deleting the existing sessions
     app.delete('/index/:id', function(request, response) {
         console.log("inside delete");
-        //console.log(request.params.id);
         var ssid = request.params.id;
-
-        console.log(ssid);
-        //console.log(sid);
         var query = db.config.query('delete from sessions where ssid = ?', [ssid], function(req, res) {
             console.log(res);
             response.send(res);
         })
 
-        //console.log(query.sql);
-
-
     });
-
-
-
-    app.post('/usessions', function(request, response) {
-        console.log("post");
-        // console.log(request.body.ssid);
-        console.log(request.body.tname);
-        // var ssid = request.body.ssid;
-        var tname = request.body.tname;
-        var pname = request.body.pname;
-        var pst_date = request.body.pst_date;
-
-        // 407 --- 
-        var query = db.config.query('insert into sessions(tname,pname,pst_date) values(' + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
-
-
-            //console.log(res);
-            response.send(res);
-        });
-
-        console.log(query.sql);
-    });
-
-
-    app.get('/sessionss/:id', isLoggedIn, home.render);
-    app.get('/sessions/:id', function(request, response) {
-        console.log("sessions get request");
-        //console.log("test" + request.params.id);
-        db.config.query('select * from participants where ssid =' + request.params.id, function(req, res) {
-            //console.log(res);
-            response.send(res);
-        });
-
-    });
-
-    app.post('/sessions', function(request, response) {
-        console.log("post");
-        //console.log(request.body); 
+    // adding new participants for new sessions
+    app.post('/participants', function(request, response) {
         var ssid = request.body.ssid;
         var tname = request.body.topic_name;
         var pname = request.body.partc_name;
         var pst_date = request.body.email;
-
-        var query = db.config.query('insert into participants(ssid,partc_name,email) values(' + ssid + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
-            //console.log(res);
+        var presenter =request.user.username;
+        console.log("presenter name"+presenter);
+        var query = db.config.query('insert into participants(ssid,partc_name,name_presenter,email) values(' + ssid + "," + "'" + pname + "'" + "," + "'" + presenter + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
+           
             response.send(res);
         });
         console.log(query.sql);
@@ -190,15 +222,7 @@ exports.init = function(app, passport, smtpTransport) {
 
 
 
-    app.get('/ratings/:id', function(request, response) {
-        //console.log("test" + request.params.id);
-
-        db.config.query('select * from feedback where ssid =' + request.params.id, function(req, res) {
-            console.log(res);
-            response.send(res);
-        });
-    });
-
+    
     app.post('/ratings/:id', function(request, response) {
 
         var ssid = request.body.ssid;
@@ -262,63 +286,5 @@ exports.init = function(app, passport, smtpTransport) {
         console.log(query.sql);
 
     });
-
-
-
-
-
-
-
-    // app.get('mailto/:id',isLoggedIn,home.render);
-    app.get('/signup', home.render);
-
-
-    app.get('/logout', function(req, res) {
-        req.logOut();
-        res.redirect('/');
-    });
-
-
-
-
-
-
-    // route middleware to make sure a user is logged in
-    function isLoggedIn(req, res, next) {
-        //console.log(req);
-        console.log("ccc" + req.isAuthenticated());
-        // if user is authenticated in the session, carry on 
-        if (req.isAuthenticated()) {
-            return next();
-        }
-        // if they aren't redirect them to the home page
-        res.redirect('/signin');
-    }
-
-    // route middleware to make sure a admin is logged in
-    function isAdmin(req, res, next) {
-
-        // if user is authenticated in the session, carry on
-        if (req.isAuthenticated()) {
-            // if user is admin, go next
-            console.log("ddd" + req.isAuthenticated());
-            console.log(req.user.role);
-            if (req.user.role == 2) {
-                return next();
-            } else {
-                console.log("user signin");
-                res.redirect('/signin');
-            }
-        } else {
-            res.redirect('/signin');
-        }
-    }
-
-
-
-
-
-
-
 
 };

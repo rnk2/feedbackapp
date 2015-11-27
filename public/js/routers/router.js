@@ -5,7 +5,7 @@ define(['jquery', 'backbone',
     'sessionBoard',
     'sessionsBoard','participant',
     'participants',
-    'home', 'technologies',
+    'home', 'requests',
     'feedview','sessions', 
     'feedback', 'rating',
     'register','signin', 
@@ -28,6 +28,8 @@ define(['jquery', 'backbone',
          RegisterModel,RegisterCollection,
          SigninModel, SigninCollection
          ) {
+   
+
     var feedapp = Backbone.Router.extend({
 
 
@@ -38,7 +40,7 @@ define(['jquery', 'backbone',
             'sessionss/:id': 'sessions',
             'feedback': 'feedback',
             'signup': 'signup',
-            'signinn' :'signin',
+            'signinn' : 'signin',
             'ratingss/:id': 'ratings',
             'mailto/:id':'mailto',
             'logout' : 'logout',
@@ -48,8 +50,9 @@ define(['jquery', 'backbone',
         },
 
         home: function() {
-            console.log("home page");
-            console.log(HomeView);
+           
+
+            
             if (!this.homeView) {
                 this.homeView = new HomeView();
             }

@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','templates','router', 'modelBoard', 'collectionBoard'], function($, Backbone,Templates,BaseRouter, BaseModel, BaseCollection) {
+define(['jquery', 'backbone','templates','router','modelBoard', 'collectionBoard'], function($, Backbone,Templates,BaseRouter,BaseModel, BaseCollection) {
 
     var FeedbackView = Backbone.View.extend({
         template: Templates['adminView'],
@@ -135,6 +135,7 @@ define(['jquery', 'backbone','templates','router', 'modelBoard', 'collectionBoar
     var feedSub = Backbone.View.extend({
         template: Templates['adminSub'],
         tagName: 'tr',
+        
         events:{    
         
          'click #btnedt': 'editData',

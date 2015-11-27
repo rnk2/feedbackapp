@@ -34,7 +34,7 @@ SigninView = Backbone.View.extend({
          signup.set('username',$("#username").val());
          // signup.set('email',$("#email").val());
          signup.set('password',$("#password").val());
-         signup.set('roll',1);
+         signup.set('role','Admin');
          signup.save({
                 wait: true
             },{

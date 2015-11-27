@@ -19,7 +19,7 @@ define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession'
 
             console.log(this.collection);
             this.collection.on("add", this.addone, this);
-            this.collection.uname = options.mid;
+            //this.collection.uname = options.mid;
 
         },
 
@@ -33,7 +33,7 @@ define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession'
             UserSessions.fetch({
                 success: function(collection) {
                     // console.log(collection.uname);
-                    document.getElementById("presenter").innerHTML = "Name : " + collection.uname;
+                    //document.getElementById("presenter").innerHTML = "Name : " + collection.uname;
                     $('#datetimepicker1').datetimepicker();
                     collection.each(function(index) {
 
@@ -69,8 +69,9 @@ define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession'
             meet.save({
                 wait: true
             }, {
-                success: function(model, respose) {
+                success: function(model, response) {
                     console.log("success");
+                    console.log("from userview"+response);
                     UserSessions.add(model);
                 },
                 error: function() {
@@ -93,7 +94,7 @@ define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession'
         },
 
         addone: function(model) {
-
+            //alert("subview")
             var subview = new feedSub({
                 model: model,
                 collection: this.collection
@@ -123,7 +124,7 @@ define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession'
         render: function() {
 
             var source = this.template(this.model.toJSON());
-
+            console.log(this.model.toJSON());
             $(this.el).html(source);
 
             return this;

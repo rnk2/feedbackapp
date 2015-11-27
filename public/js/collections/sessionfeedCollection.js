@@ -6,7 +6,7 @@ var Meetings=Backbone.Collection.extend({
     model:ParticipantModel,
     url: function () {
     	console.log(this.id);
-        return '/sessions/' + this.id;
+        return '/participants/' + this.id;
         
     },
 

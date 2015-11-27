@@ -7,7 +7,7 @@ var Meetings=Backbone.Collection.extend({
 
     // url : '/usessions',
     url: function () {    	   
-        return '/usessions/' + this.uname;
+        return '/usessions';
         
     },
 

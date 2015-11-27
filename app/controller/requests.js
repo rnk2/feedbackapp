@@ -1,7 +1,8 @@
 exports.render = function(req, res, next) {
-    res.render('index.html', {
+    
+	console.log("track here");
+
+    res.render('requests.html', {
         msg: "Welcome"
     });
 };
-
-

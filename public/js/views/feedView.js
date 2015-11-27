@@ -1,7 +1,7 @@
 define(['jquery', 'backbone','templates', 'router', 'feedBoard','feedsBoard'], function($, Backbone,Templates,BaseRouter,FeedModel,FeedsCollection) {
 
     var FeedView = Backbone.View.extend({
-        template: Templates['signin'],
+        template: Templates['ratings'],
         id: '#container',
         className: 'home',
 

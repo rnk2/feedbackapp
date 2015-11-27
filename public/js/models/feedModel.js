@@ -8,8 +8,8 @@ var Rating = Backbone.Model.extend({
         email :'',
         pskills : '',
         tskills : '',
-        timestamp:'',
-        userStatus:''
+        timestamp:''
+        
             
     },
 

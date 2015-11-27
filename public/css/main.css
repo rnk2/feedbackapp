@@ -2,61 +2,89 @@ body {
         width: auto;
     height: auto;
         background-size: cover;
-    background-color: #2F4F4F;
-    color : #8FBC8F;
+    background-color: #FFFFFF;
+    color : #2F2F2F;
     /*background-image: url("../images/Benifits_of_Training.JPG");
 */
 }
+
+#header{
+
+    align :center;
+}
 nav {
+    /*margin-top: 50px;*/
     height: 40px;
     width: 100%;
-    background: aliceblue;
+    background: #FFFFFF;
+border-top: 1px solid #086A87;   
+/*border-bottom: 1px solid #FFFFFF;*/
+
 }
 
 nav ul {
     list-style: none;
-    padding: 0;
+    
     margin: 0 auto;
     width: 600px;
-    height: 40px;
+    height: 30px;
 }
 
 nav li {
     display: inline;
-    float: left;
+    /*border-right: 1px solid #000;*/
+    /*float: left;*/
 }
 
 nav a {
-    color: #8FBC8F;
-    display: inline-block;
+    color: #086A87;
+    /*display: inline-block;*/
     width: 100px;
-    text-align: left;
+    /*text-align: left;*/
     text-decoration: none;
-    font-family: verdana;
-    
-    font-size: 14px;
+    font-family: sans-serif;
+    /*padding-left: 20px;
+    padding-right: 20px;*/
+    padding: 8px 20px;
+
+    font-weight: bold;
+    font-size: 16px;
     line-height: 40px;
     text-shadow: 1px 1px 0px #FFFFFF;
 }
 
-nav a:hover{
+/*nav a:hover{
     text-decoration: none;
 
+}*/
+
+/* Link Hover Color */
+nav a:hover {
+text-decoration: none;
+border-bottom: 2px solid #BDBDBD;
+background: #FFFFFF;
+color: #BDBDBD;
 }
+
+/*nav a:visited {
+    color: green;
+}*/
+
+
 
 
 
  .formb a:hover {
     text-decoration: none;
-    color: #FFFFFF
+    color: #333333
 }
 
 .formb a{
-    color:#FFFFFF;
+    color:#2F2F2F;
 }
 
 .startup {
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .signin {
@@ -64,9 +92,9 @@ nav a:hover{
 }
 
 .formb {
-    background-color: #2F4F4F;
+    /*background-color: #99CC99;*/
     padding-bottom: 20px;
-    color : #FFFFFF;
+    color : #2F2F2F;
     a:hover : #FFFFFF;
 }
 
@@ -88,9 +116,30 @@ body .modal-dialog {
 }
 
 body .jumbotron{
-    background-color: #2F4F4F;
+    background-color: #E6E6E6;
+    color : #086A87;
 }
 
+
+table td{
+    color:#2F2F2F;
+}
+
+table th{
+    color:#428bca;
+}
+
+
+/*tbody div{
+    overflow:scroll;
+    height:100px;
+}*/
+
+/*.scrollit{
+    height:100px;
+    overflow: scroll;
+    height:100px;
+}*/
 
 .btn-custom {
   background-color: #8FBC8F;
@@ -119,4 +168,35 @@ fieldset[disabled] .btn-custom.active {
   background-color: #8FBC8F;
   border-color: #8FBC8F;
 }
+
+
+/*edit and delete buttons in admin*/
+.icon-input-btn{
+        display: inline-block;
+        position: relative;
+    }
+    .icon-input-btn input[type="submit"]{
+        padding-left: 2em;
+    }
+    .icon-input-btn .glyphicon{
+        display: inline-block;
+        position: absolute;
+        left: 0.65em;
+        top: 30%;
+    }
+
+
+    footer{
+    width:100%;
+    min-height:30px;    
+    padding-top:6px;
+    background-color: #F2F2F2;
+    /*border-top: 1px solid #424242;*/
+    color: #428bca /* This color gets inverted color or you can add navbar inverse class in html */
+}
+
+
+
+
+
 

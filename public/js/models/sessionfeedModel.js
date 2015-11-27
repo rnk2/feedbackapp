@@ -1,7 +1,7 @@
 define(['jquery', 'backbone'], function($, Backbone) {
     
 var Meeting = Backbone.Model.extend({
-	urlRoot : '/sessions',
+	urlRoot : '/participants',
     idAttribute : 'id',
     defaults: {
         

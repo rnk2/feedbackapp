@@ -11,7 +11,7 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
         },
 
         initialize: function(options) {
-
+            var collectionn;
             this.collection.partc.on("add", this.addone, this);
             this.collection.ratings.on("add", this.addtwo, this);
 
@@ -19,17 +19,41 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
             this.collection.ratings.id = options.mid;
             this.collection.sessions.id = options.mid;
             this.collection.id = options.mid;
+            console.log(this.collection);
+            //collection = this.collection;
 
         },
 
         render: function() {
             var self = this;
 
-            // var template = $("#sessionsTemplate").html();
-            // var html = Handlebars.compile(template);
-
             $(this.el).html(this.template);
 
+            //participants collections
+
+
+            // this.collection.fetch({
+            //     success: function(collection) {
+
+            //         collection.each(function(index) {
+
+            //             self.addone(index);
+            //             console.log(index.attributes)
+
+
+                       
+            //         }, this);
+            //     },
+            //     error: function() {
+
+            //         console.log('some thing went wrong!');
+
+            //     }
+            // });
+            
+
+
+           
             this.collection.partc.fetch({
                 success: function(collection) {
 
@@ -38,22 +62,26 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
                         self.addone(index);
 
 
+                       
                     }, this);
                 },
                 error: function() {
 
                     console.log('some thing went wrong!');
+                     var invalideuser = document.getElementById("thanks");
+                    invalideuser.innerHTML = "<b> Your are not valid user to submit feedback !!!!!</b>";
 
                 }
             });
-
+            
+            //ratings collection
             this.collection.ratings.fetch({
                 success: function(collection) {
                     collection.each(function(index) {
                         self.addtwo(index);
-                        
-                        var rstatus = index.attributes.status;
-                        console.log(rstatus);
+                        //self.addthree(index);
+                        // var rstatus = index.attributes.status;
+                        // console.log(rstatus);
                         
                     }, this);
                 },
@@ -61,13 +89,14 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
                     console.log('something went wrong!');
                 }
             });
-
+            
+            //sessions collection
             this.collection.sessions.fetch({
                 success: function(collection) {
                     console.log(collection.id);
                     collection.each(function(index) {
                         // self.addthree(index);
-                        //console.log(index.id);
+                        console.log(index.id);
                         if (index.id == collection.id) {
                             var title = index.attributes.tname;
                             var ssid = index.id;
@@ -90,7 +119,8 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
 
             return this;
         },
-
+         
+         //adding new records/participants
         addData: function(e) {
             //alert("adding new records");
             var url = Backbone.history.getFragment().split('/');
@@ -130,7 +160,8 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
             //Clear all Textboxes 
             $("#tblinput input").val('');
         },
-
+        
+        //settings for email sending
         emailid: function(e) {
             
             var collection = this.collection.partc;
@@ -200,6 +231,15 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
             this.afterRender();
         },
 
+        // addthree: function(model){
+        //     var status = new rateSub1({
+        //         model:model,
+        //         collection : this.collection
+        //     });
+        //     $(this.el).find("#feeds").append(status.el);
+
+        // },
+
 
         afterRender: function(model) {
 
@@ -208,12 +248,12 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
             var tskills = [];
 
             this.collection.ratings.each(function(index) {
-
+                console.log("inside ratings");
                 names.push(index.attributes.user);
                 pskills.push(index.attributes.pskills);
                 tskills.push(index.attributes.tskills);
 
-                // console.log(index.attributes);
+                console.log(index.attributes);
             }, this);
 
             var ctx;
@@ -267,13 +307,18 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
         initialize: function() {
             // var template = $("#sessionfeed-template").html();
             // var source = Handlebars.compile(template);
-
+          
             var source = this.template(this.model.toJSON());
-
+            //var source1 = this.template(this.model1.toJSON());
+            console.log(source);
+            //console.log(source1);
             $(this.el).html(source);
+
             return this;
         }
     });
+
+    
 
 
     var prating = Backbone.View.extend({

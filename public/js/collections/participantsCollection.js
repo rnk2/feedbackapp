@@ -7,7 +7,7 @@ var Meetings=Backbone.Collection.extend({
     url : '/partcpates',
 
     initialize:function(){
-        console.log("collection created from participants");
+        console.log("no more collection created from participants");
 
         
     }

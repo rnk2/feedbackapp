@@ -4,7 +4,7 @@ define(['jquery','backbone','router','modelBoard'], function($, Backbone,BaseRou
 
 var Meetings=Backbone.Collection.extend({
     model:BaseModel,
-    url : '/index',
+    url : '/admin',
 
     initialize:function(){
         console.log("collection created from base");

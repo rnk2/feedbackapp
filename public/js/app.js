@@ -16,12 +16,12 @@ define(['jquery','backbone','router'], function($,Backbone,BaseRouter) {
 
     App.start = function() {
         new BaseRouter();
-     console.log("start");
+     // console.log("start");
 
         Backbone.history.start({
-            pushState: true,
-            hashstate: false
+            // pushState: true,
+            // hashstate: false 
         });
-    };
+     };
     return App;
 });

@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','router', 'signinBoard','templates', 'signinsBoard'], function($, Backbone,BaseRouter, SigninModel,Templates,SigninCollection) {
+define(['jquery', 'backbone','router','signinBoard','templates', 'signinsBoard'], function($, Backbone,BaseRouter,SigninModel,Templates,SigninCollection) {
 
     SigninView = Backbone.View.extend({
 
@@ -39,7 +39,7 @@ define(['jquery', 'backbone','router', 'signinBoard','templates', 'signinsBoard'
             
             console.log("signinview");
             var signin = new SigninModel();
-            console.log(signin);
+            //console.log(signin);
             signin.set('username', $("#username").val());
             signin.set('password', $("#password").val());
             
@@ -47,19 +47,21 @@ define(['jquery', 'backbone','router', 'signinBoard','templates', 'signinsBoard'
                
                 success:function(model,response){
                     console.log(response.role);
-                     var uname = response.username;
+                     var User,uname = response.username;
                      console.log(uname);
+                     console.log(response.role);
+                     
 
                     if(uname){
 
-                        if(response.role==1){
-                            
-                            Backbone.history.navigate('/user/'+uname,{ trigger:true, replace: true })
+                        if(response.role == "User"){
+                            window.location.href = '/userhome';
+                            //Backbone.history.navigate('/profile',{ trigger:true})
                        
                         }
                         else{
-                            Backbone.history.navigate('/feedback',{ trigger:true, replace: true })
-                            
+                            window.location.href = "/adminhome";
+                            //Backbone.history.navigate('/feedback',{ trigger:true})                            
                 
                         }
 

@@ -8,6 +8,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session');
     nodemailer = require('nodemailer');
+    url = require('url');
 
 var db = require('./db');
 
@@ -19,11 +20,11 @@ var app = express();
 var smtpTransport = nodemailer.createTransport("SMTP",{
 service: "Gmail",
 auth: {
-user: "xxxxxxx",
-pass: "xxxxxx"
+user: "nfeedback07@gmail.com",
+pass: "feedapp12"
 }
 });
-
+var auth = require('./config/middleware/authorization');
 require('./config/passport')(passport); // pass passport for configuration
 
 // instruct the app to use the `morgan()` middleware for log every request to the console
@@ -41,9 +42,13 @@ app.use(bodyParser.json());
 
 app.set('port', process.env.PORT || 3000);
 
+
+
 // set the view engine to ejs
-app.use(express.static(__dirname + '/public'));
-app.set('views', __dirname + '/public/views');
+app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(__dirname + '/public'));
+app.set('views', path.join(__dirname, 'public/views'));
+// app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 //app.set('view engine', 'ejs');
 
@@ -67,7 +72,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 
 
 //Initialize Routes
-require('./config/routes').init(app, passport,smtpTransport);
+require('./config/routes').init(app,passport,auth,smtpTransport);
 
 http.createServer(app).listen(app.get('port'), function() {
     console.log("Express server listening on port " + app.get('port'));
