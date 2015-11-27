@@ -221,8 +221,15 @@ exports.init = function(app, passport,auth,smtpTransport) {
     // app.get('/ratingss/:id', home.render);
 
 
+    app.get('/ratings/:id', function(request, response) {
+        //console.log("test" + request.params.id);
 
-    
+        db.config.query('select * from feedbacks where ssid =' + request.params.id, function(req, res) {
+            console.log(res);
+            response.send(res);
+        });
+    });
+
     app.post('/ratings/:id', function(request, response) {
 
         var ssid = request.body.ssid;
@@ -235,7 +242,7 @@ exports.init = function(app, passport,auth,smtpTransport) {
 
         //console.log(status);
 
-        var query = db.config.query('insert into feedback(ssid,user,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status + ');', function(req, res) {
+        var query = db.config.query('insert into feedbacks(ssid,user,pskills,tskills,timestamp,status) values(' + ssid + "," + "'" + user + "'" + "," + "'" + pskills + "'" + "," + "'" + tskills + "'" + "," + timestamp + "," + status + ');', function(req, res) {
             console.log(res);
             response.send(res);
         });

@@ -19,12 +19,16 @@
     "express": "^4.12.4",
     "express-session": "~1.0.0",
     "express4-handlebars": "~0.2.0",
+    "grunt": "^0.4.5",
     "method-override": "2.3.5",
     "morgan": "~1.0.0",
     "mysql": "~2.9.0",
     "nodemailer": "0.7.1",
     "passport": "0.2.0",
-    "passport-local": "1.0.0",
-    "url": "^0.11.0"
+    "passport-local": "1.0.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }
