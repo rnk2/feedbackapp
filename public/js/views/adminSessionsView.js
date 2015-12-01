@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard', 'sessionBoard', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone,Templates,Bootstrap,BaseRouter, SessionCollection, SessionModel, FeedModel, FeedCollection, charts) {
+define(['jquery', 'backbone','helpers', 'templates', 'bootstrap', 'router', 'sessionsBoard', 'sessionBoard', 'feedBoard', 'feedsBoard', 'chart'], function($, Backbone,Helpers,Templates,Bootstrap,BaseRouter, SessionCollection, SessionModel, FeedModel, FeedCollection, charts) {
 
     SessionView = Backbone.View.extend({
         template: Templates['adminSessions'],
@@ -304,6 +304,8 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
     var rateSub = Backbone.View.extend({
         template: Templates['sessionsSub'],
         tagName: 'tr',
+         
+    
         initialize: function() {
             // var template = $("#sessionfeed-template").html();
             // var source = Handlebars.compile(template);
@@ -315,7 +317,10 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
             $(this.el).html(source);
 
             return this;
-        }
+        },
+
+
+        
     });
 
     

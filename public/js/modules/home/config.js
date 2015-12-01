@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview'], function($,Backbone,HomeView,FeedModel,FeedCollection,FeedView) 
+define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview','header'], function($,Backbone,HomeView,FeedModel,FeedCollection,FeedView,HeaderView) 
 {
    
         
@@ -19,8 +19,10 @@ define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview'], funct
             
             if (!this.homeView) {
                 this.homeView = new HomeView();
+                this.headerView = new HeaderView();
             }
             $('.displayBoard').html(this.homeView.render().el);
+            $('.headerBoard').html(this.headerView.render().el);
 
         },
 

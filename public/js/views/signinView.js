@@ -46,9 +46,10 @@ define(['jquery', 'backbone','router','signinBoard','templates', 'signinsBoard']
             signin.save(null,{
                
                 success:function(model,response){
-                    console.log(response.role);
+                    console.log(response.username);
                      var User,uname = response.username;
-                     console.log(uname);
+                     
+                     // alert("sigin");
                      console.log(response.role);
                      
 

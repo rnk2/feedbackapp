@@ -21,6 +21,7 @@ require.config({
         'underscore': 'lib/underscore',
         'bootstrap': 'lib/bootstrap',
         'handlebars.runtime': 'lib/handlebars.runtime.amd',
+        'helpers' : 'helpers',
         'templates': 'templates/templates',
         'chart': 'lib/chart',
         'feedstar': 'feedstar',
@@ -55,7 +56,8 @@ require.config({
         'router': 'routers/router',
         'mailers': 'collections/mailCollection',
         'mailer': 'models/mailModel',
-        'user': 'views/userView'
+        'user': 'views/userView',
+        'header':'views/headerView'
 
     },
 
@@ -65,6 +67,7 @@ require.config({
 
         },
         handlebars: {
+            deps:['helpers'],
             exports: 'Handlebars'
 
         },

@@ -1,6 +1,6 @@
 define(['jquery', 'backbone',
-    'signinBoard', 'signinsBoard'
-], function($, Backbone, SigninModel, SigninCollection) {
+    'signinBoard', 'signinsBoard','header'
+], function($, Backbone, SigninModel, SigninCollection,HeaderView) {
 
 
     var feedapp = Backbone.Router.extend({
@@ -26,9 +26,11 @@ define(['jquery', 'backbone',
                 this.signinView = new SigninView({
                     collection: SigninCollection
                 });
+                this.headerView = new HeaderView();
 
             }
             $('.displayBoard').html(this.signinView.render().el);
+            $('.headerBoard').html(this.headerView.render().el);
         }
 
 

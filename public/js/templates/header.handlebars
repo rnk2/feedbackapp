@@ -1,0 +1,24 @@
+<div style="text-align: center">
+            <nav class="menu">
+            {{#if req.user}}
+                <ul class="header">
+                    <li><p>Username: {{user.username}}</p></li>
+                    <li><a href="/requests">Requests</a>
+                    </li>
+                    
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+
+
+                {{else}}
+                <ul class="header">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/requests">Requests</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    
+                   
+                </ul>
+                {{/if}}
+
+            </nav>
+        </div>

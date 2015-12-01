@@ -2,9 +2,9 @@ mysql = require('mysql');
 
 var connection = mysql.createConnection({
     host: 'localhost',
-    port: '3306',
+    port: '3309',
     user: 'root',
-    password: 'root',
+    password: 'admin',
     database: 'feedapp',
     dateStrings:'date'
 });

@@ -203,7 +203,7 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
         },
 
         removebutton : function(){
-            
+            console.log("hide from rbutton");
             $("#addrmv").hide(); 
     },
 
@@ -253,7 +253,16 @@ define(['jquery', 'backbone', 'templates', 'bootstrap', 'router', 'sessionsBoard
                 pskills.push(index.attributes.pskills);
                 tskills.push(index.attributes.tskills);
 
-                console.log(index.attributes);
+                if(index.attributes !=" ")
+                {
+                    // alert("no feedback");
+                    this.removebutton();
+
+                }
+
+                else{
+                    // alert("continue");
+                }
             }, this);
 
             var ctx;

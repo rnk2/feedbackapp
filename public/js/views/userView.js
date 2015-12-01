@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession', 'userSessions', 'dateformat'], function($, Backbone, Templates, DatePicker, BaseRouter, UserModel, UserSessions, Dateformat) {
+define(['jquery', 'backbone','helpers','templates', 'datepicker', 'router', 'userSession', 'userSessions', 'dateformat'], function($, Backbone,Helpers,Templates, DatePicker, BaseRouter, UserModel, UserSessions, Dateformat) {
 
     UserView = Backbone.View.extend({
 
@@ -117,6 +117,15 @@ define(['jquery', 'backbone', 'templates', 'datepicker', 'router', 'userSession'
         template: Templates['userSub'],
 
         tagName: 'tr',
+        events:{    
+        'click td': 'showSession'
+    },
+        showSession: function(){
+            
+            var amp = this.model.toJSON()
+            console.log(amp.ssid);
+            window.location.href = "#/sessionss/"+amp.ssid+"";
+        },
         initialize: function() {
             this.render();
         },

@@ -11,7 +11,7 @@ define(['jquery', 'backbone',
     'register','signin', 
     'feedBoard', 'feedsBoard',
     'registrationBoard','registrationsBoard',
-    'signinBoard','signinsBoard'
+    'signinBoard','signinsBoard','header'
     ], function($,Backbone,
         Mboard,BaseCollection,
         UserModel,UserCollection,
@@ -26,7 +26,7 @@ define(['jquery', 'backbone',
         FeedModel, FeedCollection,
          RatingModel, RatingsCollection,
          RegisterModel,RegisterCollection,
-         SigninModel, SigninCollection
+         SigninModel, SigninCollection,HeaderView
          ) {
    
         
@@ -54,9 +54,11 @@ define(['jquery', 'backbone',
                     collection: {
                         records: new BaseCollection() }
                 });
+                this.headerView = new HeaderView();
                 console.log('feedback router');
             
             $('.displayBoard').html(this.feedbackView.render().el);
+            $('.headerBoard').html(this.headerView.render().el);
         },
 
         sessions: function(id) {

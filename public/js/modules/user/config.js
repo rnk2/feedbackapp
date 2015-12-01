@@ -1,4 +1,4 @@
-define(['jquery', 'backbone',
+define(['jquery', 'backbone','header',
     'modelBoard', 'collectionBoard',
     'userSession', 'userSessions',
     'user','mailers','mailer',
@@ -9,7 +9,7 @@ define(['jquery', 'backbone',
     'feedview','sessions', 
     'feedback', 'rating',
     'feedBoard', 'feedsBoard'
-    ], function($,Backbone,
+    ], function($,Backbone,HeaderView,
         Mboard,BaseCollection,
         UserModel,UserCollection,
         UserView,MailingCollection,
@@ -44,8 +44,13 @@ define(['jquery', 'backbone',
             //console.log(new BaseCollection());
             if (!this.userView) {
                 this.userView = new UserView({collection: UserCollection});
+                this.headerView = new HeaderView();
             }
+
+            //var headerView =new HeaderView();
+
             $('.displayBoard').html(this.userView.render().el);
+            $('.headerBoard').html(this.headerView.render().el);
 
         },
 

@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview','requests'], function($,Backbone,HomeView,FeedModel,FeedCollection,FeedView,RequestView) 
+define(['jquery', 'backbone','header','home','feedBoard', 'feedsBoard','feedview','requests'], function($,Backbone,HeaderView,HomeView,FeedModel,FeedCollection,FeedView,RequestView) 
 {
    
         
@@ -19,17 +19,21 @@ define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview','reques
             
             if (!this.homeView) {
                 this.homeView = new HomeView();
+                
             }
             $('.displayBoard').html(this.homeView.render().el);
+            
 
         },
 
         requests: function() {
-            console.log("technologies page");
+            console.log("technologies page.........");
             if (!this.technologiesView) {
                 this.technologiesView = new RequestView();
+                this.headerView = new HeaderView();
             }
             $('.displayBoard').html(this.technologiesView.render().el);
+            $('.headerBoard').html(this.headerView.render().el);
         },
 
         userfeedback : function(id){

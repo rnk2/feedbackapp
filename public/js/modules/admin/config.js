@@ -1,4 +1,4 @@
-define(['jquery', 'backbone',
+define(['jquery', 'backbone','header',
     'modelBoard', 'collectionBoard',
     'sessionBoard',
     'adminParticipants','participant',
@@ -6,7 +6,8 @@ define(['jquery', 'backbone',
     'feedview','sessions', 
     'feedback', 'rating',
     'feedBoard', 'feedsBoard'
-    ], function($,Backbone,
+    
+    ], function($,Backbone,HeaderView,
         Mboard,BaseCollection,
         SessionModel,
         AdminParticipantsCollection,ParticipantsModel,
@@ -41,9 +42,11 @@ define(['jquery', 'backbone',
                     collection: {
                         records: new BaseCollection() }
                 });
+                this.headerView = new HeaderView();
                 console.log('feedback router');
             
             $('.displayBoard').html(this.feedbackView.render().el);
+            $('.headerBoard').html(this.headerView.render().el);
         },
 
         sessions: function(id) {
