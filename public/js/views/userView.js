@@ -53,6 +53,7 @@ define(['jquery', 'backbone','helpers','templates', 'datepicker', 'router', 'use
 
 
         addData: function(e) {
+            var self = this;
             var url = Backbone.history.getFragment().split('/');
             var timestamp = url[1]
             console.log(timestamp);
@@ -64,7 +65,7 @@ define(['jquery', 'backbone','helpers','templates', 'datepicker', 'router', 'use
             meet.set('tname', $("#tname").val());
             meet.set('pname', timestamp);
             meet.set('pst_date', $("#pst_date").val());
-
+            
             meet.set('partcp', $("#attended").val());
             meet.save({
                 wait: true
@@ -72,7 +73,24 @@ define(['jquery', 'backbone','helpers','templates', 'datepicker', 'router', 'use
                 success: function(model, response) {
                     console.log("success");
                     console.log("from userview"+response);
-                    UserSessions.add(model);
+                    //UserSessions.add(model);
+
+                     UserSessions.fetch({
+                        success: function(collection) {
+                            // console.log(collection.uname);
+                            //document.getElementById("presenter").innerHTML = "Name : " + collection.uname;
+                            
+                            collection.each(function(index) {
+
+                                self.addone(index);
+                            }, self);
+                        },
+                        error: function() {
+                            console.log('some thing went wrong!');
+
+                        }
+                    });
+
                 },
                 error: function() {
                     console.log("Something went wrong while saving the model");

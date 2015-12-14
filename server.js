@@ -8,8 +8,9 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session');
     nodemailer = require('nodemailer');
+    open = require("open");
     url = require('url');
-
+var server;
 var db = require('./db');
 
 db.config.connect();
@@ -20,8 +21,8 @@ var app = express();
 var smtpTransport = nodemailer.createTransport("SMTP",{
 service: "Gmail",
 auth: {
-user: "nfeedback07@gmail.com",
-pass: "feedapp12"
+user: "xxxxxxx",
+pass: "xxxxxxxxxx"
 }
 });
 var auth = require('./config/middleware/authorization');
@@ -74,6 +75,12 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 //Initialize Routes
 require('./config/routes').init(app,passport,auth,smtpTransport);
 
-http.createServer(app).listen(app.get('port'), function() {
+server = http.createServer(app).listen(app.get('port'), function() {
     console.log("Express server listening on port " + app.get('port'));
 });
+
+
+// server.listen(3000, '127.0.0.1',function(){
+//     console.log('Launching the browser!');
+//     open('http://127.0.0.1:3000');
+// });

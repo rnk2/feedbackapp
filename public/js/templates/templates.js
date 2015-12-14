@@ -42,7 +42,7 @@ templates['header'] = template({"1":function(container,depth0,helpers,partials,d
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.user : depth0)) != null ? stack1.username : stack1), depth0))
     + "</p></li>\r\n                    <li><a href=\"/requests\">Requests</a>\r\n                    </li>\r\n                    \r\n                    <li><a href=\"/logout\">Logout</a></li>\r\n                </ul>\r\n\r\n\r\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                <ul class=\"header\">\r\n                    <li><a href=\"/\">Home</a></li>\r\n                    <li><a href=\"/requests\">Requests</a></li>\r\n                    <li><a href=\"/logout\">Logout</a></li>\r\n                    \r\n                   \r\n                </ul>\r\n";
+    return "                <ul class=\"header\">\r\n                    <li><a href=\"/\">HOME</a></li>\r\n                    <li><a href=\"/requests\">REQUESTS</a></li>\r\n                    <li><a href=\"/logout\">LOGOUT</a></li>\r\n                    \r\n                   \r\n                </ul>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
