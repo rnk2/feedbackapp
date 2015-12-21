@@ -1,0 +1,7 @@
+define(['handlebars'], function(Handlebars) {
+
+return Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<!-- Fixed navbar -->\r\n<div class=\"navbar navbar-inverse navbar-fixed-top headroom\" >\r\n	<div class=\"container\">\r\n		<div class=\"navbar-header\">\r\n			<!-- Button for smallest screens -->\r\n			<button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\"><span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span class=\"icon-bar\"></span> </button>\r\n			<a class=\"navbar-brand\" href=\"/\"><img width=\"120\" height=\"60\" src=\"images/feedback.png\" alt=\"Progressus HTML5 template\"></a>\r\n		</div>\r\n		<div class=\"navbar-collapse collapse\">\r\n			<ul class=\"nav navbar-nav pull-right\">\r\n				<li class=\"active\"><a href=\"/\">Home</a></li>\r\n				<li><a href=\"/#header\">About</a></li>\r\n				<li class=\"dropdown\">\r\n					<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">More Pages <b class=\"caret\"></b></a>\r\n					<ul class=\"dropdown-menu\">\r\n						<li><a href=\"sidebar-left.html\">Left Sidebar</a></li>\r\n						<li class=\"active\"><a href=\"sidebar-right.html\">Right Sidebar</a></li>\r\n					</ul>\r\n				</li>\r\n				<li><a href=\"/#contact\">Contact</a></li>\r\n				<li><a class=\"btn\" href=\"/signin\">SIGN IN</a></li>\r\n			</ul>\r\n			</div><!--/.nav-collapse -->\r\n		</div>\r\n	</div>\r\n	<!-- /.navbar -->\r\n	<!-- Header -->";
+},"useData":true})
+
+});
