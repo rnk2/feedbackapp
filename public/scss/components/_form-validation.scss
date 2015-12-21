@@ -1,0 +1,8 @@
+.invalid-form .ux-error-class, .ux-error-generic, .ux-error-class{
+    color: #E11A2B;
+    padding-left: 20px;
+}
+
+.ux-error-field input, .ux-error-field select, .ux-error-field textarea {
+    border: 1px solid #E11A2B ;
+}

@@ -11,3 +11,9 @@
 
 /platform-web/.sass-cache
 /IMP.log
+
+/public/node_modules
+/public/js/templates
+/public/css
+
+/.sass-cache

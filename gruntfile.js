@@ -18,7 +18,7 @@ grunt.initConfig({
          files: [
         {
           expand: true,     
-          cwd: 'public/templates',  
+          cwd: 'public/hbtemplates',  
           src: ['**/*.html'], 
           dest: 'public/js/templates',   
           ext: '.js',   
@@ -31,24 +31,46 @@ grunt.initConfig({
           amd: true
       }
   },
+
+  sass: {
+      dist: {
+        options: {
+          style: 'expanded',
+          /* nested / compact/ compressed / expanded  */
+          trace: true,
+          debugInfo: false,
+          lineNumbers: true,
+          update: false,
+          sourcemap: "none"
+        },
+        files: [{
+          expand: true,
+          cwd: 'public/scss',
+          src: ['*.scss', '**/*.scss'],
+          dest: 'public/css',
+          ext: '.css'
+        }]
+
+      }
+    },
   watch: {
       handlebars : {
-        files: ['public/templates/**/*.html'],
+        files: ['public/hbtemplates/**/*.html'],
         tasks:["handlebars"]
       },
-      js : {
-        files: ['js/**/*.js'],
-        tasks: ['concat:js']
-      },
-      css: {
-        files: ['css/**/*.css'],
-        tasks: ['concat:css']
+      sass : {
+        files: ["public/scss/**/*.scss"],
+        tasks: ["sass"]
       }
     }
 });
 
 	grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks("grunt-jsbeautifier");
   grunt.loadNpmTasks('grunt-contrib-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.registerTask('default',['concat'],['watch']);
+
+  grunt.registerTask('build',['handlebars','sass']);
+	grunt.registerTask('default',['build','watch']);
 };
