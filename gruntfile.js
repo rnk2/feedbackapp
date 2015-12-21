@@ -1,7 +1,5 @@
 module.exports = function(grunt){
 
-console.log("hello")
-
 	// Project configuration.
 grunt.initConfig({
   concat: {
