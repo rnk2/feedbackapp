@@ -1,0 +1,215 @@
+body {
+        width: auto;
+    height: auto;
+        background-size: cover;
+    background-color: #FFFFFF;
+    color : #2F2F2F;
+    /*background-image: url("../images/Benifits_of_Training.JPG");
+*/
+}
+
+#header{
+
+    align :center;
+}
+nav {
+    /*margin-top: 50px;*/
+    height: 40px;
+    width: 100%;
+    background: #FFFFFF;
+border-top: 1px solid #086A87;   
+/*border-bottom: 1px solid #FFFFFF;*/
+
+}
+
+nav ul {
+    list-style: none;
+    
+    margin: 0 auto;
+    width: 600px;
+    height: 30px;
+}
+
+nav li {
+    display: inline;
+    /*border-right: 1px solid #000;*/
+    /*float: left;*/
+}
+
+nav a {
+    color: #086A87;
+    /*display: inline-block;*/
+    width: 100px;
+    /*text-align: left;*/
+    text-decoration: none;
+    font-family: "Helvetica Neue", Helvetica, Ubuntu, Arial, sans-serif;
+    /*padding-left: 20px;
+    padding-right: 20px;*/
+    padding: 8px 20px;
+
+   /* font-weight: bold;*/
+    font-size: 15px;
+    line-height: 40px;
+    text-shadow: 1px 1px 0px #FFFFFF;
+}
+
+/*nav a:hover{
+    text-decoration: none;
+
+}*/
+
+/* Link Hover Color */
+nav a:hover {
+text-decoration: none;
+border-bottom: 2px solid #BDBDBD;
+background: #FFFFFF;
+color: #BDBDBD;
+}
+
+/*nav a:visited {
+    color: green;
+}*/
+
+
+
+
+
+ .formb a:hover {
+    text-decoration: none;
+    color: #333333
+}
+
+.formb a{
+    color:#2F2F2F;
+}
+
+.startup {
+    margin-top: 30px;
+}
+
+.signin {
+    margin-top: 40px;
+}
+
+.formb {
+    /*background-color: #99CC99;*/
+    padding-bottom: 20px;
+    color : #2F2F2F;
+    a:hover : #FFFFFF;
+}
+
+
+
+.thumb {
+    display: border;
+    height: 120px;
+    width: 100px;
+    margin: 10px 5px 0 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 12px;
+}
+
+body .modal-dialog {
+  width: 600px;
+}
+
+body .jumbotron{
+    background-color: #E6E6E6;
+    color : #086A87;
+}
+
+
+table td{
+    color:#2F2F2F;
+}
+
+table th{
+    color:#428bca;
+}
+
+
+/*tbody div{
+    overflow:scroll;
+    height:100px;
+}*/
+
+/*.scrollit{
+    height:100px;
+    overflow: scroll;
+    height:100px;
+}*/
+
+.btn-custom {
+  background-color: #8FBC8F;
+  border-color: #8FBC8F;
+  color:#FFFFFF;
+}
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active {
+  background-color: #7fb27f;
+  border-color: #6fa96f;
+}
+.btn-custom.disabled:hover,
+.btn-custom.disabled:focus,
+.btn-custom.disabled:active,
+.btn-custom.disabled.active,
+.btn-custom[disabled]:hover,
+.btn-custom[disabled]:focus,
+.btn-custom[disabled]:active,
+.btn-custom[disabled].active,
+fieldset[disabled] .btn-custom:hover,
+fieldset[disabled] .btn-custom:focus,
+fieldset[disabled] .btn-custom:active,
+fieldset[disabled] .btn-custom.active {
+  background-color: #8FBC8F;
+  border-color: #8FBC8F;
+}
+
+
+/*edit and delete buttons in admin*/
+.icon-input-btn{
+        display: inline-block;
+        position: relative;
+    }
+    .icon-input-btn input[type="submit"]{
+        padding-left: 2em;
+    }
+    .icon-input-btn .glyphicon{
+        display: inline-block;
+        position: absolute;
+        left: 0.65em;
+        top: 30%;
+    }
+
+
+    footer{
+    width:100%;
+    min-height:30px;    
+    padding-top:6px;
+    background-color: #F2F2F2;
+    /*border-top: 1px solid #424242;*/
+    color: #428bca /* This color gets inverted color or you can add navbar inverse class in html */
+}
+
+
+
+
+.error-status {
+    background: #e22416 none repeat scroll 0 0;
+    color: #fff;
+    height: 25px;
+    text-align: center;
+    width: 100%;
+    display: none;
+}
+
+#header {
+    height: 75px;
+}
+
+
+

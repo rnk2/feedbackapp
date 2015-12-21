@@ -8,11 +8,14 @@ var db = require('../db');
 exports.init = function(app, passport,auth,smtpTransport) {
     console.log('Initializing Routes');
 
+    app.all('/auth/*', auth.requiresLogin);
 
     // Routes
     app.get('/api', function(request, response) {
         response.send('Library API is running');
     });
+
+    app.get('/errorRoute', index.errorRoute);
 
     // app.all('/auth/*', auth.requiresLogin, auth.user.hasAuthorization);
     //default route home router
@@ -22,7 +25,7 @@ exports.init = function(app, passport,auth,smtpTransport) {
     // app.get('/profile', auth.user.hasAuthorizationToPage, index.profile);
    
     //signin page
-    app.get('/signinn',user.signin);
+    app.get('/signin',user.signin);
     //logout page
     app.get('/logout', function(req, res) {
         //console.log(req);
@@ -32,6 +35,10 @@ exports.init = function(app, passport,auth,smtpTransport) {
     //login success response
     app.get('/auth/success', function(req, res) {
         index.home(req, res);
+    });
+
+    app.get("/dashboard", auth.requiresLogin, function(req, res){
+        user.dashboard(req, res);
     });
 
     app.get('/requests',requests.render);
@@ -44,51 +51,32 @@ exports.init = function(app, passport,auth,smtpTransport) {
 
     // admin rest Mysql
     app.get('/admin',auth.user.hasAuthorizationToPage, function(request, response) {
-        console.log("form feedback page");
-        console.log("Admin checking"+request.user.username);
      var query = db.config.query('SELECT * FROM sessions', function(req, res) {
-            console.log(res);
             response.send(res);
         });
-        console.log(query.sql);
     });
     // user rest Mysql
     app.get('/usessions',auth.user.hasAuthorizationToPage,function(request, response) {
-        console.log("test" + request.params.pname);
-        console.log(request.user.username);
         db.config.query("select * from sessions where pname =?", [request.user.username], function(req, res) {
-            //console.log(res);
             response.send(res);
         });
     });
     // individual session participants rest Mysql for presenter
-    app.get('/participants/:id', function(request, response) {
-        console.log("sessions get request");
-        console.log(request.user.id);
-        console.log("testing participants" + request.params.id);
-        presenter = request.user.username;
-        console.log("presenter in get"+presenter);
+    app.get('/participants/:id', function(request, response) {        
+        var presenter = request.user.username;
     var query = db.config.query('select * from participants where ssid =? and name_presenter =?',[request.params.id,presenter], function(req, res) {
-            console.log("sss"+res);
             response.send(res);
         });
         
-        console.log(query.sql);
     });
 
     // individual session participants rest Mysql for Admin
     app.get('/aparticipants/:id', function(request, response) {
-        console.log("sessions get request");
-        console.log(request.user.id);
-        console.log("testing participants" + request.params.id);
         presenter = request.user.username;
-        console.log("presenter in get"+presenter);
+
     var query = db.config.query('select * from participants where ssid =?',[request.params.id], function(req, res) {
-            console.log("sss"+res);
             response.send(res);
         });
-        
-        console.log(query.sql);
     });
 
     //feedback from participants
@@ -110,47 +98,40 @@ exports.init = function(app, passport,auth,smtpTransport) {
 
      // new user registration
     app.post('/signup', function(req, res, next) {
-
         // generate the authenticate method and pass the req/res
-        passport.authenticate('local-signup', function(err, user, info) {
-            console.log("user" + user);
+        passport.authenticate('local-signup', function(err, user) {
+
             if (err) {
                 return next(err);
             }
-            if (user) {
+            if (user.id) {
                 return res.send(JSON.stringify(user));
-            } else {
-                console.log("in else");
-                return res.send(JSON.stringify("user already exists"));
+            } else {                
+                return res.send(JSON.stringify({errorMessage : "User name already exists"}));
             }
 
         })(req, res, next);
 
     });
 
-     
     //user sigin and authentication
     app.post('/signin',
-        passport.authenticate('local-login', {
+        passport.authenticate('local-signin', {
             successRedirect: '/auth/success',
-            failureRedirect: '/',
-            failureFlash: 'failure message...'
+            failureRedirect: '/errorRoute',
+            failureFlash : true 
         }));
 
     //adding new sessions from admin
     app.post('/index', function(request, response) {
-        console.log("post");
         // console.log(request.body.ssid);
-        console.log(request.body.tname);
         // var ssid = request.body.ssid;
         var tname = request.body.tname;
         var pname = request.body.pname;
         var pst_date = request.body.pst_date;
         var query = db.config.query('insert into sessions(tname,pname,pst_date) values(' + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
-            console.log(res);
             response.send(res);
         });
-        console.log(query.sql);
     });
 
     //adding new sessions from user 
@@ -169,9 +150,6 @@ exports.init = function(app, passport,auth,smtpTransport) {
 
         });
 
-        
-
-        console.log(query.sql);
     });
 
     //new updates of scheduled sessions before date

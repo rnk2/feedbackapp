@@ -1,75 +1,62 @@
-define(['jquery', 'backbone','router','signinBoard','templates', 'signinsBoard'], function($, Backbone,BaseRouter,SigninModel,Templates,SigninCollection) {
+define(['jquery', 'backbone','templates/signin', 'user' ], function($, Backbone,signinTemplate, UserModel) {
 
-    SigninView = Backbone.View.extend({
+    var SigninView = Backbone.View.extend({
 
-        template: Templates['signin'],
         
-        
-         
-        //tagName: 'div',
-        //className: 'signin',
-
-        events: {
-            'keypress': 'keyAction',
-            "click #login": "login"
+        initialize : function(){
+            this.render();
         },
 
+        template: signinTemplate,
+        
+        el : "#section",
+        
+        events: {
+            'keypress': 'keyAction',
+            "click #signin": "handleSignin"
+        },
         
 
         render: function() {
-            console.log("from signin view");
-            //var template = $("#signinTemplate").html();
-            //var html = Handlebars.compile(template);
-            //console.log(html);
-            console.log(Templates);
-            //alert("inside template");
-            //var template = Handlebars.Templates['signin'];
-            $(this.el).html(this.template);
+            $(this.el).html(this.template());
             return this;
         },
 
         keyAction : function(e){
             var code = e.keyCode || e.which;
             if(code == 13){
-                this.login();
+                this.handleSignin();
             }            
         },
 
-        login: function() {
+        handleSignin: function() {
+            var self = this;
+            this.clearErrors();
+            var userModel = new UserModel({currentRoot : "/signin"});
+            userModel.set('username', $("#email").val());
+            userModel.set('password', $("#password").val());
             
-            console.log("signinview");
-            var signin = new SigninModel();
-            //console.log(signin);
-            signin.set('username', $("#username").val());
-            signin.set('password', $("#password").val());
-            
-            signin.save(null,{
+            userModel.save(null,{
                
                 success:function(model,response){
-                    console.log(response.username);
-                     var User,uname = response.username;
-                     
-                     // alert("sigin");
-                     console.log(response.role);
-                     
+                    
+                    console.log(response);
 
-                    if(uname){
-
-                        if(response.role == "User"){
-                            window.location.href = '/userhome';
+                    if(response.id){
+                        if(response.roleid == "1"){
+                            console.log("")
+                            window.location.href = '/dashboard';
                             //Backbone.history.navigate('/profile',{ trigger:true})
-                       
                         }
                         else{
                             window.location.href = "/adminhome";
-                            //Backbone.history.navigate('/feedback',{ trigger:true})                            
-                
+                            //Backbone.history.navigate('/feedback',{ trigger:true})
                         }
 
                     }else{
 
-                        
-                        Backbone.history.navigate('/signup',{ trigger:true, replace: true })
+                        self.handleErrors(response.errorMessage);
+                        //Backbone.history.navigate('/signup',{ trigger:true, replace: true })
 
 
 
@@ -78,6 +65,14 @@ define(['jquery', 'backbone','router','signinBoard','templates', 'signinsBoard']
                     
                 }
             });            
+        },
+
+        handleErrors : function(error){
+            $(this.el).find(".error-status").html(error).show();
+        },
+
+        clearErrors : function() {
+            $(this.el).find(".error-status").empty().hide();  
         }
 
 

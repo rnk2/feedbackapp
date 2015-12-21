@@ -1,25 +1,25 @@
 var routes = {
-
     /*Home page & static pages*/
     "/": {
         module: {
             "app": "appHome",
             "config" : "configHome"
-
         }
     },
-    "/signinn": {
+    "/signin": {
         module: {
             "app": "appSignin"
-            
         }
     },
-
-
     "/signup": {
         module: {
             "app": "appRegister"
-           
+        }
+    },
+
+    '/dashboard' : {
+        module : {
+            "app" : "appDashboard"
         }
     },
 
@@ -49,16 +49,12 @@ var routes = {
         {
             "app": "appRequest"
         }
-    }
-
-    
-    
-    
+    }    
 };
 
 function getRoute() {
     var module;
-    if (typeof routes[location.pathname] !== "undefined") {
+    if (routes[location.pathname]) {
         module = routes[location.pathname];
     }
     return module;
@@ -66,15 +62,10 @@ function getRoute() {
 
 var r = getRoute();
 
-
-require([r.module.app], function(app) {
-
-        // alert("helllo")
-        console.log(r.module.app);
-
-
-    app.start();
+/*Path relative to js folder*/
+require(["requireConfig"],function(){
+    require([r.module.app], function(app) {
+        app.start();
+    });
 });
-
-
 

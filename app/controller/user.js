@@ -1,9 +1,6 @@
 exports.signin = function(req, res, next) {
-    console.log(" inside signin");
     if (!req.user) {
-        res.render('signin.html', {
-            title: 'Login'
-        });
+        res.render('layout.html');
     } else {
         res.redirect('/success');
     }
@@ -13,4 +10,8 @@ exports.signin = function(req, res, next) {
 exports.userhome = function(req, res, next) {
     res.render('userhome.html', {});
 };
+
+exports.dashboard = function(req, res) {
+		res.render("layout.html");
+}
 

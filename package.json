@@ -20,6 +20,7 @@
     "express-session": "~1.0.0",
     "express4-handlebars": "~0.2.0",
     "grunt": "^0.4.5",
+    "grunt-contrib-handlebars": "^0.11.0",
     "method-override": "2.3.5",
     "morgan": "~1.0.0",
     "mysql": "~2.9.0",

@@ -1,5 +1,7 @@
-define(['handlebars.runtime'], function (Handlebars) {
-	console.log(Handlebars);
+define(['handlebars'], function (Handlebars) {
+
+  console.log(Handlebars)
+
   Handlebars.registerHelper("formatDate", function(date){
   	console.log(date);
   	

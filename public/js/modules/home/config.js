@@ -1,32 +1,34 @@
-define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview','header'], function($,Backbone,HomeView,FeedModel,FeedCollection,FeedView,HeaderView) 
+
+
+define(['jquery', 'backbone','homeView', 'feeds','feedView', 'headerView', 'footerView'], function($,Backbone,HomeView,FeedCollection,FeedView, HeaderView, FooterView) 
 {
-   
-        
-    var feedapp = Backbone.Router.extend({
 
-          
 
+    function renderHeader(){
+        new HeaderView();
+    }
+
+    function renderFooter(){
+        new FooterView();
+    }
+
+    renderHeader();
+    renderFooter();
+
+
+    var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
             'userfeedback/:id' : 'userfeedback'
-            
-
         },
 
         home: function() {
-           
-            
-            
             if (!this.homeView) {
                 this.homeView = new HomeView();
-                this.headerView = new HeaderView();
             }
-            $('.displayBoard').html(this.homeView.render().el);
-            $('.headerBoard').html(this.headerView.render().el);
-
+            this.homeView.render();
         },
 
-       
         userfeedback : function(id){
             console.log("userfeedback");
             console.log(id);
@@ -36,10 +38,6 @@ define(['jquery', 'backbone','home','feedBoard', 'feedsBoard','feedview','header
 
             $('.displayBoard').html(this.feedView.render().el);
         }
-
-      
     });
-
-    return feedapp;
-
+    return AppRouter;
 });

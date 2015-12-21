@@ -16,12 +16,7 @@ define(['jquery','backbone','configUserHome'], function($,Backbone,BaseRouter) {
 
     App.start = function() {
         new BaseRouter();
-     console.log("start user");
-
-        Backbone.history.start({
-            //pushState: true,
-            //hashstate: false 
-        });
+        Backbone.history.start();
      };
     return App;
 });

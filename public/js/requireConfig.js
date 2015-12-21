@@ -1,11 +1,12 @@
 require.config({
     baseUrl: 'js',
     paths: {
-
         'appHome': 'modules/home/app',
         'configHome': 'modules/home/config',
         'appSignin': 'modules/signin/app',
         'configSignin': 'modules/signin/config',
+        'appDashboard' : 'modules/dashboard/app',
+        'configDashboard' : 'modules/dashboard/config',
         'appAdminHome' : 'modules/admin/app',
         'configAdminHome': 'modules/admin/config',
         'appRegister' : 'modules/register/app',
@@ -20,15 +21,14 @@ require.config({
         'backbone': 'lib/backbone',
         'underscore': 'lib/underscore',
         'bootstrap': 'lib/bootstrap',
-        'handlebars.runtime': 'lib/handlebars.runtime.amd',
+        'handlebars': 'lib/handlebars.runtime',
         'helpers' : 'helpers',
-        'templates': 'templates/templates',
         'chart': 'lib/chart',
         'feedstar': 'feedstar',
         'dateformat': 'lib/jquery-dateFormat-1.0',
         'datepicker': 'lib/bootstrap-datetimepicker',
         'modelBoard': 'models/baseModel',
-        'feedBoard': 'models/feedModel',
+        'feed': 'models/feedModel',
         'registrationBoard': 'models/registrationModel',
         'signinBoard': 'models/signinModel',
         'participant': 'models/participantsModel',
@@ -36,54 +36,45 @@ require.config({
         'userSession': 'models/userModel',
         'collectionBoard': 'collections/baseCollection',
         'sessionsBoard': 'collections/sessionfeedCollection',
-        'feedsBoard': 'collections/feedCollection',
+        'feeds': 'collections/feedsCollection',
         'participants': 'collections/participantsCollection',
         'adminParticipants': 'collections/adminParticipantsCollection',
         'adminParticipant' : 'models/adminSessionsFeedModel',
         'registrationsBoard': 'collections/registrationCollection',
         'signinsBoard': 'collections/signinCollection',
         'userSessions': 'collections/userCollection',
-        'home': 'views/homeView',
+        'homeView': 'views/homeView',
         'requests': 'views/requestsView',
         'sessions': 'views/sessionsView',
         'adminSessionsView' : 'views/adminSessionsView',
         'feedback': 'views/adminView',
         'rating': 'views/ratingView',
-        'register': 'views/registerView',
-        'signin': 'views/signinView',
-        'feedview': 'views/feedView',
+        'registerView': 'views/registerView',
+        'signinView': 'views/signinView',
+        'feedView': 'views/feedView',
         'profile' : 'views/profileView',
         'router': 'routers/router',
         'mailers': 'collections/mailCollection',
         'mailer': 'models/mailModel',
-        'user': 'views/userView',
-        'header':'views/headerView'
-
+        'userView': 'views/userView',
+        'user' : 'models/userModel',
+        'headerView':'views/headerView',
+        'footerView' : 'views/footerView',
+        "templates" : "templates/"
     },
-
     shim: {
         underscore: {
             exports: '_'
 
         },
         handlebars: {
-            deps:['helpers'],
             exports: 'Handlebars'
-
         },
-
-
         backbone: {
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
-        },
-        
-
-       
-
+        }
     }
-
-
 });
 
 

@@ -1,16 +1,15 @@
 define(['jquery', 'backbone'], function($, Backbone) {
     
 var Signin = Backbone.Model.extend({
-	urlRoot : '/signin',   
-
+		urlRoot : function(){
+			return this.get("currentRoot");
+		},   
     initialize:function(){
-        console.log("model created from base");
-        
     }
     
 });
 
-
+	
 return Signin;
        
 });

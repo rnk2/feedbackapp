@@ -1,43 +1,33 @@
-define(['jquery', 'backbone',
-    'signinBoard', 'signinsBoard','header'
-], function($, Backbone, SigninModel, SigninCollection,HeaderView) {
+define(['jquery', 'backbone','headerView', 'footerView','signinView'], function($, Backbone,HeaderView, FooterView, SigninView) {
 
+    function renderHeader(){
+        new HeaderView();
+    }
 
-    var feedapp = Backbone.Router.extend({
+    function renderFooter(){
+        new FooterView();
+    }
 
+    renderHeader();
+    renderFooter();
 
-
+    var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'signin',
             'statusnull-nosession': 'statusnull'
-
-
         },
-
         statusnull: function() {
             console.log("no sessions");
-
         },
-
-        signin: function() {
-
-            console.log("singin........");
+        signin: function() {            
             if (!this.signinView) {
-                this.signinView = new SigninView({
-                    collection: SigninCollection
-                });
-                this.headerView = new HeaderView();
-
+                this.signinView = new SigninView();
             }
-            $('.displayBoard').html(this.signinView.render().el);
-            $('.headerBoard').html(this.headerView.render().el);
+            this.signinView.render();
         }
-
-
-
 
     });
 
-    return feedapp;
+    return AppRouter;
 
 });

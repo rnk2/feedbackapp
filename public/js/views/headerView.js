@@ -1,18 +1,15 @@
-define(['jquery', 'backbone','templates','router'], function($, Backbone,Templates,BaseRouter) {
+define(['jquery', 'backbone','templates/common/header'], function($, Backbone,headerTemp) {
     
 HomeView = Backbone.View.extend({
-   template: Templates['header'],
-    
+    initialize : function(){
+        this.render();
+    },
+    template: headerTemp,
+    el : "#header",
     render: function () {
-        console.log("from header view");
-        // var template = $("#homeTemplate").html();
-        // var html = Handlebars.compile(template);
-        //console.log(this.HomeTemplates);
-        //var template = Templates['home'];
-        $(this.el).html(this.template);
+        $(this.el).html(this.template());
         return this;
     }
-
 });
 
 return HomeView;

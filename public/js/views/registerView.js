@@ -1,66 +1,63 @@
-define(['jquery', 'backbone', 'templates','router','registrationBoard','registrationsBoard'], function($, Backbone,Templates,BaseRouter,RegisterModel,RegisterCollection) {
+define(['jquery', 'backbone', 'templates/register','templates/confirmation','user'], function($, Backbone, registerTemp,confirmationTemp, UserModel) {
     
-SigninView = Backbone.View.extend({
-    template: Templates['register'],
-    tagName: 'div',
-   
+var SigninView = Backbone.View.extend({
     
+    el : "#section",
+    template: registerTemp,
     events : {
-        'click button#signup': 'signup',
+        'click #signup': 'handleRegister',
+    },
+    
+    initialize: function() {            
+        this.render();    
     },
 
-    initialize: function() {
-
-
-            //this.collection.on("signin", this.signin, this);
-            console.log(RegisterCollection);
-
-        },
-
     render: function () {
-        console.log("from signin view");
-        // var template = $("#registerTemplate").html();
-        // var html = Handlebars.compile(template);
-        
-        $(this.el).html(this.template);
+        $(this.el).html(this.template());
         return this;
     },
 
-    signup : function(e){
-        console.log("signupview");
-        var signup = new RegisterModel();
-        console.log(signup);
-        // alert("signup");
-         signup.set('username',$("#username").val());
-         // signup.set('email',$("#email").val());
-         signup.set('password',$("#password").val());
-         signup.set('role','Admin');
-         signup.save({
+    handleRegister : function(e){
+        e.preventDefault();
+        var self = this;
+        self.clearErrors();
+        var userModel = new UserModel({currentRoot : "/signup"});
+         userModel.set({
+            firstname : $("#firstName").val().trim(),
+            lastname : $("#lastName").val().trim(),
+            username : $("#email").val().trim(),
+            password : $("#password").val().trim()
+         });         
+
+        // Post to register controller  "/signup"
+         userModel.save({
                 wait: true
             },{
-                success: function(model, response) {
-                    
-                    console.log(response);
-                    if(response.username){
-                        window.location.href = 'http://localhost:3000/signinn';
-                        //Backbone.history.navigate('/signinn',{ trigger:true, replace: false })
-                    }
-                    else{
-                        //window.location.href = 'http://localhost:3000/signup';
-                        Backbone.history.navigate('/signup',{ trigger:true, replace: true })
+                success: function(model, response) {                    
+
+                    if(response.errorMessage){
+                        self.handleErrors(response.errorMessage);
+                        return;
                     }
 
-                     //RegisterCollection.add(model);
+                    if(response.id){                        
+                        $(self.el).html(confirmationTemp({userName : response.name}));
+                    }
+                    else{                        
+                    }
                 },
-                error: function() {
-                    console.log("Something went wrong while saving the model");
+                error: function(error) {
+                    self.handleErrors(error);
                 }
-
-
             });
+        },
+        handleErrors : function(error){
+            $(this.el).find(".error-status").html(error).show();
+        },
 
-
-    }
+        clearErrors : function() {
+            $(this.el).find(".error-status").empty().hide();  
+        }
 
 
 });

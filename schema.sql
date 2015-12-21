@@ -1,8 +1,8 @@
-database name :feedapp
+-- database name :feedapp
 
-change to default port : 3306
+-- change to default port : 3306
 
-change to default password :root
+-- change to default password :root
 
 
 

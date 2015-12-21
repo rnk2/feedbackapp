@@ -1,10 +1,8 @@
-roleConfig = require('../role');
+var roleConfig = require('../role');
 
 exports.requiresLogin = function(req, res, next) {
     if (!req.isAuthenticated()) {
-        // return res.json(403, {message: 'Access denied, please log in'});
-        res.redirect('/signinn');
-        
+        res.redirect('/signin');
     } else {
         next();
     }
