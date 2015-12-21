@@ -18,6 +18,7 @@ require.config({
         'appRequest': 'modules/requests/app',
         'configRequest' : 'modules/requests/config',
         'jquery': 'lib/jquery',
+        'jquery-ui' : 'lib/jquery-ui',
         'backbone': 'lib/backbone',
         'underscore': 'lib/underscore',
         'bootstrap': 'lib/bootstrap',
@@ -60,7 +61,11 @@ require.config({
         'user' : 'models/userModel',
         'headerView':'views/headerView',
         'footerView' : 'views/footerView',
-        "templates" : "templates/"
+        "templates" : "templates/",
+        "validation" : "lib/formValidation",
+        "access" : "lib/access",
+        "validatorMap" : "lib/validatorMap",
+        "errorMap" : "lib/errorMap"
     },
     shim: {
         underscore: {

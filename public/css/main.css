@@ -131,3 +131,12 @@ body,h1, h2, h3, h4, h5, h6 {
 .signin-btn{
 	background: #175BA8 !important;
 }
+
+.invalid-form .ux-error-class, .ux-error-generic, .ux-error-class{
+    color: #E11A2B;
+    padding-left: 20px;
+}
+
+.ux-error-field input, .ux-error-field select, .ux-error-field textarea {
+    border: 1px solid #E11A2B ;
+}

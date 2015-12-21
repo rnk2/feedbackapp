@@ -20,10 +20,10 @@ define(['jquery', 'backbone','headerView', 'footerView','signinView'], function(
             console.log("no sessions");
         },
         signin: function() {            
-            if (!this.signinView) {
-                this.signinView = new SigninView();
-            }
-            this.signinView.render();
+           
+                var signinView = new SigninView();
+            
+            // this.signinView.render();
         }
 
     });

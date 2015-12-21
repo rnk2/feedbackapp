@@ -20,10 +20,10 @@ define(['jquery', 'backbone', "registerView", 'headerView', 'footerView'], funct
         },
 
         signup: function() {
-            if (!this.signupView) {
-                this.registerView = new RegisterView();
-            }
-            this.registerView.render();
+           
+                var registerView = new RegisterView();
+            
+           
         }      
     });
 

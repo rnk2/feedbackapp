@@ -1,10 +1,22 @@
-define(['jquery', 'backbone','templates/signin', 'user' ], function($, Backbone,signinTemplate, UserModel) {
+define(['jquery', 'backbone','templates/signin', 'user','validation','validatorMap','errorMap'], function($, Backbone,signinTemplate, UserModel,Validation,validatorMap,errorMap) {
 
     var SigninView = Backbone.View.extend({
 
         
         initialize : function(){
             this.render();
+            
+
+
+            this.formHandler = $("#formContainer").formvalidation({
+                validatorMap: validatorMap,
+                errorMap: errorMap,  
+                showGenericError : false
+              });
+
+        
+
+
         },
 
         template: signinTemplate,
@@ -32,11 +44,21 @@ define(['jquery', 'backbone','templates/signin', 'user' ], function($, Backbone,
         handleSignin: function() {
             var self = this;
             this.clearErrors();
-            var userModel = new UserModel({currentRoot : "/signin"});
+            
+
+            this.formHandler.formvalidation("validate");
+            console.log(this.formHandler);
+        
+            console.log(this.formHandler.formStack.isValid);
+
+            if(this.formHandler.formStack.isValid){
+        
+                    var userModel = new UserModel({currentRoot : "/signin"});
             userModel.set('username', $("#email").val());
             userModel.set('password', $("#password").val());
-            
-            userModel.save(null,{
+        
+
+                userModel.save(null,{
                
                 success:function(model,response){
                     
@@ -64,7 +86,13 @@ define(['jquery', 'backbone','templates/signin', 'user' ], function($, Backbone,
                     
                     
                 }
-            });            
+            });
+            }
+
+             
+
+
+
         },
 
         handleErrors : function(error){

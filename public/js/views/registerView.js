@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'templates/register','templates/confirmation','user'], function($, Backbone, registerTemp,confirmationTemp, UserModel) {
+define(['jquery', 'backbone', 'templates/register','templates/confirmation','user','validation','validatorMap','errorMap'], function($, Backbone, registerTemp,confirmationTemp, UserModel,Validation,validatorMap,errorMap) {
     
 var SigninView = Backbone.View.extend({
     
@@ -9,7 +9,12 @@ var SigninView = Backbone.View.extend({
     },
     
     initialize: function() {            
-        this.render();    
+        this.render();  
+        this.formHandler = $("#formContainer").formvalidation({
+                validatorMap: validatorMap,
+                errorMap: errorMap,  
+                showGenericError : false
+              });  
     },
 
     render: function () {
@@ -21,14 +26,22 @@ var SigninView = Backbone.View.extend({
         e.preventDefault();
         var self = this;
         self.clearErrors();
-        var userModel = new UserModel({currentRoot : "/signup"});
+        this.formHandler.formvalidation("validate");
+
+
+        console.log(this.formHandler.formStack.isValid);
+        if(this.formHandler.formStack.isValid){
+
+            var userModel = new UserModel({currentRoot : "/signup"});
          userModel.set({
             firstname : $("#firstName").val().trim(),
             lastname : $("#lastName").val().trim(),
             username : $("#email").val().trim(),
             password : $("#password").val().trim()
-         });         
+         }); 
 
+
+         
         // Post to register controller  "/signup"
          userModel.save({
                 wait: true
@@ -49,7 +62,14 @@ var SigninView = Backbone.View.extend({
                 error: function(error) {
                     self.handleErrors(error);
                 }
-            });
+            });    
+
+
+
+
+        }
+            
+
         },
         handleErrors : function(error){
             $(this.el).find(".error-status").html(error).show();
