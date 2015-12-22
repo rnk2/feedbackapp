@@ -25,11 +25,11 @@ require.config({
         'handlebars': 'lib/handlebars.runtime',
         'helpers' : 'helpers',
         'chart': 'lib/chart',
-        'feedstar': 'feedstar',
+       
         'dateformat': 'lib/jquery-dateFormat-1.0',
         'datepicker': 'lib/bootstrap-datetimepicker',
         'modelBoard': 'models/baseModel',
-        'feed': 'models/feedModel',
+        
         'registrationBoard': 'models/registrationModel',
         'signinBoard': 'models/signinModel',
         'participant': 'models/participantsModel',
@@ -37,7 +37,7 @@ require.config({
         'userSession': 'models/userModel',
         'collectionBoard': 'collections/baseCollection',
         'sessionsBoard': 'collections/sessionfeedCollection',
-        'feeds': 'collections/feedsCollection',
+       
         'participants': 'collections/participantsCollection',
         'adminParticipants': 'collections/adminParticipantsCollection',
         'adminParticipant' : 'models/adminSessionsFeedModel',
@@ -45,19 +45,19 @@ require.config({
         'signinsBoard': 'collections/signinCollection',
         'userSessions': 'collections/userCollection',
         'homeView': 'views/homeView',
-        'requests': 'views/requestsView',
-        'sessions': 'views/sessionsView',
-        'adminSessionsView' : 'views/adminSessionsView',
-        'feedback': 'views/adminView',
-        'rating': 'views/ratingView',
+        'dashboardview': 'views/dashboardview',
+        
+        'sessions': 'views/addSession',
+        
+       
         'registerView': 'views/registerView',
         'signinView': 'views/signinView',
-        'feedView': 'views/feedView',
-        'profile' : 'views/profileView',
+        
+       
         'router': 'routers/router',
         'mailers': 'collections/mailCollection',
         'mailer': 'models/mailModel',
-        'userView': 'views/userView',
+        
         'user' : 'models/userModel',
         'headerView':'views/headerView',
         'footerView' : 'views/footerView',

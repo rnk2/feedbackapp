@@ -1,6 +1,6 @@
 
 
-define(['jquery', 'backbone','homeView', 'feeds','feedView', 'headerView', 'footerView'], function($,Backbone,HomeView,FeedCollection,FeedView, HeaderView, FooterView) 
+define(['jquery', 'backbone','homeView','headerView', 'footerView'], function($,Backbone,HomeView,HeaderView, FooterView) 
 {
 
 
@@ -19,7 +19,7 @@ define(['jquery', 'backbone','homeView', 'feeds','feedView', 'headerView', 'foot
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'home',
-            'userfeedback/:id' : 'userfeedback'
+            
         },
 
         home: function() {
@@ -30,13 +30,7 @@ define(['jquery', 'backbone','homeView', 'feeds','feedView', 'headerView', 'foot
         },
 
         userfeedback : function(id){
-            console.log("userfeedback");
-            console.log(id);
-            if(!this.feedView){
-                this.feedView = new FeedView({collection:FeedCollection,mid : id});
-            }
-
-            $('.displayBoard').html(this.feedView.render().el);
+            
         }
     });
     return AppRouter;
