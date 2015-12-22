@@ -25,11 +25,11 @@ require.config({
         'handlebars': 'lib/handlebars.runtime',
         'helpers' : 'helpers',
         'chart': 'lib/chart',
-       
         'dateformat': 'lib/jquery-dateFormat-1.0',
         'datepicker': 'lib/bootstrap-datetimepicker',
+        'sessionModel': 'models/sessionModel',
+        'sessionCollection' : 'collections/sessionCollection',
         'modelBoard': 'models/baseModel',
-        
         'registrationBoard': 'models/registrationModel',
         'signinBoard': 'models/signinModel',
         'participant': 'models/participantsModel',
@@ -37,7 +37,6 @@ require.config({
         'userSession': 'models/userModel',
         'collectionBoard': 'collections/baseCollection',
         'sessionsBoard': 'collections/sessionfeedCollection',
-       
         'participants': 'collections/participantsCollection',
         'adminParticipants': 'collections/adminParticipantsCollection',
         'adminParticipant' : 'models/adminSessionsFeedModel',
@@ -46,18 +45,13 @@ require.config({
         'userSessions': 'collections/userCollection',
         'homeView': 'views/homeView',
         'dashboardview': 'views/dashboardview',
-        
         'sessions': 'views/addSession',
-        
-       
+        'viewSessions' : 'views/viewSessions',
         'registerView': 'views/registerView',
         'signinView': 'views/signinView',
-        
-       
         'router': 'routers/router',
         'mailers': 'collections/mailCollection',
         'mailer': 'models/mailModel',
-        
         'user' : 'models/userModel',
         'headerView':'views/headerView',
         'footerView' : 'views/footerView',

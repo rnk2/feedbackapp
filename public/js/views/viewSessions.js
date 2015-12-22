@@ -8,7 +8,7 @@ define(['jquery', 'backbone','templates/viewSessions'], function($, Backbone,vie
             
 
 
-           alert("fron sessions view");
+           
 
 
         },

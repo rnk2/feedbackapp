@@ -124,7 +124,7 @@ exports.init = function(app, passport,auth,smtpTransport) {
 
     //adding new sessions from admin
     app.post('/index', function(request, response) {
-        // console.log(request.body.ssid);
+        console.log(request.body.ssid);
         // var ssid = request.body.ssid;
         var tname = request.body.tname;
         var pname = request.body.pname;
@@ -150,6 +150,24 @@ exports.init = function(app, passport,auth,smtpTransport) {
 
         });
 
+    });
+
+
+    app.post('/newsessions',function(request,response){
+        console.log(request.body);
+        var tname = request.body.topicname;
+        var pname = request.body.presentername;
+        var location = request.body.location;
+        var pst_date = request.body.pst_date;
+
+         var query = db.config.query('insert into sessions(name,pid,location,date) values(' + "'" + tname + "'" + "," + "'" + pname + "'" + "," + "'" + location + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
+            // console.log("last insert id"+res.insertId);
+        //response.send(res);
+           
+                response.send(res);
+          
+
+        });
     });
 
     //new updates of scheduled sessions before date

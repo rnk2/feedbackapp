@@ -56,14 +56,14 @@ function getRoute() {
     var module;
     if (routes[location.pathname]) {
         module = routes[location.pathname];
-        console.log( "from main"+module);
+       
     }
     return module;
 }
 
 var r = getRoute();
 
-console.log(r);
+
 
 /*Path relative to js folder*/
 require(["requireConfig"],function(){
