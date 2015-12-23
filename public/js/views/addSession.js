@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/addSessions','sessionModel'], function($, Backbone,Bootstrap,DatePicker,Dateformat,sessionTemplate,SessionModel) {
+define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/addSessions','templates/sessionconfirmation','sessionModel'], function($, Backbone,Bootstrap,DatePicker,Dateformat,sessionTemplate,sessionconfirmationTemp,SessionModel) {
 
             var SessionView = Backbone.View.extend({
 
@@ -49,8 +49,8 @@ define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/a
 
                 //adding new records/participants
                 addSession: function(e) {
-                    alert("adding new records");
-
+                    
+                    var self = this;
                     var meet = new SessionModel();
                    meet.set('presentername', $("#presentername").val());
                    meet.set('topicname', $("#topicname").val());
@@ -61,12 +61,28 @@ define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/a
                 wait: true
             }, {
                 success: function(model, response) {
-                    console.log("success");
-                    console.log("from  add sessions"+response);
-                    // UserSessions.add(model);
+
+                    console.log(response);
+                    $(self.el).html(sessionconfirmationTemp({topicname : "session successfully added"}));
+                    // if(response.errorMessage){
+                    //     self.handleErrors(response.errorMessage);
+                    //     return;
+                    // }
+
+                    //  if(response.topicname){     
+
+                    //     alert("success");
+
+                    //  //    var records=JSON.stringify(user);
+                    //  // console.log(records.pid);                   
+                    //  //    $(self.el).html(confirmationTemp({topicname : response.topicname}));
+                    // }
+                    // else{                        
+                    // }
                  },
                 error: function() {
                     console.log("Something went wrong while saving the model");
+                    $(self.el).html(sessionconfirmationTemp({topicname : "something went wrong"}));
                 }
 
 

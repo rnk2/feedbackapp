@@ -28,8 +28,6 @@ var SigninView = Backbone.View.extend({
         self.clearErrors();
         this.formHandler.formvalidation("validate");
 
-
-        console.log(this.formHandler.formStack.isValid);
         if(this.formHandler.formStack.isValid){
 
             var userModel = new UserModel({currentRoot : "/signup"});
@@ -53,7 +51,9 @@ var SigninView = Backbone.View.extend({
                         return;
                     }
 
-                    if(response.id){                        
+                    if(response.id){    
+                       console.log(response.id);
+                       console.log(response.name);                    
                         $(self.el).html(confirmationTemp({userName : response.name}));
                     }
                     else{                        

@@ -28,7 +28,7 @@ require.config({
         'dateformat': 'lib/jquery-dateFormat-1.0',
         'datepicker': 'lib/bootstrap-datetimepicker',
         'sessionModel': 'models/sessionModel',
-        'sessionCollection' : 'collections/sessionCollection',
+        'sessionCollection' : 'collections/sessionsCollection',
         'modelBoard': 'models/baseModel',
         'registrationBoard': 'models/registrationModel',
         'signinBoard': 'models/signinModel',

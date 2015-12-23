@@ -1,13 +1,14 @@
-define(['jquery','backbone','sessionModel'], function($, Backbone,BaseRouter,SessionModel) {
+define(['jquery','backbone','sessionModel'], function($,Backbone,SessionModel) {
   
 
 
 var Meetings=Backbone.Collection.extend({
-    model:UserModel,
+
+    model:SessionModel,
 
     // url : '/usessions',
     url: function () {    	   
-        return '/usessions';
+        return '/newsessions';
         
     },
 
