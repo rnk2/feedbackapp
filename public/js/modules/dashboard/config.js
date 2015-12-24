@@ -4,7 +4,7 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
 {
 
     function renderHeader(){
-        new HeaderView();
+        new HeaderView({signedIn : true});
     }
 
     function renderFooter(){
@@ -19,23 +19,19 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
         routes: {
             '': 'dashboard',
             'viewsessions' : 'viewsessions',
-            'newsessions' : 'newsessions',
+            'createsession' : 'createsession',
             'sessiondetails' : 'sessiondetails'
             
         },
 
-        dashboard: function() {
-            
-                var dashboardView = new DashboardView();
-        
-           
+        dashboard: function() {            
+                var dashboardView = new DashboardView();            
         },
 
-        newsessions: function(){
+        createsession: function(){
             console.log("new sessions");
             var sessionView = new SessionsView();
         },
-
 
         viewsessions : function(){
             console.log("view sessions");

@@ -2,7 +2,7 @@ define(['backbone','configDashboard'], function(Backbone, BaseRouter) {
     var App = {};
 
 
-    $(document).on('click', 'a:not([data-bypass])', function(e) {
+/*    $(document).on('click', 'a:not([data-bypass])', function(e) {
         href = $(this).prop('href')
         console.log(href);
 
@@ -12,7 +12,7 @@ define(['backbone','configDashboard'], function(Backbone, BaseRouter) {
             Backbone.history.navigate(href.slice(root.length), true);
         }
     });
-
+*/
     App.start = function() {
         new BaseRouter();
         Backbone.history.start();
