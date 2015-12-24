@@ -20,7 +20,7 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
             '': 'dashboard',
             'viewsessions' : 'viewsessions',
             'createsession' : 'createsession',
-            'sessiondetails' : 'sessiondetails'
+            'sessiondetails/:id' : 'sessiondetails'
             
         },
 
@@ -38,9 +38,9 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
             var viewsessions = new ViewSessions({collection:SessionCollection});
         },
 
-        sessiondetails :function(){
+        sessiondetails :function(id){
             console.log("specific sessions");
-            var sessiondetails = new SessionDetails({});
+            var sessiondetails = new SessionDetails({collection:SessionCollection,mid:id});
         }
     });
     return AppRouter;
