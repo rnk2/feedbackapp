@@ -1,6 +1,6 @@
 
 
-define(['jquery', 'backbone','dashboardview','sessions','sessionCollection','viewSessions','headerView', 'footerView'], function($, Backbone, DashboardView,SessionsView,SessionCollection,ViewSessions,HeaderView, FooterView) 
+define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollection','viewSessions','sessionsDetails','headerView', 'footerView'], function($, Backbone, DashboardView,SessionsView,SessionCollection,ViewSessions,SessionDetails,HeaderView, FooterView) 
 {
 
     function renderHeader(){
@@ -19,7 +19,8 @@ define(['jquery', 'backbone','dashboardview','sessions','sessionCollection','vie
         routes: {
             '': 'dashboard',
             'viewsessions' : 'viewsessions',
-            'newsessions' : 'newsessions'
+            'newsessions' : 'newsessions',
+            'sessiondetails' : 'sessiondetails'
             
         },
 
@@ -31,14 +32,19 @@ define(['jquery', 'backbone','dashboardview','sessions','sessionCollection','vie
         },
 
         newsessions: function(){
-            console.log("view sessions");
+            console.log("new sessions");
             var sessionView = new SessionsView();
         },
 
 
         viewsessions : function(){
-            console.log("new sessions");
+            console.log("view sessions");
             var viewsessions = new ViewSessions({collection:SessionCollection});
+        },
+
+        sessiondetails :function(){
+            console.log("specific sessions");
+            var sessiondetails = new SessionDetails({});
         }
     });
     return AppRouter;
