@@ -66,7 +66,7 @@ var r = getRoute();
 
 
 /*Path relative to js folder*/
-require(["requireConfig"],function(){
+require(["js/requireConfig"],function(){
     require([r.module.app], function(app) {
         app.start();
     });

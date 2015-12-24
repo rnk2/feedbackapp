@@ -9,13 +9,30 @@ html, body
 }
 
 .user-block {
-	.title {
-		color: #fff;
-		font-family: "Segoe UI";
-		font-size: 36px;
-		font-weight: 100;
+/* 	  position: absolute;
+		right: 320px;
+    top: 18px;
+ */	.title {
+		color: #ccc;
+    font-size: 23px;
+    font-weight: bold;
+    padding-top: 20px;
+
 	}
 }
 
+.profile-dropdown{
+	height:59px;
+}
 
+
+.user-title-section {
+	padding:0;
+	text-align: center;
+}
+
+.nav-section {
+
+	padding: 0
+}
 

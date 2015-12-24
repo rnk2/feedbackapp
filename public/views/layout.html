@@ -11,16 +11,29 @@
         <![endif]-->        
         <meta name="viewport" content="width=device-width, initial-scale=1">        
     </head>
-    <body>
-
-       
-
+    <body>        
         <header id="header">
         </header>
         <section id="section">
         </section>
         <footer id="footer">
         </footer>
-        <script data-main="js/main" src="js/lib/require.js"></script>
+            
+        
+
+
+        <script src="js/lib/require.js"></script>
+        <script>
+            define("appUser",[], function(){
+            <% if(typeof user != 'undefined') {%>
+               return <%-JSON.stringify(user)%>;
+            <%} else { %>
+               return {
+                signedIn : false
+               }; 
+            <%}%>   
+            });
+        </script>
+        <script src="js/main.js"></script>
     </body>
 </html>
