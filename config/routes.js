@@ -5,6 +5,7 @@ var requests = require('../app/controller/requests');
 var db = require('../db');
 
 
+
 exports.init = function(app, passport, auth, smtpTransport) {
     console.log('Initializing Routes');
 
@@ -98,8 +99,9 @@ exports.init = function(app, passport, auth, smtpTransport) {
     });
     //getting existing sessions
     app.get('/newsessions', function(request, response) {
-
+   
         db.config.query("select * from sessions", function(req, res) {
+            console.log(res);
             response.send(res);
         });
     });

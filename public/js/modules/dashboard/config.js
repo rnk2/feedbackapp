@@ -20,7 +20,8 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
             '': 'dashboard',
             'viewsessions' : 'viewsessions',
             'createsession' : 'createsession',
-            'sessiondetails/:id' : 'sessiondetails'
+            'sessiondetails/:id' : 'sessiondetails',
+            'logout' : 'logout'
             
         },
 
@@ -41,7 +42,12 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
         sessiondetails :function(id){
             console.log("specific sessions");
             var sessiondetails = new SessionDetails({collection:SessionCollection,mid:id});
+        },
+
+        logout : function() {
+            window.location.href = 'http://localhost:3000/logout'
         }
+
     });
     return AppRouter;
 });
