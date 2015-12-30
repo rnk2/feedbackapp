@@ -1,17 +1,18 @@
-define(['jquery', 'backbone'], function($, Backbone) {
+define(['backbone'], function(Backbone) {
     
 var Meeting = Backbone.Model.extend({
 	urlRoot : '/partcpates',
-    defaults: {
-        ssid :'null',
-       
-        partc_name :'unknown',
-        email :'unknown'
-              
-    },
+    
 
+	
+	defaults: {
+
+        
+        username :''
+        
+    },
     initialize:function(){
-        console.log("model created from base");
+        console.log("model created from partcpates");
         
     }
     

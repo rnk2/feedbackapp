@@ -2,7 +2,7 @@ define(['jquery','backbone','sessionModel'], function($,Backbone,SessionModel) {
   
 
 
-var Meetings=Backbone.Collection.extend({
+var Sessions=Backbone.Collection.extend({
 
     model:SessionModel,
 
@@ -21,8 +21,8 @@ var Meetings=Backbone.Collection.extend({
 });
 
 
-  var meetingsobj= new Meetings();
+  // var meetingsobj= new Meetings();
   // console.log(meetingsobj);
-  return meetingsobj;
+  return Sessions;
 
  });

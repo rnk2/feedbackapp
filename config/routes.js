@@ -44,12 +44,68 @@ exports.init = function(app, passport, auth, smtpTransport) {
 
     app.get('/requests', requests.render);
 
-    //admin module
-    app.get('/adminhome', auth.requiresLogin, auth.user.hasAuthorization, admin.render);
+    app.get('/partcpates/:id',function(request,response){
+       
+        
+         db.config.query("select * from participants where ssid= ?",[request.params.id], function(req, res) {
+            // console.log(res);
+            response.send(res);
+        });
 
-    //user module
-    app.get('/userhome', auth.requiresLogin, auth.user.hasAuthorization, user.userhome);
 
+    });
+
+    
+
+    app.post('/partcpates',function(request,response){
+        console.log("inside partcpates post");
+
+        var username = request.body.participant;
+        var email = request.body.email;
+        var ssid = request.body.ssid;
+       
+
+       db.config.query("select email from participants where email=?",[email],function(req,res){
+
+        console.log("testing select"+res.email);
+        var a =  JSON.stringify(res);
+        if(a.length<0)
+        {
+            console.log("successs");
+             db.config.query('insert into participants(participant,email,ssid) values(' + "'" + username + "'" + "," + "'" + email + "'" + "," + "'" + ssid + "'" + ');', function(req, res) {
+
+
+            response.send(res);
+
+        });
+        }
+        else{
+            console.log("user already exists");
+        }
+
+       });
+       
+      
+
+        // console.log(query.sql);
+    });
+
+
+    app.delete('/partcpates/:id',function(request,response){
+        console.log("inside partcpates delete");
+
+        var id = request.params.id;
+        // console.log("testind"+ssid);
+        // var email = request.params.email;
+        // console.log(email);
+        var query = db.config.query('delete from participants where id = ?', [id], function(req, res) {
+            console.log(res);
+            response.send(res);
+        });
+
+    });
+
+    
 
     // new user registration
     app.post('/signup', function(req, res, next) {
@@ -87,8 +143,9 @@ exports.init = function(app, passport, auth, smtpTransport) {
         var pname = request.body.presentername;
         var location = request.body.location;
         var pst_date = request.body.pst_date;
+        var description = request.body.description;
 
-        var query = db.config.query('insert into sessions(name,pid,location,date) values(' + "'" + pname + "'" + "," + "'" + tname + "'" + "," + "'" + location + "'" + "," + "'" + pst_date + "'" + ');', function(req, res) {
+        var query = db.config.query('insert into sessions(name,pid,location,date,description) values(' + "'" + pname + "'" + "," + "'" + tname + "'" + "," + "'" + location + "'" + "," + "'" + pst_date + "'" + "," + "'" + description + "'" + ');', function(req, res) {
 
 
             response.send(res);
@@ -101,7 +158,7 @@ exports.init = function(app, passport, auth, smtpTransport) {
     app.get('/newsessions', function(request, response) {
    
         db.config.query("select * from sessions", function(req, res) {
-            console.log(res);
+            // console.log(res);
             response.send(res);
         });
     });

@@ -3,8 +3,10 @@ define(['jquery', 'backbone','helpers','templates/viewSessions','templates/sessi
     var ViewSessions = Backbone.View.extend({
 
         
-        initialize : function(){
+        initialize : function(options){
             this.render();
+            this.collection.sessions.id = options.mid;
+            
         
         },
 
@@ -21,7 +23,7 @@ define(['jquery', 'backbone','helpers','templates/viewSessions','templates/sessi
             $(this.el).html(this.template());
 
             
-            this.collection.fetch({
+            this.collection.sessions.fetch({
                 success: function(collection) {
 
                     collection.each(function(index) {
@@ -40,6 +42,8 @@ define(['jquery', 'backbone','helpers','templates/viewSessions','templates/sessi
                 }
             });
             
+
+
             return this;
         },
 

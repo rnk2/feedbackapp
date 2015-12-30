@@ -31,11 +31,11 @@
             </div>
             <div class="col-md-6 col-sm-6">
                 <h1>Description</h1>
-                <p>
-                    A Simple Component React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try clicking on "Compiled JS" to see the raw JavaScript code produced by the JSX compiler.
-                </p>
+                <div id="description">
+                </div>
             </div>
             <div class="col-md-4 col-sm-4">
+                
             </div>
         </div>
         <div>
@@ -47,31 +47,16 @@
                         <p align="center">Participants Details</p>
                     </div>
                     <div class="row">
-                        <table class="table table-hover">
-                            <thead>
+                        <table class="table table-hover" id="crud">
+                            
                                 <tr>
+                                    <th>ID</th>
                                     <th>Participant Name</th>
                                     <th>Email</th>
-                                    <th>Team</th>
+                                   
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ram</td>
-                                    <td>Ram@123.com</td>
-                                    <td>Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>Santosh</td>
-                                    <td>Santosh@123.com</td>
-                                    <td>IT</td>
-                                </tr>
-                                <tr>
-                                    <td>Srikanth</td>
-                                    <td>srikanth@123.com</td>
-                                    <td>UI</td>
-                                </tr>
-                            </tbody>
+                            
+                            
                         </table>
                     </div>
                 </div>
@@ -87,10 +72,11 @@
             <div class="col-md-2 col-sm-2">
             </div>
             <div class="col-md-6 col-sm-6">
-                <h1 class="lead">interested to join ?       stay tunned ?</h1>
+                <h1 class="lead">interested to join ?       stay tunned ? {{username}}</h1>
                 
-                <p><a class="btn btn-success btn-lg" role="button" href=" ">Subscribe</a>
-                <a class="btn btn-danger btn-lg" href="" role="button">Unsubscribe</a></p>
+                <p>
+                <button type="button" class="btn btn-success" id="addParticipants">Subscribe</button>
+                <button type="button" class="btn btn-danger" id="deleteParticipants">Unsubscribe</button></p>
             </div>
             <div class="col-md-4 col-sm-4">
             </div>

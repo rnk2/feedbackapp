@@ -56,6 +56,7 @@ define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/a
                    meet.set('topicname', $("#topicname").val());
                    meet.set('location',$("#location").val());
                    meet.set('pst_date', $("#pst_date").val());
+                   meet.set('description',$("#description").val());
 
                    meet.save({
                 wait: true
