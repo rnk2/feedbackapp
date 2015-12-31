@@ -5,6 +5,8 @@ var UserModel = Backbone.Model.extend({
             return this.get("currentRoot");
         },   
     initialize:function(){
+
+    	console.log("from usermodel");
     }
     
 });

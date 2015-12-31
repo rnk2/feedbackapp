@@ -63,13 +63,13 @@ exports.init = function(app, passport, auth, smtpTransport) {
         var username = request.body.participant;
         var email = request.body.email;
         var ssid = request.body.ssid;
+        console.log(email);
+        console.log(ssid);
        
 
-       db.config.query("select email from participants where email=?",[email],function(req,res){
+       var query = db.config.query('select * from participants where email=? and ssid= ?',[email,ssid],function(req,res){
 
-        console.log("testing select"+res.email);
-        var a =  JSON.stringify(res);
-        if(a.length<0)
+        if(res.length<=0)
         {
             console.log("successs");
              db.config.query('insert into participants(participant,email,ssid) values(' + "'" + username + "'" + "," + "'" + email + "'" + "," + "'" + ssid + "'" + ');', function(req, res) {
@@ -87,7 +87,7 @@ exports.init = function(app, passport, auth, smtpTransport) {
        
       
 
-        // console.log(query.sql);
+         console.log(query.sql);
     });
 
 
@@ -190,6 +190,23 @@ exports.init = function(app, passport, auth, smtpTransport) {
             response.send(res);
         })
 
+    });
+
+
+    app.get('/usessions',function(request, response) {
+        // console.log(request);
+        // console.log("email"+request.user.firstname);
+        var username = request.user.firstname;
+        var email = request.user.email;
+        var ssid = request.body.ssid;
+        // console.log(email);
+        // console.log(ssid);
+     var query = db.config.query("select * from sessions where name =?", [username], function(req, res) {
+            // console.log(res);
+            response.send(res);
+        });
+
+        console.log(query.sql);
     });
 
 

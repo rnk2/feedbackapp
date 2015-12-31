@@ -1,4 +1,4 @@
-define(['jquery','backbone','router','userSession'], function($, Backbone,BaseRouter,UserModel) {
+define(['jquery','backbone','userSession'], function($, Backbone,UserModel) {
   
 
 

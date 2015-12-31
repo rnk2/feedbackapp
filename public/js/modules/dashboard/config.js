@@ -1,11 +1,7 @@
 
 
-define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollection','viewSessions','sessionsDetails','headerView', 'footerView','appUser','participants'], function($, Backbone, DashboardView,SessionsView,SessionCollection,ViewSessions,SessionDetails,HeaderView, FooterView,AppUser,Participants) 
+define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollection','viewSessions','userSessions','sessionsDetails','headerView', 'footerView','appUser','mysessions','participants','mySessionsDetails'], function($, Backbone, DashboardView,SessionsView,SessionCollection,ViewSessions,UserSessions,SessionDetails,HeaderView, FooterView,AppUser,MySessions,Participants,MySessionsDetails) 
 {
-
-
-  console.log(AppUser);
-  
 
     function renderHeader(){
         new HeaderView({signedIn : true,username: AppUser.firstname, lastname : AppUser.lastname});
@@ -25,6 +21,8 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
             'viewsessions' : 'viewsessions',
             'createsession' : 'createsession',
             'sessiondetails/:id' : 'sessiondetails',
+            'mysessiondetails/:id' : 'mySessions',
+            'userSessions' : 'userSessions',
             'logout' : 'logout'
             
         },
@@ -56,6 +54,24 @@ define(['jquery', 'backbone','dashboardview','createSessionsView','sessionCollec
                      },
                     mid:id
                 });
+        },
+
+
+        mySessions : function(id){
+            console.log("my sessions");
+            var sessiondetails = new MySessionsDetails({
+                  collection: {
+                    sessions : new SessionCollection(),
+                    participants : new Participants()
+                     },
+                    mid:id
+                });
+        },
+
+
+        userSessions : function(){
+            console.log("from user sessions");
+            var usersessions = new MySessions({collection:UserSessions});
         },
 
         logout : function() {

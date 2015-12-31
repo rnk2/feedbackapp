@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/addSessions','templates/sessionconfirmation','sessionModel'], function($, Backbone,Bootstrap,DatePicker,Dateformat,sessionTemplate,sessionconfirmationTemp,SessionModel) {
+define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/addSessions','templates/sessionconfirmation','sessionModel','appUser'], function($, Backbone,Bootstrap,DatePicker,Dateformat,sessionTemplate,sessionconfirmationTemp,SessionModel,AppUser) {
 
             var SessionView = Backbone.View.extend({
 
@@ -52,7 +52,9 @@ define(['jquery', 'backbone','bootstrap','datepicker', 'dateformat','templates/a
                     
                     var self = this;
                     var meet = new SessionModel();
-                   meet.set('presentername', $("#presentername").val());
+                    console.log(AppUser.firstname);
+                    var presentername = AppUser.firstname;
+                   meet.set('presentername',presentername);
                    meet.set('topicname', $("#topicname").val());
                    meet.set('location',$("#location").val());
                    meet.set('pst_date', $("#pst_date").val());
