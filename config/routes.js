@@ -209,6 +209,19 @@ exports.init = function(app, passport, auth, smtpTransport) {
         console.log(query.sql);
     });
 
+    app.get('/ratings/:id',function(request,response){
+        var username = request.user.firstname;
+        var ssid = request.params.id;
+        console.log(ssid);
+
+        var query = db.config.query("select * from feedback where ssid =?", [ssid], function(req, res) {
+            console.log(res);
+            response.send(res);
+        });
+
+        console.log(query.sql);
+    })
+
 
 
 
