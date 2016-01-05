@@ -4,8 +4,30 @@
             <td>{{pid}}</td>
             <td>{{location}}</td>
             <td>{{formatDate date}}</td>
-            <td>{{status}}</td>
-            <td><a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a></td>
+			{{#if status}}
+				<td>
+					Open
+				</td>
+				<td>
+					<a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a>
+				</td>
+				<td>
+					<a class="btn btn-custom btn-sm active" role="button" disabled>Feed Back</a>
+				</td>
+
+			{{else}}
+				<td>
+					Close
+				</td>
+				<td>
+					<a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a>
+				</td>
+				<td>
+					<a href="#/ratings/{{id}}" class="btn btn-custom btn-sm active" role="button">Feed Back</a>
+				</td>
+
+			{{/if}}            
+			
             
                 
             

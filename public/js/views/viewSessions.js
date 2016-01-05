@@ -6,16 +6,12 @@ define(['jquery', 'backbone','helpers','templates/viewSessions','templates/sessi
         initialize : function(options){
             this.render();
             this.collection.sessions.id = options.mid;
-            
-        
+           
         },
 
         template: viewSessionsTemplate,
         
         el : "#section",
-        
-       
-        
 
         render: function() {
             self=this;
@@ -26,37 +22,23 @@ define(['jquery', 'backbone','helpers','templates/viewSessions','templates/sessi
             this.collection.sessions.fetch({
                 success: function(collection) {
 
-                    collection.each(function(index) {
-
-                       
-                   self.addone(index);
-
-                       
+                    collection.each(function(index) {                       
+                        self.addone(index);                       
                     }, this);
                 },
                 error: function() {
-
                     console.log('some thing went wrong!');
-                     
-
                 }
             });
-            
-
-
             return this;
         },
 
-         addone: function(model) {
-
+        addone: function(model) {           
             var singlerecord = new sessionSub({
                 model: model,
                 collection: this.collection
-            });
-
+            });            
             $(this.el).find("#crud").append(singlerecord.el);
-
-
         },
 
        
@@ -78,30 +60,19 @@ define(['jquery', 'backbone','helpers','templates/viewSessions','templates/sessi
 
 
  var sessionSub = Backbone.View.extend({
-        template: sessionsSubTemplate,
-        tagName: 'tr',
+    template: sessionsSubTemplate,
+    tagName: 'tr',
 
+    initialize: function() {
+        this.render();
+    },         
 
-        initialize: function() {
-            this.render();
-        },
-         
-    
-       render: function() {
-
-            var source = this.template(this.model.toJSON());
-            console.log(this.model.toJSON());
-            $(this.el).html(source);
-
-            return this;
-
-        }
-
-
-
-
-        
-    });
+    render: function() {
+        var source = this.template(this.model.toJSON());            
+        $(this.el).html(source);
+        return this;
+    }
+});
 
     return ViewSessions;
 

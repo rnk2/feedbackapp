@@ -1,18 +1,12 @@
 define(['jquery', 'backbone','templates/sessionDetails','templates/sessionDetailsSub','appUser','participant'], function($, Backbone,sessionDetailsTemplate,sessionDetailsSubTemplate,AppUser,Participant) {
   
     var SessionDetails = Backbone.View.extend({
-
-
-         events: {
-                    
-                    "click #addParticipants": "addParticipants",
-                    "click #deleteParticipants": "deleteParticipants"
-                },
+         events: {    
+            "click #addParticipants": "addParticipants",
+            "click #deleteParticipants": "deleteParticipants"
+        },
         
-       
-        initialize : function(options){
-            
-            
+        initialize : function(options){  
             this.collection.sessions.id = options.mid;
             this.collection.participants.id = options.mid;
             this.collection.id = options.mid;
@@ -26,10 +20,11 @@ define(['jquery', 'backbone','templates/sessionDetails','templates/sessionDetail
 
         
 
-        render: function() {
+        render: function() {            
+
             var self = this;
-           
-            $(this.el).html(this.template());
+           console.log(this.collection.sessions);
+            $(this.el).html(this.template(this.collection.sessions));
 
              //sessions collection
             this.collection.sessions.fetch({

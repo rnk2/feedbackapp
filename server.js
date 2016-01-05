@@ -9,8 +9,8 @@ var express = require('express'),
     session = require('express-session');
     nodemailer = require('nodemailer');
     open = require("open");
-    url = require('url');
-    // schedule = require('node-schedule');
+    url = require('url'),
+    schedule = require('node-schedule');
 var server;
 var db = require('./db');
 
@@ -25,24 +25,28 @@ db.config.connect(function(err){
 
 var app = express();
 
+var query = db.config.query("select * from sessions", function(req, res) {
+    //console.log(res);
+    res.forEach(function(item){
+        //console.log(item);
+        if(new Date(item.date) < new Date()){
+            //console.log("session should close");
+            var query = db.config.query('update sessions set status = ? where id = ?', ["close",item.id], function(req, res) {
+                
+            });
+        }
+    })
+    
+});
 
 
-var date = new Date().toString();
+// var j = schedule.scheduleJob({hour: 12, minute: 21}, function(){
+//   //console.log('The world is going to end today.');
 
-console.log(date);
-// var j = schedule.scheduleJob(date, function(){
-//   console.log('The world is going to end today.');
-
-//   var current_date=date;
-//   console.log(current_date);
-
-   
-
-
-//       var query = db.config.query('update sessions set status = ? where date = ?', ["close",current_date], function(req, res) {
-//          console.log(query.sql);
+//         var query = db.config.query('update sessions set status = ? where date = ?', ["close",current_date], function(req, res) {
+//          //console.log(query.sql);
   
-// });
+//         });
 
 // });
 

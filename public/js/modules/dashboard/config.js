@@ -38,6 +38,7 @@ define(['jquery', 'backbone',
             'sessiondetails/:id' : 'sessiondetails',
             'mysessiondetails/:id' : 'mySessions',
             'userSessions' : 'userSessions',
+            'ratings/:id':'ratings',
             'feedback/:id' : 'feedback',
             'logout' : 'logout'
             
@@ -64,10 +65,10 @@ define(['jquery', 'backbone',
             console.log("specific sessions");
             console.log(id);
             var sessiondetails = new SessionDetails({
-                  collection: {
-                    sessions : new SessionCollection(),
-                    participants : new Participants()
-                     },
+                    collection: {
+                        sessions : new SessionCollection(),
+                        participants : new Participants()
+                    },
                     mid:id
                 });
         },
@@ -90,6 +91,10 @@ define(['jquery', 'backbone',
             var usersessions = new MySessions({collection:UserSessions});
         },
 
+        ratings : function(id){
+            alert("test");
+            console.log(id);
+        },
 
         feedback : function(id){
             console.log("feedback: "+id);
@@ -105,7 +110,7 @@ define(['jquery', 'backbone',
 
         logout : function() {
             window.location.href = 'http://localhost:3000/logout'
-        }
+        },
 
     });
     return AppRouter;
