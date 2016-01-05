@@ -31,7 +31,7 @@ var query = db.config.query("select * from sessions", function(req, res) {
         //console.log(item);
         if(new Date(item.date) < new Date()){
             //console.log("session should close");
-            var query = db.config.query('update sessions set status = ? where id = ?', ["close",item.id], function(req, res) {
+            var query = db.config.query('update sessions set status = ? where id = ?', [true,item.id], function(req, res) {
                 
             });
         }

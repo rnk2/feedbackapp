@@ -1,19 +1,19 @@
 define(['handlebars'], function(Handlebars) {
 
 return Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "				<td>\r\n					Close\r\n					\r\n				</td>\r\n				<td>\r\n					<a href=\"#/sessiondetails/"
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" class=\"btn btn-custom btn-sm active\" role=\"button\">View Details</a>\r\n				</td>\r\n				<td>\r\n					<a href=\"#/ratings/"
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" class=\"btn btn-custom btn-sm active\" role=\"button\">Feed Back</a>\r\n					\r\n				</td>\r\n\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "				<td>\r\n					Open\r\n				</td>\r\n				<td>\r\n					<a href=\"#/sessiondetails/"
     + container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"id","hash":{},"data":data}) : helper)))
     + "\" class=\"btn btn-custom btn-sm active\" role=\"button\">View Details</a>\r\n				</td>\r\n				<td>\r\n					<a class=\"btn btn-custom btn-sm active\" role=\"button\" disabled>Feed Back</a>\r\n				</td>\r\n\r\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "				<td>\r\n					Close\r\n				</td>\r\n				<td>\r\n					<a href=\"#/sessiondetails/"
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\" class=\"btn btn-custom btn-sm active\" role=\"button\">View Details</a>\r\n				</td>\r\n				<td>\r\n					<a href=\"#/ratings/"
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\" class=\"btn btn-custom btn-sm active\" role=\"button\">Feed Back</a>\r\n				</td>\r\n\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
