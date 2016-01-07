@@ -61,7 +61,9 @@ require.config({
         "validation" : "lib/formValidation",
         "access" : "lib/access",
         "validatorMap" : "lib/validatorMap",
-        "errorMap" : "lib/errorMap"
+        "errorMap" : "lib/errorMap",
+        "validators" : "validators",
+        "errorMessages" : "errorMessages"
     },
     shim: {
         underscore: {

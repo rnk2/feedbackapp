@@ -1,6 +1,4 @@
-
-define(function(){
-	return {
+define({
 		"formGeneric": "Please check all the highlighted fields.",
     "userName" : {
       "required" : "This is the required field - required",
@@ -43,6 +41,5 @@ define(function(){
       "required" : "This is required field - required"
     }
 
-	};
 });
 

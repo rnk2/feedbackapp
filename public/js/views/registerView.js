@@ -1,4 +1,5 @@
-define(['jquery', 'backbone', 'templates/register','templates/confirmation','user','validation','validatorMap','errorMap'], function($, Backbone, registerTemp,confirmationTemp, UserModel,Validation,validatorMap,errorMap) {
+define(['jquery', 'backbone', 'templates/register','templates/confirmation','user','validation','validators/register','errorMessages/register'], 
+    function($, Backbone, registerTemp,confirmationTemp, UserModel,Validation, registerValidators, registerErrors) {
     
 var SigninView = Backbone.View.extend({
     
@@ -11,8 +12,8 @@ var SigninView = Backbone.View.extend({
     initialize: function() {            
         this.render();  
         this.formHandler = $("#formContainer").formvalidation({
-                validatorMap: validatorMap,
-                errorMap: errorMap,  
+                validatorMap: registerValidators,
+                errorMap: registerErrors,  
                 showGenericError : false
               });  
     },

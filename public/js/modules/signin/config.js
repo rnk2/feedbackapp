@@ -18,8 +18,7 @@ define(['jquery', 'backbone', 'headerView', 'footerView', 'signinView', "forgotP
         },
 
         signin: function() {
-            var signinView = new SigninView();
-            // this.signinView.render();
+            var signinView = new SigninView();            
         },
 
         forgotpassword : function() {

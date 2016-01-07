@@ -1,6 +1,4 @@
-define(function(){
-
-	return {
+define({
 	userName: {
       required: true,
       minCharacters : 6,
@@ -35,7 +33,5 @@ define(function(){
     password : {
     	required: true
     }
-	};
-
-});
+	});
 	
