@@ -2,7 +2,7 @@ exports.signin = function(req, res, next) {
     if (!req.user) {
         res.render('layout.html');
     } else {
-        res.redirect('/success');
+        res.redirect('/dashboard');
     }
 };
 
