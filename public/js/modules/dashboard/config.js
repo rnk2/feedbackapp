@@ -7,7 +7,7 @@ define(['jquery', 'backbone',
     'headerView', 'footerView',
     'appUser','mysessions',
     'participants','mySessionsDetails',
-    'ratingCollection','sessionRating'], 
+    'ratingCollection','sessionRating','ratingsView'], 
     function($, Backbone,
      DashboardView,SessionsView,
      SessionCollection,ViewSessions,
@@ -15,7 +15,7 @@ define(['jquery', 'backbone',
      HeaderView, FooterView,
      AppUser,MySessions,
      Participants,MySessionsDetails,
-     RatingCollection,SessionRating) 
+     RatingCollection,SessionRating,Ratings) 
 {
 
     function renderHeader(){
@@ -92,8 +92,13 @@ define(['jquery', 'backbone',
         },
 
         ratings : function(id){
-            alert("test");
-            console.log(id);
+            // alert("test");
+            var ratings = new Ratings({
+                collection:{
+                   ratings : new RatingCollection()
+            },
+            mid:id
+        }); 
         },
 
         feedback : function(id){

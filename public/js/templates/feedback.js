@@ -1,7 +1,0 @@
-define(['handlebars'], function(Handlebars) {
-
-return Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<script id=\"rating-template\" type=\"text/x-handlebars-template\">\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-1 col-md-1\">\r\n                </div>\r\n                <div class=\"col-sm-8 col-md-8 startup\">\r\n                    <table class=\"table table-bordered\" id=\"feed\">\r\n                        <tr>\r\n                            <th width=\"75\">SSID</th>\r\n                            <th width=\"75\">User</th>\r\n                            <th width=\"75\">Presentation Skills</th>\r\n                            <th width=\"75\">Technical Skills</th>\r\n                        </tr>\r\n                    </table>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-1 col-md-1\">\r\n                </div>\r\n                <div class=\"col-sm-10 col-md-10\">\r\n                    <div style=\"height:450px; width:600px\">\r\n                        <canvas id=\"canvas\"></canvas>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </script>";
-},"useData":true})
-
-});

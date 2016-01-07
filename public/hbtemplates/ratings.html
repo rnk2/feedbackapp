@@ -1,54 +1,29 @@
- 
-            <div class="row startup">
-                <div class="col-sm-2 col-md-2col-lg-2">
-                </div>
-                <div>
-                    <p style="color:red">***Welcome to Feedback page your ratings must be between 1 to 5 and User Name same as Email</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-1 col-md-1">
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <table class="table table-bordered" id="tblinput">
-                        <thead>
-                            <tr>
-                                <th width="75"><strong>Session ID</strong></th>
-                                <th width="75"><strong>User Name</strong></th>
-                                <th width="75"><strong>Presentation Skills</strong></th>
-                                <th width="75"><strong>Technical Skills</strong></th>
-                            </tr>
-                        </thead>
-                        <tr>
-                            <td>
-                                <input type="text" id="ssid" placeholder="topic name" /> </td>
-                            <td>
-                                <input type="text" id="uname" placeholder="User Name" /> </td>
-                            <td>
-                                <input type="text" id="pskills" placeholder="Presentaion Skills" /> </td>
-                            <td>
-                                <input type="text" id="tskills" placeholder="Technical Skills" /> </td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <button id="btnadd">Submit</button>
-                                <button id="btnclear">Reset</button>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 col-md-3 col-lg-3">
-                </div>
-                <div id="thanks">
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li class="active">Users Feedback </li>
+        </ol>
         
+    </div>
+    <div class="row">
+            <div class="col-sm-2 col-md-2col-lg-2">
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <p style="color:red">***Welcome to Feedback page your ratings must be between 1 to 5 </p>
+            </div>
+        </div>
+    <!-- Intro -->
+    <div class="container text-center">
+        <form>
+            <input id="input-22" class="rating" data-min="0" data-max="5" data-step="1">
+            <div class="form-group" style="margin-top:10px">
+                <button type="submit" id="addRating" class="btn btn-primary">Submit</button>
+                <button type="reset" id="btnclear" class="btn btn-default">Reset</button>
+            </div>
+        </form>
+    </div>
+    <!-- /Intro-->
+    <!-- /container -->
+    <!-- Social links. @TODO: replace by link/instructions in template -->
+</div>

@@ -209,6 +209,26 @@ exports.init = function(app, passport, auth, smtpTransport) {
         console.log(query.sql);
     });
 
+
+
+    app.post('/ratings/:id',function(request,response){
+
+        var participant = request.body.participant;
+        var ssid = request.body.ssid;
+        var pscore = request.body.pscore;
+        var tscore = request.body.tscore;
+        console.log(request.body);
+
+     var query = db.config.query('insert into feedback(participant,ssid,pscore,tscore) values(' + "'" + participant + "'" + "," + "'" + ssid + "'" + "," + "'" + pscore + "'" + "," + "'" + tscore + "'" + ');', function(req, res) {
+
+
+            response.send(res);
+
+        });
+
+         console.log(query.sql);
+    })
+
     app.get('/ratings/:id',function(request,response){
         var username = request.user.firstname;
         var ssid = request.params.id;
@@ -220,7 +240,7 @@ exports.init = function(app, passport, auth, smtpTransport) {
         });
 
         console.log(query.sql);
-    })
+    });
 
 
 

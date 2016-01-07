@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 05, 2016 at 06:05 AM
+-- Generation Time: Jan 07, 2016 at 06:41 AM
 -- Server version: 5.1.53
 -- PHP Version: 5.3.4
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `feedback` (
   `pscore` int(2) DEFAULT NULL,
   `tscore` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `feedback`
@@ -50,7 +50,8 @@ INSERT INTO `feedback` (`id`, `participant`, `ssid`, `pscore`, `tscore`) VALUES
 (9, 'manoj', '88', 3, 4),
 (10, 'ssangireddy', '88', 2, 4),
 (11, 'venkatesh', '88', 3, 4),
-(12, 'vanava', '88', 4, 5);
+(12, 'vanava', '88', 4, 5),
+(14, 'Naresh', '60', 4, 5);
 
 -- --------------------------------------------------------
 
@@ -124,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `location` varchar(25) NOT NULL,
   `date` datetime DEFAULT NULL,
   `description` text NOT NULL,
-  `status` varchar(15) NOT NULL DEFAULT 'open',
+  `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
 
@@ -133,15 +134,15 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `name`, `pid`, `location`, `date`, `description`, `status`) VALUES
-(59, 'Ram', 'ReactJS', '2nd-Floor', '2015-12-31 18:30:00', 'React is a JavaScript library for creating user interfaces by Facebook and Instagram. Many people choose to think of React as the V in MVC.', 'open'),
-(60, 'Shiva', 'AngularJS', '4th-Floor', '2015-12-31 22:30:00', 'HTML is great for declaring static documents, but it falters when we try to use it for declaring dynamic views in web-applications. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.', 'open'),
-(79, 'sai', 'nodejs', '4th-floor', '2015-12-30 16:30:00', 'server-side scripting language', 'open'),
-(81, 'raj', 'Jasmine', '2nd-Floor', '2015-12-31 18:30:00', 'Javascript testing', 'open'),
-(85, 'anil', 'NodeJS', '4th-Floor', '2015-12-31 18:30:00', 'Sever-Side Javascript ', 'open'),
-(86, 'anil', 'AngularJS', '2nd-Floor', '2015-12-31 20:30:00', 'AngularJS developed by Google', 'open'),
-(87, 'Naresh', 'ExpressJS', '4th-Floor', '2016-01-08 16:30:00', 'Server Side Javascript Framework', 'open'),
-(88, 'Naresh', 'PassportJS', '4th-Floor', '2016-01-08 20:30:00', 'Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.', 'open'),
-(89, 'Shiva', 'Jasmine Test Ca', '4th-Floor', '2016-01-15 16:30:00', 'test casess', 'open');
+(59, 'Ram', 'ReactJS', '2nd-Floor', '2015-12-31 18:30:00', 'React is a JavaScript library for creating user interfaces by Facebook and Instagram. Many people choose to think of React as the V in MVC.', 1),
+(60, 'Shiva', 'AngularJS', '4th-Floor', '2015-12-31 22:30:00', 'HTML is great for declaring static documents, but it falters when we try to use it for declaring dynamic views in web-applications. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.', 1),
+(79, 'sai', 'nodejs', '4th-floor', '2015-12-30 16:30:00', 'server-side scripting language', 1),
+(81, 'raj', 'Jasmine', '2nd-Floor', '2015-12-31 18:30:00', 'Javascript testing', 1),
+(85, 'anil', 'NodeJS', '4th-Floor', '2015-12-31 18:30:00', 'Sever-Side Javascript ', 1),
+(86, 'anil', 'AngularJS', '2nd-Floor', '2015-12-31 20:30:00', 'AngularJS developed by Google', 1),
+(87, 'Naresh', 'ExpressJS', '4th-Floor', '2016-01-08 16:30:00', 'Server Side Javascript Framework', 0),
+(88, 'Naresh', 'PassportJS', '4th-Floor', '2016-01-08 20:30:00', 'Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.', 0),
+(89, 'Shiva', 'Jasmine Test Ca', '4th-Floor', '2016-01-15 16:30:00', 'test casess', 0);
 
 -- --------------------------------------------------------
 
