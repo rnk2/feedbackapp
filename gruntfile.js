@@ -41,7 +41,7 @@ grunt.initConfig({
           debugInfo: false,
           lineNumbers: true,
           update: false,
-          sourcemap: "none"
+          sourcemap: "auto"
         },
         files: [{
           expand: true,
@@ -70,7 +70,6 @@ grunt.initConfig({
   grunt.loadNpmTasks("grunt-jsbeautifier");
   grunt.loadNpmTasks('grunt-contrib-handlebars');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-
   grunt.registerTask('build',['handlebars','sass']);
 	grunt.registerTask('default',['build','watch']);
 };

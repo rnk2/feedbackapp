@@ -4,9 +4,7 @@ exports.render = function(req, res, next) {
     });
 };
 
-
 exports.home = function(req, res, next) {
-	
     res.json(req.user);
 };
 
