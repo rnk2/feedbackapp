@@ -1,7 +1,7 @@
 var bcrypt = require('bcrypt-nodejs');
 var LocalStrategy = require('passport-local').Strategy;
 var db = require('../db');
-var query = require('./sql');
+var sq = require('./sql');
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -15,7 +15,7 @@ module.exports = function(passport) {
     
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        db.config.query(query.user.checkUserById,[id], function(err, rows){
+        db.config.query(sq.user.checkUserById,[id], function(err, rows){
             done(err, rows[0]);
         });
     });
@@ -39,17 +39,16 @@ module.exports = function(passport) {
             var firstname = request.body.firstname;
             var lastname = request.body.lastname;
 
-            db.config.query(query.user.checkUser, [username], function(err, user) {
+            db.config.query(sq.user.checkUser, [username], function(err, user) {
                 if (err)
                     return done(err);
                 if (user.length) {
                     return done(null, false, request.flash('signupMesssage', 'Username is already taken'));
                 } else {
-                   db.config.query(query.user.createUser,[firstname, lastname, username, bcrypt.hashSync(password), 1], function(err, rows) { 
+                   db.config.query(sq.user.createUser,[firstname, lastname, username, bcrypt.hashSync(password), 1], function(err, rows) { 
                         if(err){
                             return done(err);
-                        }
-                        
+                        }                        
                         var user ={}
                         user.id = rows.insertId;
                         user.name = firstname+" "+lastname;
@@ -64,12 +63,12 @@ module.exports = function(passport) {
 
         passport.use('local-signin', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'username',
+            usernameField : 'userEmail',
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) { // callback with email and password from our form
-                db.config.query(query.user.checkUser,[username], function(err, rows){
+                db.config.query(sq.user.checkUser,[username], function(err, rows){
 
                 if (err){
                     return done(err);

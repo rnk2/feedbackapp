@@ -214,9 +214,6 @@
     //>
     //
     function init(config) {
-
-        console.log(this);
-
         if (!this.length) {
             console.error("No element is found with given selector");
             return;
@@ -390,8 +387,6 @@
             glbObj.clearErrors(formStack);
             formStack.invalidFieldsArray = glbObj.runValidation(formStack);
 
-            console.log(formStack.invalidFieldsArray)
-
             if (formStack.invalidFieldsArray.length) {
                 glbObj.showErrors(formStack);
             }
@@ -482,8 +477,6 @@
               formTag = formElement[0].tagName;
 
            if (formTag !== "INPUT" && formTag !== "SELECTION" && formTag !== "TEXTAREA") {
-                
-                console.log(formElement[0]);
                 formElement.addClass("invalid-form");
             }
 

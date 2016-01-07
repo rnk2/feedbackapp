@@ -12,10 +12,11 @@ exports.userhome = function(req, res, next) {
 
 exports.dashboard = function(req, res) {
 		res.render('layout.html', {"user" : {
+			"id" : req.user.id,
 			"email" : req.user.email,
-			"firstname" : req.user.firstname,
-			"lastname" : req.user.lastname,
-			"roleid" : req.user.roleid,
+			"firstname" : req.user.firstName,
+			"lastname" : req.user.lastName,
+			"roleid" : req.user.roleId,
 			"signedIn" : true
 		}});
 }

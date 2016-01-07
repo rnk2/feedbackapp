@@ -1,0 +1,67 @@
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/">Dashboard</a></li>
+        <li class="active">Create Session</li>
+    </ol>
+    <div class="row">
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+            <div class="col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                <div id="formContainer">
+                    <h3 class="thin text-center">Creat New Session</h3>
+                    
+                    <p class="error-status">!Oops Something went wrong please try again</p>
+                    <hr>
+                    
+                    <!-- /container -->
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="sessionTitle" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Location</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="sessionLocation">
+                                    <option value="">Select Location</option>
+                                    {{#each locations}}
+                                        <option value="{{this.id}}">{{this.title}}</option>
+                                     {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Date</label>
+                            <div class="col-sm-10">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text' class="form-control" id="sessionDate"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" placeholder="Description" id="description" style="width: 100%;"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-offset-4 col-sm-4">
+                                <button id="addSession" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+                <div>
+                </div>
+            </article>
+            <!-- /Article -->
+        </div>
+    </div>

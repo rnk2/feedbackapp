@@ -1,7 +1,7 @@
 var index = require('../app/controller/index');
 var user = require('../app/controller/user');
 var admin = require('../app/controller/admin');
-var requests = require('../app/controller/requests');
+var session = require('../app/controller/session');
 var db = require('../db');
 
 
@@ -42,7 +42,11 @@ exports.init = function(app, passport, auth, smtpTransport) {
         user.dashboard(req, res);
     });
 
-    app.get('/requests', requests.render);
+    app.get("/getLocations", function(req, resp){
+        session.getLocations(req, resp);        
+    });
+
+    
 
     app.get('/partcpates/:id',function(request,response){
        
@@ -137,22 +141,8 @@ exports.init = function(app, passport, auth, smtpTransport) {
 
 
     //adding new sessions from 
-    app.post('/newsessions', function(request, response) {
-
-        var tname = request.body.topicname;
-        var pname = request.body.presentername;
-        var location = request.body.location;
-        var pst_date = request.body.pst_date;
-        var description = request.body.description;
-
-        var query = db.config.query('insert into sessions(name,pid,location,date,description) values(' + "'" + pname + "'" + "," + "'" + tname + "'" + "," + "'" + location + "'" + "," + "'" + pst_date + "'" + "," + "'" + description + "'" + ');', function(req, res) {
-
-
-            response.send(res);
-
-        });
-
-        console.log(query.sql);
+    app.post('/createSession', function(req, resp) {
+        session.create(req, resp);       
     });
     //getting existing sessions
     app.get('/newsessions', function(request, response) {
@@ -208,6 +198,9 @@ exports.init = function(app, passport, auth, smtpTransport) {
 
         console.log(query.sql);
     });
+
+
+
 
 
 

@@ -12,7 +12,5 @@ define(['jquery', 'backbone', 'templates/common/header'], function($, Backbone, 
 			return this;
 		}
 	});
-
 	return HomeView;
-
 });

@@ -8,7 +8,6 @@ exports.requiresLogin = function(req, res, next) {
     }
 };
 
-
 exports.user = {
     hasAuthorization: function(req, res, next) {
         next();

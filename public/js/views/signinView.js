@@ -13,14 +13,14 @@ define(['jquery', 'backbone', 'templates/signin', 'user', 'validation', 'validat
         template: signinTemplate,
         el: "#section",
         events: {
-            'keypress': 'keyAction',
+            'keypress': 'handleEnterBtnSubmit',
             "click #signin": "handleSignin"
         },
         render: function() {
             $(this.el).html(this.template());
             return this;
         },
-        keyAction: function(e) {
+        handleEnterBtnSubmit: function(e) {
             var code = e.keyCode || e.which;
             if (code == 13) {
                 this.handleSignin();
@@ -29,67 +29,37 @@ define(['jquery', 'backbone', 'templates/signin', 'user', 'validation', 'validat
         handleSignin: function() {
             var self = this;
             this.clearErrors();
-
-
             this.formHandler.formvalidation("validate");
-            console.log(this.formHandler);
-
-            console.log(this.formHandler.formStack.isValid);
 
             if (this.formHandler.formStack.isValid) {
 
                 var userModel = new UserModel({
                     currentRoot: "/signin"
                 });
-                userModel.set('username', $("#email").val());
+                userModel.set('userEmail', $("#email").val());
                 userModel.set('password', $("#password").val());
 
-
                 userModel.save(null, {
-
                     success: function(model, response) {
-
-                        console.log(response);
-
                         if (response.id) {
-                            if (response.roleid == "1") {
-                                console.log("")
+                            if (response.roleId == "1") {
                                 window.location.href = '/dashboard';
-                                //Backbone.history.navigate('/profile',{ trigger:true})
                             } else {
                                 window.location.href = "/adminhome";
-                                //Backbone.history.navigate('/feedback',{ trigger:true})
                             }
-
                         } else {
-
                             self.handleErrors(response.errorMessage);
-                            //Backbone.history.navigate('/signup',{ trigger:true, replace: true })
-
-
-
                         }
-
-
                     }
                 });
             }
-
-
-
-
-
         },
-
         handleErrors: function(error) {
             $(this.el).find(".error-status").html(error).show();
         },
-
         clearErrors: function() {
             $(this.el).find(".error-status").empty().hide();
         }
-
-
     });
 
     return SigninView;

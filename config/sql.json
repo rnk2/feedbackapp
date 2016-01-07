@@ -1,8 +1,8 @@
 {
     "user": {
-    		"checkUser" : "select * from users where email = ?",
-    		"checkUserById" : "SELECT * FROM users where id = ?",
-    		"createUser" : "INSERT INTO users (firstname, lastname, email, password, roleid ) values (?,?,?,?,?)",
+        "checkUser": "select * from users where email = ?",
+        "checkUserById": "SELECT * FROM users where id = ?",
+        "createUser": "INSERT INTO users (firstName, lastName, email, password, roleId ) values (?,?,?,?,?)",
         "getUser": "SELECT users.id, username, roleid, firstname,lastname, sex, dob, contactno, teamid  FROM users  join userdetails  AS usd on users.id = usd.userid LEFT JOIN teamresource tr ON tr.userid = users.id WHERE users.id = ? AND usd.active = true",
         "getUserById": "SELECT users.id, username, usd.firstname, usd.lastname  FROM users  JOIN userdetails AS usd ON  users.id = usd.userid WHERE users.id = ?",
         "getUserByName": "SELECT users.id, username  FROM users WHERE BINARY username = ?",
@@ -17,12 +17,12 @@
         "editUserDetailsPro": "call edituserdetails(?, ?, ?, ?, ?, ?, ?, ?)",
         "editPassword": "UPDATE users SET password = ? WHERE BINARY username = ?",
         "getUsersAvailabilityTeamId": "SELECT userid, SUM(NOW() >= startdate AND NOW() <= enddate) AS valid FROM logs WHERE userid IN (SELECT users.id FROM users  JOIN teamresource tr ON tr.userid = users.id WHERE tr.teamid = ?)  AND logs.startdate BETWEEN  CONCAT(CURDATE(), ?)  AND CONCAT(CURDATE(), ?) GROUP BY userid",
-        "getUserByTeamId":"SELECT users.username, ud.firstname, ud.lastname FROM  users JOIN userdetails AS ud ON users.id = ud.userid  WHERE users.id = ?"
+        "getUserByTeamId": "SELECT users.username, ud.firstname, ud.lastname FROM  users JOIN userdetails AS ud ON users.id = ud.userid  WHERE users.id = ?"
     },
 
-    "project": {
-        "getProjects": "SELECT id, name, category FROM project WHERE (leadid = ?) AND active = true ORDER BY createddate DESC",
-        "getAdminProjects": "SELECT id, name, description, DATE_FORMAT(startdate,'%Y-%m-%d') as startdate, DATE_FORMAT(enddate,'%Y-%m-%d') as enddate FROM project WHERE category =0",
+    "session": {
+        "create": "insert into sessions(title, presenterId, locationId, date, description ) values(?,?,?,?,?)",
+        "getLocations": "SELECT * FROM locations where status = '1'",
         "saveAdminProject": "INSERT INTO project(name  ,description ,startdate ,enddate , leadid ,createddate, category) VALUES  (?, ?, ?, ?, ?, now(), 0)",
         "editAdminProject": "UPDATE project SET name=?, description = ?, startdate = ?, enddate= ?, editdate = now() WHERE id = ?",
         "getUserProjects": "SELECT pr.id, pr.name FROM users as usr JOIN teamresource tr ON usr.id = tr.userid JOIN Team tm on tr.teamid = tm.id JOIN project pr on pr.leadid = tm.leadid or pr.category = 0 WHERE usr.id = ? AND pr.active = true",
@@ -42,7 +42,7 @@
     },
 
     "team": {
-        "getTeamLeadDetailsByUserId":"SELECT users.username, ud.firstname,ud.lastname FROM team JOIN teamresource AS tr ON tr.teamid = team.id JOIN users ON team.leadid = users.id JOIN userdetails AS ud ON users.id = ud.userid WHERE tr.userid = ?",
+        "getTeamLeadDetailsByUserId": "SELECT users.username, ud.firstname,ud.lastname FROM team JOIN teamresource AS tr ON tr.teamid = team.id JOIN users ON team.leadid = users.id JOIN userdetails AS ud ON users.id = ud.userid WHERE tr.userid = ?",
         "getTeams": "SELECT team.id, team.name, team.description,users.username,users.id as leadid FROM team join users on team.leadid = users.id",
         "getTeam": "SELECT team.id,team.name FROM team WHERE team.leadid = ?",
         "saveTeam": "INSERT INTO team(name  ,description ,leadid, createddate) VALUES  (?, ?, ?, now())",
@@ -64,7 +64,7 @@
     },
 
     "log": {
-        "getUserDetailsByLogid":"SELECT users.username,ud.firstname,ud.lastname FROM logs JOIN users on logs.userid = users.id JOIN userdetails as ud on ud.userid = users.id WHERE logs.id = ?",
+        "getUserDetailsByLogid": "SELECT users.username,ud.firstname,ud.lastname FROM logs JOIN users on logs.userid = users.id JOIN userdetails as ud on ud.userid = users.id WHERE logs.id = ?",
         "getLogsByUserId": "SELECT logs.id, logs.projectid, project.name as title , logs.iteration, logs.story, logstatus.id as statusid, logstatus.name as status, logs.plannedStatus, DATE_FORMAT(logs.plannedstartdate,'%Y-%m-%d %h:%i %p') as plannedstart, DATE_FORMAT(logs.plannedenddate,'%Y-%m-%d %h:%i %p')  as plannedend, DATE_FORMAT(logs.startdate,'%Y-%m-%d %h:%i %p') as start, DATE_FORMAT(logs.enddate,'%Y-%m-%d %h:%i %p')  as end, logs.description,logs.className, logs.locked, logs.lockrequest FROM logs LEFT JOIN logstatus ON logs.status = logstatus.id JOIN project ON logs.projectid = project.id WHERE (logs.startdate BETWEEN  ? AND ? OR logs.plannedstartdate BETWEEN  ? AND ?) AND userid = ? ORDER BY logs.plannedstartdate",
         "getLogById": "SELECT * FROM logs WHERE id = ?",
         "getLogHistoryById": "SELECT * FROM loghistory WHERE logid = ?",
