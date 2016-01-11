@@ -14,10 +14,11 @@ define(['jquery', 'backbone', 'headerView', 'footerView', 'signinView', "forgotP
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'signin',
-            'forgotpassword': "forgotpassword"
+            'forgotpassword': "forgotpassword",
+            "*default" : 'signin'
         },
 
-        signin: function() {
+        signin: function() {            
             var signinView = new SigninView();            
         },
 

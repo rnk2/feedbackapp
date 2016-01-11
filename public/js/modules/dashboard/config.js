@@ -1,5 +1,5 @@
 define(['jquery', 'backbone',
-        'dashboardview', 'sessionFormView',
+        'dashboardview', 'views/createSessionFormView',
         'sessionCollection', 'viewSessions',
         'userSessions', 'sessionDetails',
         'headerView', 'footerView',
@@ -8,7 +8,7 @@ define(['jquery', 'backbone',
         'ratingCollection', 'sessionRating', 'ratingsView'
     ],
     function($, Backbone,
-        DashboardView, SessionFormView,
+        DashboardView, CreateSessionFormView,
         SessionCollection, ViewSessions,
         UserSessions, SessionDetails,
         HeaderView, FooterView,
@@ -38,7 +38,7 @@ define(['jquery', 'backbone',
             },
 
             createSession: function() {
-                var sessionView = new SessionFormView();
+                new CreateSessionFormView();
             },
 
             viewsessions: function() {

@@ -11,11 +11,11 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
                 var self = this;
                 var locationsCollection = new LocationsCollection();
                 console.log(locationsCollection.fetch({
-                    success : function(collection, resp){                        
-                    $(self.el).html(self.template({
-                        locations : resp
-                    }));
-                    $('#datetimepicker1').datetimepicker();
+                    success: function(collection, resp) {
+                        $(self.el).html(self.template({
+                            locations: resp
+                        }));
+                        $('#datetimepicker1').datetimepicker();
                     }
                 }));
 
@@ -48,36 +48,29 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
                 e.preventDefault();
                 var self = this;
                 var session = new SessionModel();
+                var title = $("#sessionTitle").val();
 
-                session.set('title', $("#sessionTitle").val());
+                session.set('title', title);
                 session.set('presenterId', appUser.id);
                 session.set('locationId', Number($("#sessionLocation").val()));
-                session.set('description', $("#description").val());
                 session.set('date', $("#sessionDate").val());
+                session.set('description', $("#description").val());
 
                 session.save({
                     wait: true
                 }, {
                     success: function(model, response) {
 
-                        $(self.el).html(sessionconfirmationTemp({
-                            topicname: "session successfully added"
-                        }));
-                        // if(response.errorMessage){
-                        //     self.handleErrors(response.errorMessage);
-                        //     return;
-                        // }
+                        if (response.errorMessage) {
+                            self.handleErrors(response.errorMessage);
+                            return;
+                        } else {
+                            $(self.el).find('.session-save-status').html(sessionconfirmationTemp({
+                                title: model.title
+                            }));
+                        }
 
-                        //  if(response.topicname){     
-
-                        //     alert("success");
-
-                        //  //    var records=JSON.stringify(user);
-                        //  // console.log(records.pid);                   
-                        //  //    $(self.el).html(confirmationTemp({topicname : response.topicname}));
-                        // }
-                        // else{                        
-                        // }
+                        self.clearSessionForm();
                     },
                     error: function() {
                         console.log("Something went wrong while saving the model");
@@ -93,6 +86,10 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
             clearInput: function() {
                 //Clear all Textboxes 
                 $("#tblinput input").val('');
+            },
+
+            clearSessionForm: function() {
+                $(".form-horizontal")[0].reset();
             }
 
         });
