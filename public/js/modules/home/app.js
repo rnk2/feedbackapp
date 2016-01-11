@@ -1,4 +1,4 @@
-define(['backbone','configHome'], function(Backbone, BaseRouter) {
+define(['backbone','configHome','bootstrap'], function(Backbone, BaseRouter) {
     var App = {};
     App.start = function() {
         new BaseRouter();

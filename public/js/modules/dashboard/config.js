@@ -12,25 +12,15 @@ define(['jquery', 'backbone',
         SessionCollection, ViewSessions,
         UserSessions, SessionDetails,
         HeaderView, FooterView,
-        AppUser, MySessions,
+        appUser, MySessions,
         Participants, MySessionsDetails,
         RatingCollection, SessionRating, Ratings) {
 
-        function renderHeader() {
-            new HeaderView({
-                signedIn: true,
-                username: AppUser.firstname,
-                lastname: AppUser.lastname
-            });
-        }
+        var app = {};
 
-        function renderFooter() {
-            new FooterView();
-        }
-
-        renderHeader();
-        renderFooter();
-
+        app.header = new HeaderView();
+        app.footer = new FooterView();
+       
         var AppRouter = Backbone.Router.extend({
             routes: {
                 '': 'dashboard',

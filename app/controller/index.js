@@ -1,5 +1,9 @@
 exports.render = function(req, res, next) {	
-   	res.render('layout.html');
+   	if (!req.user) {
+        res.render('layout.html');
+    } else {
+        res.redirect('/dashboard');
+    }
 };
 
 exports.errorRoute = function(req, res){
