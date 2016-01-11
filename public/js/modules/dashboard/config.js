@@ -1,6 +1,5 @@
 define(['jquery', 'backbone',
-        'dashboardview', 'views/createSessionFormView',
-        'sessionCollection', 'viewSessions',
+        'views/dashboardView',        
         'userSessions', 'sessionDetails',
         'headerView', 'footerView',
         'appUser', 'mysessions',
@@ -8,8 +7,7 @@ define(['jquery', 'backbone',
         'ratingCollection', 'sessionRating', 'ratingsView'
     ],
     function($, Backbone,
-        DashboardView, CreateSessionFormView,
-        SessionCollection, ViewSessions,
+        DashboardView,        
         UserSessions, SessionDetails,
         HeaderView, FooterView,
         appUser, MySessions,
@@ -20,39 +18,37 @@ define(['jquery', 'backbone',
 
         app.header = new HeaderView();
         app.footer = new FooterView();
-       
+        //require(["views/viewSessionsView"]);
+
         var AppRouter = Backbone.Router.extend({
             routes: {
                 '': 'dashboard',
-                'viewsessions': 'viewsessions',
+                'viewCurrentSessions': 'viewCurrentSessions',
                 'createSession': 'createSession',
                 'sessiondetails/:id': 'sessiondetails',
                 'mysessiondetails/:id': 'mySessions',
                 'userSessions': 'userSessions',
                 'ratings/:id': 'ratings',
-                'feedback/:id': 'feedback'                
+                'feedback/:id': 'feedback'
             },
 
             dashboard: function() {
                 var dashboardView = new DashboardView();
             },
 
-            createSession: function() {
-                new CreateSessionFormView();
-            },
-
-            viewsessions: function() {
-                console.log("view sessions");
-                var viewsessions = new ViewSessions({
-                    collection: {
-                        sessions: new SessionCollection()
-                    }
+            createSession: function() {                
+                require(["views/createSessionFormView"], function(CreateSessionFormView) {                    
+                   new CreateSessionFormView();                   
                 });
             },
 
-            sessiondetails: function(id) {
-                console.log("specific sessions");
-                console.log(id);
+            viewCurrentSessions: function() {
+                require(["views/sessionsList"], function(SessionsListView) {                    
+                    new SessionsListView();
+                });
+            },
+
+            sessiondetails: function(id) {                
                 var sessiondetails = new SessionDetails({
                     collection: {
                         sessions: new SessionCollection(),

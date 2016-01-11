@@ -1,18 +1,12 @@
 define(['handlebars'], function (Handlebars) {
 
-  console.log(Handlebars)
-
   Handlebars.registerHelper("formatDate", function(date){
-  	console.log(date);
   	
   	var dateobj= new Date(date);
-  	console.log(dateobj)
   	 if (typeof(date) == "undefined") {
         return "Unknown";
-        console.log("something form helpersjs");
       }
       // These methods need to return a String
-      console.log("something form helpersjssssss");
       var datem = dateobj.getMonth()+1; 
       // var hours = dateobj.getHours();
       var hours = dateobj.getHours() > 12 ? dateobj.getHours() - 12 : dateobj.getHours();

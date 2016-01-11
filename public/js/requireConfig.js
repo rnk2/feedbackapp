@@ -64,7 +64,10 @@ require.config({
         "errorMap" : "lib/errorMap",
         "validators" : "validators",
         "errorMessages" : "errorMessages",
-        "views" : "views"
+        "views" : "views",
+        "collections" : "collections",
+        "models" : "models",
+        "templates" : "templates"
     },
     shim: {
         underscore: {

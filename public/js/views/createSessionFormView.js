@@ -10,15 +10,14 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
             initialize: function(options) {
                 var self = this;
                 var locationsCollection = new LocationsCollection();
-                console.log(locationsCollection.fetch({
+                locationsCollection.fetch({
                     success: function(collection, resp) {
                         $(self.el).html(self.template({
                             locations: resp
                         }));
                         $('#datetimepicker1').datetimepicker();
                     }
-                }));
-
+                });
                 self.render();
             },
 

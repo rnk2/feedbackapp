@@ -29,7 +29,6 @@ exports.init = function(app, passport, auth, smtpTransport) {
     app.get('/signin', user.signin);
     //logout page
     app.get('/logout', function(req, res) {
-        //console.log(req);
         req.logOut();
         res.redirect('/');
     });
@@ -42,80 +41,48 @@ exports.init = function(app, passport, auth, smtpTransport) {
         user.dashboard(req, res);
     });
 
-    app.get("/getLocations", function(req, resp){
-        session.getLocations(req, resp);        
+    app.get("/getLocations", function(req, resp) {
+        session.getLocations(req, resp);
     });
 
-    
-
-    app.get('/partcpates/:id',function(request,response){
-       
-        
-         db.config.query("select * from participants where ssid= ?",[request.params.id], function(req, res) {
-            // console.log(res);
+    app.get('/partcpates/:id', function(request, response) {
+        db.config.query("select * from participants where ssid= ?", [request.params.id], function(req, res) {
             response.send(res);
         });
-
-
     });
 
-    
-
-    app.post('/partcpates',function(request,response){
-        console.log("inside partcpates post");
+    app.post('/partcpates', function(request, response) {
 
         var username = request.body.participant;
         var email = request.body.email;
         var ssid = request.body.ssid;
-        console.log(email);
-        console.log(ssid);
-       
 
-       var query = db.config.query('select * from participants where email=? and ssid= ?',[email,ssid],function(req,res){
+        var query = db.config.query('select * from participants where email=? and ssid= ?', [email, ssid], function(req, res) {
 
-        if(res.length<=0)
-        {
-            console.log("successs");
-             db.config.query('insert into participants(participant,email,ssid) values(' + "'" + username + "'" + "," + "'" + email + "'" + "," + "'" + ssid + "'" + ');', function(req, res) {
-
-
-            response.send(res);
-
+            if (res.length <= 0) {
+                db.config.query('insert into participants(participant,email,ssid) values(' + "'" + username + "'" + "," + "'" + email + "'" + "," + "'" + ssid + "'" + ');', function(req, res) {
+                    response.send(res);
+                });
+            } else {                
+            }
         });
-        }
-        else{
-            console.log("user already exists");
-        }
-
-       });
-       
-      
-
-         console.log(query.sql);
     });
 
 
-    app.delete('/partcpates/:id',function(request,response){
-        console.log("inside partcpates delete");
-
+    app.delete('/partcpates/:id', function(request, response) {
         var id = request.params.id;
-        // console.log("testind"+ssid);
-        // var email = request.params.email;
-        // console.log(email);
         var query = db.config.query('delete from participants where id = ?', [id], function(req, res) {
-            console.log(res);
             response.send(res);
         });
 
     });
 
-    
+
 
     // new user registration
     app.post('/signup', function(req, res, next) {
         // generate the authenticate method and pass the req/res
         passport.authenticate('local-signup', function(err, user) {
-
             if (err) {
                 return next(err);
             }
@@ -142,22 +109,21 @@ exports.init = function(app, passport, auth, smtpTransport) {
 
     //adding new sessions from 
     app.post('/createSession', function(req, resp) {
-        session.create(req, resp);       
+        session.create(req, resp);
     });
     //getting existing sessions
-    app.get('/newsessions', function(request, response) {
-   
-        db.config.query("select * from sessions", function(req, res) {
-            // console.log(res);
-            response.send(res);
+    app.get('/getSessions', function(req, resp) {
+        
+        var sessionsQuery = "select sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id";
+        
+        db.config.query(sessionsQuery, function(err, rows) {                        
+            resp.send(rows);
         });
     });
 
     //new updates of scheduled sessions before date
     app.put('/index/:id', function(request, response) {
-        console.log("inside put");
-        //console.log(request.params.id);
-        //console.log(request.body.tname);
+
         var ssid = request.params.id;
         var tname = request.body.tname;
         var pname = request.body.pname;
@@ -172,75 +138,42 @@ exports.init = function(app, passport, auth, smtpTransport) {
         //console.log(query.sql);
     });
     //deleting the existing sessions
-    app.delete('/index/:id', function(request, response) {
-        console.log("inside delete");
+    app.delete('/index/:id', function(request, response) {        
         var ssid = request.params.id;
         var query = db.config.query('delete from sessions where ssid = ?', [ssid], function(req, res) {
-            console.log(res);
             response.send(res);
         })
 
     });
 
 
-    app.get('/usessions',function(request, response) {
-        // console.log(request);
-        // console.log("email"+request.user.firstname);
+    app.get('/usessions', function(request, response) {
+
         var username = request.user.firstname;
         var email = request.user.email;
         var ssid = request.body.ssid;
-        // console.log(email);
-        // console.log(ssid);
-     var query = db.config.query("select * from sessions where name =?", [username], function(req, res) {
-            // console.log(res);
+        var query = db.config.query("select * from sessions where name =?", [username], function(req, res) {
             response.send(res);
         });
 
-        console.log(query.sql);
     });
 
-
-
-
-
-
-    app.post('/ratings/:id',function(request,response){
+    app.post('/ratings/:id', function(request, response) {
 
         var participant = request.body.participant;
         var ssid = request.body.ssid;
         var pscore = request.body.pscore;
         var tscore = request.body.tscore;
-        console.log(request.body);
-
-     var query = db.config.query('insert into feedback(participant,ssid,pscore,tscore) values(' + "'" + participant + "'" + "," + "'" + ssid + "'" + "," + "'" + pscore + "'" + "," + "'" + tscore + "'" + ');', function(req, res) {
-
-
+        var query = db.config.query('insert into feedback(participant,ssid,pscore,tscore) values(' + "'" + participant + "'" + "," + "'" + ssid + "'" + "," + "'" + pscore + "'" + "," + "'" + tscore + "'" + ');', function(req, res) {
             response.send(res);
-
         });
-
-         console.log(query.sql);
     })
 
-    app.get('/ratings/:id',function(request,response){
+    app.get('/ratings/:id', function(request, response) {
         var username = request.user.firstname;
         var ssid = request.params.id;
-        console.log(ssid);
-
         var query = db.config.query("select * from feedback where ssid =?", [ssid], function(req, res) {
-            console.log(res);
             response.send(res);
         });
-
-        console.log(query.sql);
     });
-
-
-
-
-
-
-
-
-
 };

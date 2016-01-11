@@ -1,0 +1,26 @@
+<td>{{firstName}} {{lastName}}</td>
+<td>{{title}}</td>
+<td>{{location}}</td>
+<td>{{formatDate date}}</td>
+{{#unless status}}
+<td>
+	Close	
+</td>
+<td>
+	<a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a>
+</td>
+<td>
+	<a href="#/ratings/{{id}}" class="btn btn-custom btn-sm active" role="button">Feed Back</a>
+	
+</td>
+{{else}}
+<td>
+	Open
+</td>
+<td>
+	<a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a>
+</td>
+<td>
+	<a class="btn btn-custom btn-sm active" role="button" disabled>Feed Back</a>
+</td>
+{{/unless}}
