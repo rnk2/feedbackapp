@@ -34,7 +34,6 @@ define(['jquery', 'backbone', 'helpers',
         },
 
         renderSessionRow: function(model) {
-            console.log(model);
             var sessionRow = new SessionRow({
                 model: model                
             });

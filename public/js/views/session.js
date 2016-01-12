@@ -1,13 +1,13 @@
 define(['jquery', 'backbone','templates/session',
     'templates/sessionDetailsSub','appUser','collections/participants',
     'views/participantRow'], 
-    function($, Backbone, sessionTemplate, sessionDetailsSubTemplate, AppUser, ParticipantsCollection, ParticipantRowView) {
+    function($, Backbone, sessionTemplate, sessionDetailsSubTemplate, appUser, ParticipantsCollection, ParticipantRowView) {
   
     var SessionDetailsView = Backbone.View.extend({
          
          events: {    
-            "click #addParticipants": "addParticipants",
-            "click #deleteParticipants": "deleteParticipants"
+            "click #subscribe": "handleSessionSubscription",
+            "click #unsubscribe": "handleSessionUnsubscription"
         },
         
         initialize : function(options){  
@@ -44,15 +44,25 @@ define(['jquery', 'backbone','templates/session',
         },
 
         renderParticipantRow : function(model) {
-
            var participantRowView = new ParticipantRowView({
                     model : model
                   });
             $(this.el).find("#sessionParticipants").append(participantRowView.el);
+        },
+
+        handleSessionSubscription : function(){
+
+          console.log(appUser);
+          console.log(this.model.attributes);
+
+
 
 
         },
 
+        handleSessionUnsubscription : function() {
+          alert("ji");
+        },
 
         addTwo: function(model) {
 

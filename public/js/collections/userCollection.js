@@ -12,8 +12,6 @@ var Meetings=Backbone.Collection.extend({
     },
 
     initialize:function(){
-        console.log("collection created from base");
-        
         
     }
     
