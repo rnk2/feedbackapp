@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.12
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2016 at 09:45 AM
--- Server version: 5.5.36
--- PHP Version: 5.4.27
+-- Generation Time: Jan 12, 2016 at 08:32 PM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `feedapp`
@@ -26,14 +26,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `feedback`
 --
 
-CREATE TABLE IF NOT EXISTS `feedback` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `feedback` (
+  `id` int(10) NOT NULL,
   `participantId` int(10) NOT NULL,
   `sessionId` int(10) NOT NULL,
   `pScore` int(2) DEFAULT NULL,
-  `tScore` int(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `tScore` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `feedback`
@@ -60,12 +59,11 @@ INSERT INTO `feedback` (`id`, `participantId`, `sessionId`, `pScore`, `tScore`) 
 -- Table structure for table `locations`
 --
 
-CREATE TABLE IF NOT EXISTS `locations` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `locations` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `locations`
@@ -81,22 +79,21 @@ INSERT INTO `locations` (`id`, `title`, `status`) VALUES
 -- Table structure for table `participants`
 --
 
-CREATE TABLE IF NOT EXISTS `participants` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `participants` (
+  `id` int(10) NOT NULL,
   `userId` int(10) NOT NULL,
   `sessionId` int(5) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=116 ;
+  `status` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `participants`
 --
 
 INSERT INTO `participants` (`id`, `userId`, `sessionId`, `status`) VALUES
-(54, 0, 59, 1),
-(75, 0, 59, 1),
-(77, 0, 60, 1),
+(54, 17, 101, 1),
+(75, 18, 101, 1),
+(77, 19, 60, 1),
 (87, 0, 79, 1),
 (88, 0, 79, 1),
 (91, 0, 60, 1),
@@ -120,11 +117,10 @@ INSERT INTO `participants` (`id`, `userId`, `sessionId`, `status`) VALUES
 -- Table structure for table `roles`
 --
 
-CREATE TABLE IF NOT EXISTS `roles` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+CREATE TABLE `roles` (
+  `id` int(10) NOT NULL,
+  `title` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `roles`
@@ -140,16 +136,15 @@ INSERT INTO `roles` (`id`, `title`) VALUES
 -- Table structure for table `sessions`
 --
 
-CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sessions` (
+  `id` int(10) NOT NULL,
   `title` varchar(30) NOT NULL,
   `presenterId` int(15) DEFAULT NULL,
   `locationId` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,
   `description` text NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=106 ;
+  `status` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sessions`
@@ -170,15 +165,14 @@ INSERT INTO `sessions` (`id`, `title`, `presenterId`, `locationId`, `date`, `des
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(10) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `roleId` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+  `roleId` varchar(12) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -200,6 +194,80 @@ INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `roleId
 (30, 'ram', 'p', 'test@mail.com', '$2a$10$oqvXKHHjqVklzSISBVkOgeM0W6gk3DRtYdF6nUmLyFbOQu9Xc3I2e', '1'),
 (31, 'ram', 'p', 'hello@gmail.com', '$2a$10$ycmcZlOoc4PzmfjaWUqbsOGbdQZyzpScRsHT7D08zljfECbIiPWgK', '1');
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `participants`
+--
+ALTER TABLE `participants`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `participants`
+--
+ALTER TABLE `participants`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
