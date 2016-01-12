@@ -1,15 +1,10 @@
-define(['jquery', 'backbone', 'headerView', 'footerView', 'signinView', "forgotPasswordView"], function($, Backbone, HeaderView, FooterView, SigninView, ForgotPasswordView) {
+define(['jquery', 'backbone', 'signinView'], function($, Backbone, SigninView) {
 
-    function renderHeader() {
+    /*Render header and footer*/
+    require(["views/header", "views/footer"], function(HeaderView, FooterView) {
         new HeaderView();
-    }
-
-    function renderFooter() {
         new FooterView();
-    }
-
-    renderHeader();
-    renderFooter();
+    });
 
     var AppRouter = Backbone.Router.extend({
         routes: {
@@ -23,7 +18,9 @@ define(['jquery', 'backbone', 'headerView', 'footerView', 'signinView', "forgotP
         },
 
         forgotpassword : function() {
-            new ForgotPasswordView();
+              require(["views/forgotPassword"], function(ForgotPasswordView) {                    
+                   new ForgotPasswordView();                   
+                });
         }
 
     });

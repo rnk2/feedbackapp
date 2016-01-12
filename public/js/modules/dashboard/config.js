@@ -1,24 +1,23 @@
 define(['jquery', 'backbone',
         'views/dashboardView',        
-        'userSessions', 'sessionDetails',
-        'headerView', 'footerView',
+        'userSessions', 'sessionDetails',        
         'appUser', 'mysessions',
         'participants', 'mySessionsDetails',
         'ratingCollection', 'sessionRating', 'ratingsView'
     ],
     function($, Backbone,
         DashboardView,        
-        UserSessions, SessionDetails,
-        HeaderView, FooterView,
+        UserSessions, SessionDetails,        
         appUser, MySessions,
         Participants, MySessionsDetails,
         RatingCollection, SessionRating, Ratings) {
 
-        var app = {};
+        /*Render header and footer*/
+        require(["views/header", "views/footer"], function(HeaderView, FooterView) {            
+            new HeaderView();
+            new FooterView();
+        });
 
-        app.header = new HeaderView();
-        app.footer = new FooterView();
-        //require(["views/viewSessionsView"]);
 
         var AppRouter = Backbone.Router.extend({
             routes: {

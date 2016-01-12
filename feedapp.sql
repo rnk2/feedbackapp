@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2016 at 03:55 PM
+-- Generation Time: Jan 12, 2016 at 09:45 AM
 -- Server version: 5.5.36
 -- PHP Version: 5.4.27
 
@@ -147,33 +147,22 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `locationId` int(11) NOT NULL,
   `date` datetime DEFAULT NULL,
   `description` text NOT NULL,
-  `status` tinyint(1) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=99 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=106 ;
 
 --
 -- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `title`, `presenterId`, `locationId`, `date`, `description`, `status`) VALUES
-(59, 'Ram', 0, 2, '2015-12-31 18:30:00', 'React is a JavaScript library for creating user interfaces by Facebook and Instagram. Many people choose to think of React as the V in MVC.', 1),
-(60, 'Shiva', 0, 4, '2015-12-31 22:30:00', 'HTML is great for declaring static documents, but it falters when we try to use it for declaring dynamic views in web-applications. AngularJS lets you extend HTML vocabulary for your application. The resulting environment is extraordinarily expressive, readable, and quick to develop.', 1),
-(79, 'sai', 0, 4, '2015-12-30 16:30:00', 'server-side scripting language', 1),
-(81, 'raj', 0, 2, '2015-12-31 18:30:00', 'Javascript testing', 1),
-(85, 'anil', 0, 4, '2015-12-31 18:30:00', 'Sever-Side Javascript ', 1),
-(86, 'anil', 0, 2, '2015-12-31 20:30:00', 'AngularJS developed by Google', 1),
-(87, 'Naresh', 0, 4, '2016-01-08 16:30:00', 'Server Side Javascript Framework', 0),
-(88, 'Naresh', 0, 4, '2016-01-08 20:30:00', 'Passport is authentication middleware for Node.js. Extremely flexible and modular, Passport can be unobtrusively dropped in to any Express-based web application. A comprehensive set of strategies support authentication using a username and password, Facebook, Twitter, and more.', 0),
-(89, 'Shiva', 0, 4, '2016-01-15 16:30:00', 'test casess', 0),
-(90, 'sdasd', 31, 3, '0000-00-00 00:00:00', '2016-01-20 13:45', 0),
-(91, 'sess1', 31, 3, '2016-01-12 13:45:00', 'asdasd', 0),
-(92, 'sdfdsf', 31, 5, '2016-01-11 12:40:00', 'sdfsdf', 0),
-(93, 'rdsfdsk', 31, 2, '2016-01-13 19:45:00', 'vxv', 0),
-(94, 'rdsfdsk', 31, 2, '2016-01-13 19:45:00', 'vxv', 0),
-(95, 'sdjfh', 31, 3, '1899-12-27 18:50:00', 'dfsdf', 1),
-(96, 'sdasd', 31, 3, '2016-01-05 13:45:00', 'dfsdf', 1),
-(97, 'session', 31, 1, '2016-01-03 08:40:00', 'sdfsdf', 0),
-(98, 'asdad', 31, 2, '2016-01-12 20:45:00', 'dsfsdf', 0);
+(99, 'Backbone', 17, 1, '2016-01-04 09:25:00', 'Backbone', 1),
+(100, 'require', 17, 2, '2016-02-01 15:40:00', '2223', 1),
+(101, 'require', 17, 1, '2015-12-29 05:45:00', '123456789', 1),
+(102, 'jil', 17, 2, '2016-02-01 16:39:00', 'sfll', 1),
+(103, 'akl', 17, 1, '2016-01-25 16:41:00', '5666', 1),
+(104, 'sdasd', 17, 2, '2016-02-01 16:45:00', '456', 1),
+(105, 'sdd', 17, 1, '2016-01-25 16:41:00', 'asd', 1);
 
 -- --------------------------------------------------------
 
@@ -196,7 +185,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `roleId`) VALUES
-(17, 'ramesh', 'polishetti', 'ram.polishetti@gmail.com', '$2a$10$s.D8VNhsEaC079eONiAEZOqAYLlVmGodHkLV6KnMG.KMrZD/zb/Pe', '1'),
+(17, 'ramesh', 'polishetti', 'ram.polishetti@gmail.com', '$2a$10$ycmcZlOoc4PzmfjaWUqbsOGbdQZyzpScRsHT7D08zljfECbIiPWgK', '1'),
 (18, 'ramesh', 'polishetti', 'rpolishetti', '$2a$10$b3Jqao1BbprZS2RrIT6gueLi55/MgkiOCk273NLwr5LG1omOJKBni', '1'),
 (19, 'naresh', 'kumar', 'nrenukuntla@nisum.com', '$2a$10$X3B0a8qZcfJMkpRV5o0BV.VkhHWakcSYrrzyaemnQI9Tv/fEu5hLW', '1'),
 (20, 'ram', 'ram', 'ram@gmail.com', '$2a$10$EXmmQLWB.bTmNVYotj8NTu2GFFaq2C1hsbO7Po4aACiwuaWPOPE9C', '1'),
