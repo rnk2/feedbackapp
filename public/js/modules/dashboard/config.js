@@ -1,19 +1,19 @@
 define(['jquery', 'backbone',
-        'views/dashboardView',        
-        'userSessions', 'sessionDetails',        
+        'views/dashboardView',
+        'userSessions',
         'appUser', 'mysessions',
         'participants', 'mySessionsDetails',
         'ratingCollection', 'sessionRating', 'ratingsView'
     ],
     function($, Backbone,
-        DashboardView,        
-        UserSessions, SessionDetails,        
+        DashboardView,
+        UserSessions,
         appUser, MySessions,
         Participants, MySessionsDetails,
         RatingCollection, SessionRating, Ratings) {
 
         /*Render header and footer*/
-        require(["views/header", "views/footer"], function(HeaderView, FooterView) {            
+        require(["views/header", "views/footer"], function(HeaderView, FooterView) {
             new HeaderView();
             new FooterView();
         });
@@ -24,7 +24,7 @@ define(['jquery', 'backbone',
                 '': 'dashboard',
                 'viewCurrentSessions': 'viewCurrentSessions',
                 'createSession': 'createSession',
-                'sessiondetails/:id': 'sessiondetails',
+                'viewSession/:id': 'viewSession',
                 'mysessiondetails/:id': 'mySessions',
                 'userSessions': 'userSessions',
                 'ratings/:id': 'ratings',
@@ -35,26 +35,49 @@ define(['jquery', 'backbone',
                 var dashboardView = new DashboardView();
             },
 
-            createSession: function() {                
-                require(["views/createSessionFormView"], function(CreateSessionFormView) {                    
-                   new CreateSessionFormView();                   
+            createSession: function() {
+                require(["views/createSessionForm"], function(CreateSessionFormView) {
+                    new CreateSessionFormView();
                 });
             },
 
             viewCurrentSessions: function() {
-                require(["views/sessionsList"], function(SessionsListView) {                    
+                require(["views/sessionsList"], function(SessionsListView) {
                     new SessionsListView();
                 });
             },
 
-            sessiondetails: function(id) {                
-                var sessiondetails = new SessionDetails({
-                    collection: {
-                        sessions: new SessionCollection(),
-                        participants: new Participants()
-                    },
-                    mid: id
+            viewSession: function(id) {
+                require(["views/session","models/session"], function(SessionView, SessionModel) {
+
+                    var sessionModel = new SessionModel({                        
+                            currentRoute: "/getSession",
+                            id: id
+                        }
+                    );
+
+                    var sessionView = new SessionView({
+                        model : sessionModel
+                    });
+
+                    sessionModel.fetch({
+                        success: function(model) {
+                            sessionView.render();
+                        },
+                        error : function(err, resp) {
+                            console.log(resp);
+                        }
+                    })
+
                 });
+
+                /*         var sessiondetails = new SessionDetails({
+                             collection: {
+                                 sessions: new SessionCollection(),
+                                 participants: new Participants()
+                             },
+                             mid: id
+                         });*/
             },
 
             mySessions: function(id) {

@@ -33,7 +33,7 @@ define(['jquery', 'backbone', 'templates/register', 'templates/confirmation', 'u
                 if (this.formHandler.formStack.isValid) {
 
                     var userModel = new UserModel({
-                        currentRoot: "/signup"
+                        currentRoute: "/signup"
                     });
                     userModel.set({
                         firstname: $("#firstName").val().trim(),

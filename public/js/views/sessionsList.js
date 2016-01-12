@@ -2,9 +2,9 @@ define(['jquery', 'backbone', 'helpers',
     'templates/sessionsList',
     'templates/session',
     'collections/sessions',
-    "views/session"
+    "views/sessionRow"
 ], function($, Backbone, Helpers, sessionsListTemp,
-    sessionsSubTemplate, SessionsCollection, SessionView) {
+    sessionsSubTemplate, SessionsCollection, SessionRow) {
 
     var SessionsListView = Backbone.View.extend({
         
@@ -18,15 +18,9 @@ define(['jquery', 'backbone', 'helpers',
         el: "#section",
         render: function() {
             self = this;
-
             $(this.el).html(this.template());
-
-
             this.collection.fetch({
                 success: function(collection) {
-                    
-                    console.log(collection);
-
                     collection.each(function(model) {
                         self.renderSessionRow(model);
                     }, this);
@@ -40,14 +34,12 @@ define(['jquery', 'backbone', 'helpers',
         },
 
         renderSessionRow: function(model) {
-            var sessionView = new SessionView({
+            console.log(model);
+            var sessionRow = new SessionRow({
                 model: model                
             });
-            $(this.el).find("#currentSessions").append(sessionView.el);
+            $(this.el).find("#currentSessions").append(sessionRow.el);
         },
-
-
-
 
         handleErrors: function(error) {
             $(this.el).find(".error-status").html(error).show();

@@ -1,4 +1,4 @@
-define(['jquery', 'backbone', 'signinView'], function($, Backbone, SigninView) {
+define(['jquery', 'backbone', 'views/signin'], function($, Backbone, SigninView) {
 
     /*Render header and footer*/
     require(["views/header", "views/footer"], function(HeaderView, FooterView) {

@@ -46,7 +46,9 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
             handleCreateSession: function(e) {
                 e.preventDefault();
                 var self = this;
-                var session = new SessionModel();
+                var session = new SessionModel({
+                    currentRoute : "/createSession"
+                });
                 var title = $("#sessionTitle").val();
 
                 session.set('title', title);
@@ -60,12 +62,14 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
                 }, {
                     success: function(model, response) {
 
+                        console.log(model);
+
                         if (response.errorMessage) {
                             self.handleErrors(response.errorMessage);
                             return;
                         } else {
                             $(self.el).find('.session-save-status').html(sessionconfirmationTemp({
-                                title: model.title
+                                title: model.attributes.title
                             }));
                         }
 

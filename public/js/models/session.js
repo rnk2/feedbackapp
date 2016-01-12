@@ -1,13 +1,16 @@
 define(['backbone'], function(Backbone) {
 
-	var sessionModel = Backbone.Model.extend({		
-		urlRoot: '/createSession',
-		initialize: function() {			
+	var SessionModel = Backbone.Model.extend({		
 		
+		urlRoot: function() {
+			return this.get("currentRoute");
+		},
+
+		initialize: function() {					
 		}
 	});
 
 
-	return sessionModel;
+	return SessionModel;
 
 });

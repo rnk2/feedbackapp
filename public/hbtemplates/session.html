@@ -1,26 +1,104 @@
-<td>{{firstName}} {{lastName}}</td>
-<td>{{title}}</td>
-<td>{{location}}</td>
-<td>{{formatDate date}}</td>
-{{#unless status}}
-<td>
-	Close	
-</td>
-<td>
-	<a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a>
-</td>
-<td>
-	<a href="#/ratings/{{id}}" class="btn btn-custom btn-sm active" role="button">Feed Back</a>
-	
-</td>
-{{else}}
-<td>
-	Open
-</td>
-<td>
-	<a href="#/sessiondetails/{{id}}" class="btn btn-custom btn-sm active" role="button">View Details</a>
-</td>
-<td>
-	<a class="btn btn-custom btn-sm active" role="button" disabled>Feed Back</a>
-</td>
-{{/unless}}
+<!-- Header -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 col-sm-2">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Session Details</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h1>
+            {{title}}
+            </h1>
+        </div>
+        <div class="col-md-6">
+            <h1>
+            {{title}}
+            </h1>
+        </div>
+    </div>
+    <div class="row description">
+        
+        <div class="col-md-6 col-sm-6">
+            <h3>Description :</h3>
+            <div id="description">
+                <p>
+                    {{description}}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4">
+            
+        </div>
+    </div>
+    
+    
+    <div class="row location">
+        
+        <div class="col-md-6 col-sm-6">
+            <h3>Location : </h3>
+            <div id="description">
+                <p>
+                    {{location}}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-4">
+            <h3>Date : </h3>
+            <div id="date">
+                <p>
+                    {{date}}
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div>
+        <div class="row participants" padding-top="10px">
+            <div class="col-sm-2 col-md-2">
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="row">
+                    <p align="center">Participants Details</p>
+                </div>
+                <div class="row">
+                    <table class="table table-hover" id="crud">
+                        
+                        <tr>
+                            <th>ID</th>
+                            <th>Participant Name</th>
+                            <th>Email</th>
+                            
+                        </tr>
+                        
+                        
+                    </table>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+            </div>
+        </div>
+    </div>
+    <!-- /Header -->
+    <!-- Intro -->
+    <div class="container text-center">
+        <div class="col-md-2 col-sm-2">
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <h1 class="lead">interested to join ? stay tunned ? </h1>
+            
+            <p>
+                <button type="button" class="btn btn-success" id="addParticipants">Subscribe</button>
+            <button type="button" class="btn btn-danger" id="deleteParticipants">Unsubscribe</button></p>
+        </div>
+        <div class="col-md-4 col-sm-4">
+        </div>
+        
+    </div>
+    <!-- /Intro-->
+    <!-- /container -->
+    <!-- Social links. @TODO: replace by link/instructions in template -->
+</div>

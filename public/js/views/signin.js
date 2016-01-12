@@ -34,7 +34,7 @@ define(['jquery', 'backbone', 'templates/signin', 'user', 'validation', 'validat
             if (this.formHandler.formStack.isValid) {
 
                 var userModel = new UserModel({
-                    currentRoot: "/signin"
+                    currentRoute: "/signin"
                 });
                 userModel.set('userEmail', $("#email").val());
                 userModel.set('password', $("#password").val());

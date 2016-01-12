@@ -114,10 +114,21 @@ exports.init = function(app, passport, auth, smtpTransport) {
     //getting existing sessions
     app.get('/getSessions', function(req, resp) {
         
-        var sessionsQuery = "select sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id";
+        var sessionsQuery = "select sessions.id, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id";
         
         db.config.query(sessionsQuery, function(err, rows) {                        
             resp.send(rows);
+        });
+    });
+
+
+       //getting existing sessions
+    app.get('/getSession/:id', function(req, resp) {
+
+        var sessionQuery = "select sessions.id, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id where sessions.id=?"; 
+        var sessionId = req.params.id;
+        db.config.query(sessionQuery, [sessionId], function(err, rows) {                        
+            resp.send(rows[0]);
         });
     });
 

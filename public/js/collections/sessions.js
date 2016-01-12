@@ -1,11 +1,13 @@
-define(['jquery', 'backbone', 'sessionModel'], function($, Backbone, SessionModel) {
+define(['jquery', 'backbone'], function($, Backbone) {
 
 	var Sessions = Backbone.Collection.extend({
-		model: SessionModel,
+		
 		url: function() {
 			return '/getSessions';
 		},
-		initialize: function() {}
+		initialize: function() {
+			
+		}
 
 	});
 
