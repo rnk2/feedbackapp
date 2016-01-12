@@ -36,8 +36,6 @@ require.config({
         'sessionCollection' : 'collections/sessionsCollection',
         'ratingModel': 'models/ratingsModel',
         'ratingCollection' : 'collections/ratingsCollection',
-        'participant': 'models/participantsModel',
-        'participants': 'collections/participantsCollection',
         'userSession': 'models/mySessionModel',
         'registerView': 'views/registerView',
         'signinView': 'views/signinView',

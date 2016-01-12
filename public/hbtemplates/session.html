@@ -1,104 +1,79 @@
 <!-- Header -->
 <div class="container">
     <div class="row">
-        <div class="col-md-2 col-sm-2">
+        <div class="col-md-12">
             <ol class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <li class="active">Session Details</li>
             </ol>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h1>
-            {{title}}
-            </h1>
-        </div>
-        <div class="col-md-6">
-            <h1>
-            {{title}}
-            </h1>
-        </div>
-    </div>
-    <div class="row description">
-        
-        <div class="col-md-6 col-sm-6">
-            <h3>Description :</h3>
-            <div id="description">
-                <p>
-                    {{description}}
-                </p>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-4">
-            
-        </div>
-    </div>
-    
-    
-    <div class="row location">
-        
-        <div class="col-md-6 col-sm-6">
-            <h3>Location : </h3>
-            <div id="description">
-                <p>
-                    {{location}}
-                </p>
-            </div>
-        </div>
-        <div class="col-md-6 col-sm-4">
-            <h3>Date : </h3>
-            <div id="date">
-                <p>
-                    {{date}}
-                </p>
-            </div>
-        </div>
-    </div>
-    
-    <div>
-        <div class="row participants" padding-top="10px">
-            <div class="col-sm-2 col-md-2">
-            </div>
-            <div class="col-sm-6 col-md-6">
-                <div class="row">
-                    <p align="center">Participants Details</p>
-                </div>
-                <div class="row">
-                    <table class="table table-hover" id="crud">
-                        
-                        <tr>
-                            <th>ID</th>
-                            <th>Participant Name</th>
-                            <th>Email</th>
-                            
-                        </tr>
-                        
-                        
-                    </table>
+    <div class="row session-group">
+        <div class="col-md-6 details-section">
+            <div class='row session-title'>
+                <div class="col-md-12">
+                    <p>{{title}}</p>
                 </div>
             </div>
-            <div class="col-sm-4 col-md-4">
+            <div class="row description">
+                <div class="col-md-6 col-sm-6">
+                    <h3>Description :</h3>
+                    <div id="description">
+                        <p>
+                            {{description}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    
+                </div>
+            </div>
+            <div class="row location">
+                
+                <div class="col-md-6 col-sm-6">
+                    <h3>Location : </h3>
+                    <div id="description">
+                        <p>
+                            {{location}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-4">
+                    <h3>Date : </h3>
+                    <div id="date">
+                        <p>
+                            {{date}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <h1 class="lead text-center">Interested to join ? stay tunned ? </h1>
+                    <p class="text-center">
+                        <button type="button" class="btn btn-success" id="addParticipants">Subscribe</button>
+                    <button type="button" class="btn btn-danger" id="deleteParticipants">Unsubscribe</button></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default ">
+                        <div class="panel-heading">
+                            Participants
+                        </div>
+                        <!-- Table -->
+                        <table class="table table-hover table-responsive" id="sessionParticipants">
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Participant Name</th>
+                                <th>Email</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- /Header -->
-    <!-- Intro -->
-    <div class="container text-center">
-        <div class="col-md-2 col-sm-2">
-        </div>
-        <div class="col-md-6 col-sm-6">
-            <h1 class="lead">interested to join ? stay tunned ? </h1>
-            
-            <p>
-                <button type="button" class="btn btn-success" id="addParticipants">Subscribe</button>
-            <button type="button" class="btn btn-danger" id="deleteParticipants">Unsubscribe</button></p>
-        </div>
-        <div class="col-md-4 col-sm-4">
-        </div>
-        
-    </div>
-    <!-- /Intro-->
-    <!-- /container -->
-    <!-- Social links. @TODO: replace by link/instructions in template -->
 </div>

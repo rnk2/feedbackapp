@@ -1,11 +1,11 @@
 define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
-        'templates/createSessionForm', 'templates/sessionconfirmation', 'sessionModel', 'appUser',
+        'templates/createSessionForm', 'templates/sessionconfirmation', 'models/session', 'appUser',
         'collections/locations'
     ],
     function($, Backbone, Bootstrap, DatePicker, Dateformat, createSessionFormTemp, sessionconfirmationTemp,
         SessionModel, appUser, LocationsCollection) {
 
-        var SessionView = Backbone.View.extend({
+        var CreateSessionFormView = Backbone.View.extend({
 
             initialize: function(options) {
                 var self = this;
@@ -96,5 +96,5 @@ define(['jquery', 'backbone', 'bootstrap', 'datepicker', 'dateformat',
             }
 
         });
-        return SessionView;
+        return CreateSessionFormView;
     });

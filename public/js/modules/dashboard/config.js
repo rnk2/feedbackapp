@@ -2,7 +2,7 @@ define(['jquery', 'backbone',
         'views/dashboardView',
         'userSessions',
         'appUser', 'mysessions',
-        'participants', 'mySessionsDetails',
+        'collections/participants', 'mySessionsDetails',
         'ratingCollection', 'sessionRating', 'ratingsView'
     ],
     function($, Backbone,

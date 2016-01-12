@@ -1,4 +1,4 @@
-define(['jquery', 'backbone','templates/mySessionsDetails','templates/sessionDetailsSub','appUser','participant'], function($, Backbone,sessionDetailsTemplate,sessionDetailsSubTemplate,AppUser,Participant) {
+define(['jquery', 'backbone','templates/mySessionsDetails','templates/sessionDetailsSub','appUser','models/participant'], function($, Backbone,sessionDetailsTemplate,sessionDetailsSubTemplate,AppUser,Participant) {
   
     var SessionDetails = Backbone.View.extend({
 

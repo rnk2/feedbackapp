@@ -1,6 +1,7 @@
 define(['jquery', 'backbone','templates/session',
-    'templates/sessionDetailsSub','appUser','participant'], 
-    function($, Backbone, sessionTemplate, sessionDetailsSubTemplate, AppUser, Participant) {
+    'templates/sessionDetailsSub','appUser','collections/participants',
+    'views/participantRow'], 
+    function($, Backbone, sessionTemplate, sessionDetailsSubTemplate, AppUser, ParticipantsCollection, ParticipantRowView) {
   
     var SessionDetailsView = Backbone.View.extend({
          
@@ -19,11 +20,37 @@ define(['jquery', 'backbone','templates/session',
 
         
 
-        render: function() { 
+        render: function() {
 
-            console.log(this.model.toJSON())
+          var self = this;
 
             $(this.el).html(this.template(this.model.toJSON()));
+            var participantsCollection = new ParticipantsCollection();
+            participantsCollection.url = "/getParticipants/" + this.model.attributes.id;
+            participantsCollection.fetch({
+              success: function(collection) {
+                collection.each(function(model, index){
+                  model.attributes.index = index+1;
+                  self.renderParticipantRow(model);
+                });
+              },
+              error : function(err){
+                console.log(err);
+              }
+            })
+
+
+
+        },
+
+        renderParticipantRow : function(model) {
+
+           var participantRowView = new ParticipantRowView({
+                    model : model
+                  });
+            $(this.el).find("#sessionParticipants").append(participantRowView.el);
+
+
         },
 
 
@@ -167,31 +194,31 @@ define(['jquery', 'backbone','templates/session',
     });
 
 
-  var participantSub = Backbone.View.extend({
-        template: sessionDetailsSubTemplate,
-        tagName: 'tr',
+  // var participantSub = Backbone.View.extend({
+  //       template: sessionDetailsSubTemplate,
+  //       tagName: 'tr',
 
 
-        initialize: function() {
-            this.render();
-        },
+  //       initialize: function() {
+  //           this.render();
+  //       },
          
     
-       render: function() {
+  //      render: function() {
 
-            var source = this.template(this.model.toJSON());
-            console.log(this.model.toJSON());
-            $(this.el).html(source);
+  //           var source = this.template(this.model.toJSON());
+  //           console.log(this.model.toJSON());
+  //           $(this.el).html(source);
 
-            return this;
+  //           return this;
 
-        }
+  //       }
 
 
 
 
         
-    });
+  //   });
 
  
 

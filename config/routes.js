@@ -132,6 +132,22 @@ exports.init = function(app, passport, auth, smtpTransport) {
         });
     });
 
+
+    //getting existing sessions
+    app.get('/getParticipants/:id', function(req, resp) {
+        
+        var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?"; 
+        var sessionId = req.params.id;
+        db.config.query(participantsQuery, [sessionId], function(err, rows) {                        
+            resp.send(rows);
+        });
+    });
+
+
+
+
+
+
     //new updates of scheduled sessions before date
     app.put('/index/:id', function(request, response) {
 
