@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2016 at 08:32 PM
+-- Generation Time: Jan 13, 2016 at 03:48 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.5.30
 
@@ -162,6 +162,26 @@ INSERT INTO `sessions` (`id`, `title`, `presenterId`, `locationId`, `date`, `des
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sessions_status`
+--
+
+CREATE TABLE `sessions_status` (
+  `id` int(11) NOT NULL,
+  `name` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sessions_status`
+--
+
+INSERT INTO `sessions_status` (`id`, `name`) VALUES
+(1, 'open'),
+(2, 'closed'),
+(3, 'archived');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -229,6 +249,12 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sessions_status`
+--
+ALTER TABLE `sessions_status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -263,6 +289,11 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `sessions`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+--
+-- AUTO_INCREMENT for table `sessions_status`
+--
+ALTER TABLE `sessions_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users`
 --
