@@ -1,4 +1,4 @@
-define({
+/*define({
   userName: {
     required: true,
     minCharacters: 6,
@@ -12,4 +12,4 @@ define({
   password: {
     required: true
   }
-});
+});*/

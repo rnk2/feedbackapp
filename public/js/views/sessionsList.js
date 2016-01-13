@@ -10,9 +10,7 @@ define(['jquery', 'backbone', 'helpers',
         
         collection: new SessionsCollection(),
         initialize: function(options) {
-            this.render();
-            //this.collection.sessions.id = options.mid;
-
+            this.render();            
         },
         template: sessionsListTemp,
         el: "#section",
@@ -21,10 +19,8 @@ define(['jquery', 'backbone', 'helpers',
             $(this.el).html(this.template());
             this.collection.fetch({
                 success: function(collection) {
-                    collection.each(function(model) {
-                        
-                        console.log(model);
-
+                    collection.each(function(model) {                        
+                        model.set("closed", model.attributes.status == "closed" ? true : false);                        
                         self.renderSessionRow(model);
                     }, this);
                 },

@@ -1,13 +1,17 @@
-	<td>{{firstName}} {{lastName}}</td>
-	<td>{{title}}</td>
-	<td>{{location}}</td>
-	<td>{{formatDate date}}</td>
-	<td>
-		{{status}}
-	</td>
-	<td>
-		<a href="#/viewSession/{{id}}" class="btn btn-custom btn-sm active view-session-details" role="button">View Details</a>
-	</td>
-	<td>
-		<a href="#/ratings/{{id}}" class="btn btn-custom btn-sm active" role="button">Feed Back</a>		
-	</td>
+<td>{{id}}</td>
+<td>{{title}}</td>
+<td>{{firstName}} {{lastName}}</td>
+<td>{{location}}</td>
+<td>{{formatDate date}}</td>
+<td>
+	{{status}}
+</td>
+<td class="text-center">
+	<span class="glyphicon list-icons glyphicon-check {{#if subscribed}}active{{/if}}" aria-hidden="true"></span>
+	<span style="margin-left:5px" class="glyphicon list-icons glyphicon-thumbs-up {{#if feedback}}active{{/if}}" aria-hidden="true"></span>
+</td>
+
+<td class="text-center">
+	<a href="#/viewSession/{{id}}" class="glyphicon list-icons glyphicon-list active view-session-details" role="button"></a>
+</td>
+

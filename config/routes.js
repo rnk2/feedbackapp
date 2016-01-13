@@ -3,6 +3,7 @@ var user = require('../app/controller/user');
 var admin = require('../app/controller/admin');
 var session = require('../app/controller/session');
 var db = require('../db');
+var async = require("async");
 
 
 
@@ -63,8 +64,7 @@ exports.init = function(app, passport, auth, smtpTransport) {
                 db.config.query('insert into participants(participant,email,ssid) values(' + "'" + username + "'" + "," + "'" + email + "'" + "," + "'" + ssid + "'" + ');', function(req, res) {
                     response.send(res);
                 });
-            } else {                
-            }
+            } else {}
         });
     });
 
@@ -113,32 +113,60 @@ exports.init = function(app, passport, auth, smtpTransport) {
     });
     //getting existing sessions
     app.get('/getSessions', function(req, resp) {
+
+        if(req.user){
+            var userId = req.user.id;       
+        }
         
+
         var sessionsQuery = "select sessions.id, sessions_status.name as status, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id";
-        
-        db.config.query(sessionsQuery, function(err, rows) {                       
-            resp.send(rows);
+        db.config.query(sessionsQuery, function(err, rows) {            
+            function participantsCb(){                
+            }
+            async.each(rows, function(row, participantsCb) {
+                var participantsQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";                
+                db.config.query(participantsQuery, [row.id, userId], function(err, participant) {                                        
+                        row.subscribed = !!participant.length;
+
+                   var subscriptionQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";     
+
+                    db.config.query(subscriptionQuery, [row.id, userId], function(err, feedback) {
+                        
+                            row.feedback = !!feedback.length;
+                        
+                    participantsCb();    
+                    });
+
+                });
+            }, function(err) {
+                if(err) throw err;                                
+                resp.send(rows);
+            });
         });
     });
 
 
-       //getting existing sessions
+    //getting existing sessions
     app.get('/getSession/:id', function(req, resp) {
 
-        var sessionQuery = "select sessions.id, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id where sessions.id=?"; 
+        var sessionQuery = "select sessions.id, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id where sessions.id=?";
         var sessionId = req.params.id;
-        db.config.query(sessionQuery, [sessionId], function(err, rows) {                        
-            resp.send(rows[0]);
+        db.config.query(sessionQuery, [sessionId], function(err, rows) {
+             var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?";                
+                db.config.query(participantsQuery, [rows[0].id], function(err, participants) {                    
+                    rows[0].participants = participants;                    
+                    resp.send(rows[0]);                
+                });
         });
     });
 
 
     //getting existing sessions
     app.get('/getParticipants/:id', function(req, resp) {
-        
-        var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?"; 
+
+        var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?";
         var sessionId = req.params.id;
-        db.config.query(participantsQuery, [sessionId], function(err, rows) {                        
+        db.config.query(participantsQuery, [sessionId], function(err, rows) {
             resp.send(rows);
         });
     });
@@ -165,7 +193,7 @@ exports.init = function(app, passport, auth, smtpTransport) {
         //console.log(query.sql);
     });
     //deleting the existing sessions
-    app.delete('/index/:id', function(request, response) {        
+    app.delete('/index/:id', function(request, response) {
         var ssid = request.params.id;
         var query = db.config.query('delete from sessions where ssid = ?', [ssid], function(req, res) {
             response.send(res);

@@ -28,3 +28,11 @@
     margin: 0;
 	}
 }
+
+.list-icons {
+	cursor: pointer;
+	color: #dadada;
+	&.active {
+		color : #333;
+	}
+}
