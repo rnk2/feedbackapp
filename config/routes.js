@@ -117,24 +117,18 @@ exports.init = function(app, passport, auth, smtpTransport) {
         if(req.user){
             var userId = req.user.id;       
         }
-        
-
         var sessionsQuery = "select sessions.id, sessions_status.name as status, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id";
         db.config.query(sessionsQuery, function(err, rows) {            
             function participantsCb(){                
             }
             async.each(rows, function(row, participantsCb) {
-                var participantsQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";                
-                db.config.query(participantsQuery, [row.id, userId], function(err, participant) {                                        
+                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";                
+                db.config.query(subscriptionQuery, [row.id, userId], function(err, participant) {                                        
                         row.subscribed = !!participant.length;
-
-                   var subscriptionQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";     
-
-                    db.config.query(subscriptionQuery, [row.id, userId], function(err, feedback) {
-                        
-                            row.feedback = !!feedback.length;
-                        
-                    participantsCb();    
+                   var feedbackQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";
+                    db.config.query(feedbackQuery, [row.id, userId], function(err, feedback) {                        
+                        row.feedback = !!feedback.length;
+                        participantsCb();    
                     });
 
                 });
@@ -148,14 +142,19 @@ exports.init = function(app, passport, auth, smtpTransport) {
 
     //getting existing sessions
     app.get('/getSession/:id', function(req, resp) {
-
-        var sessionQuery = "select sessions.id, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id where sessions.id=?";
+        var userId = req.user.id;
+        var sessionQuery = "select sessions.id, sessions_status.name as status, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id where sessions.id=?";
         var sessionId = req.params.id;
         db.config.query(sessionQuery, [sessionId], function(err, rows) {
              var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?";                
                 db.config.query(participantsQuery, [rows[0].id], function(err, participants) {                    
                     rows[0].participants = participants;                    
-                    resp.send(rows[0]);                
+                    var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";
+                    db.config.query(subscriptionQuery, [rows[0].id, userId], function(err, participant) { 
+                        rows[0].subscribed = !!participant.length;
+                        resp.send(rows[0]);    
+                    });
+                                    
                 });
         });
     });
