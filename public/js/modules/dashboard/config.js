@@ -23,6 +23,7 @@ define(['jquery', 'backbone',
             routes: {
                 '': 'dashboard',
                 'viewCurrentSessions': 'viewCurrentSessions',
+                'viewMySessions': 'viewMySessions',
                 'createSession': 'createSession',
                 'viewSession/:id': 'viewSession',
                 'mysessiondetails/:id': 'mySessions',
@@ -43,7 +44,17 @@ define(['jquery', 'backbone',
 
             viewCurrentSessions: function() {
                 require(["views/sessionsList"], function(SessionsListView) {
-                    new SessionsListView();
+                    new SessionsListView({
+                        currentRoute : "/getSessions"
+                    });
+                });
+            },
+
+            viewMySessions: function() {
+                require(["views/mySessionsList", "appUser"], function(MySessionsListView, appUser) {
+                    new MySessionsListView({
+                        currentRoute : "/getMySessions"
+                    });
                 });
             },
 
@@ -122,5 +133,6 @@ define(['jquery', 'backbone',
             }
 
         });
+       
         return AppRouter;
     });

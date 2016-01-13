@@ -139,6 +139,34 @@ exports.init = function(app, passport, auth, smtpTransport) {
         });
     });
 
+    //getting own sessions
+    app.get('/getMySessions', function(req, resp) {
+
+        if(req.user){
+            var userId = req.user.id;       
+        }
+        var sessionsQuery = "select sessions.id, sessions_status.name as status, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id where sessions.presenterId = ? ";
+        db.config.query(sessionsQuery, [userId], function(err, rows) {            
+            function participantsCb(){                
+            }
+            async.each(rows, function(row, participantsCb) {
+                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";                
+                db.config.query(subscriptionQuery, [row.id, userId], function(err, participant) {                                        
+                        row.subscribed = !!participant.length;
+                   var feedbackQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";
+                    db.config.query(feedbackQuery, [row.id, userId], function(err, feedback) {                        
+                        row.feedback = !!feedback.length;
+                        participantsCb();    
+                    });
+
+                });
+            }, function(err) {
+                if(err) throw err;                                
+                resp.send(rows);
+            });
+        });
+    });
+
 
     //getting existing sessions
     app.get('/getSession/:id', function(req, resp) {
