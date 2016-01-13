@@ -114,9 +114,9 @@ exports.init = function(app, passport, auth, smtpTransport) {
     //getting existing sessions
     app.get('/getSessions', function(req, resp) {
         
-        var sessionsQuery = "select sessions.id, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date, sessions.status FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id";
+        var sessionsQuery = "select sessions.id, sessions_status.name as status, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id";
         
-        db.config.query(sessionsQuery, function(err, rows) {                        
+        db.config.query(sessionsQuery, function(err, rows) {                       
             resp.send(rows);
         });
     });

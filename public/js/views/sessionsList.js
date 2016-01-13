@@ -22,6 +22,9 @@ define(['jquery', 'backbone', 'helpers',
             this.collection.fetch({
                 success: function(collection) {
                     collection.each(function(model) {
+                        
+                        console.log(model);
+
                         self.renderSessionRow(model);
                     }, this);
                 },
