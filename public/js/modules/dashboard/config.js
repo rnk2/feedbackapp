@@ -26,7 +26,7 @@ define(['jquery', 'backbone',
                 'viewMySessions': 'viewMySessions',
                 'createSession': 'createSession',
                 'viewSession/:id': 'viewSession',
-                'mysessiondetails/:id': 'mySessions',
+                'viewMySession/:id': 'viewMySession',
                 'userSessions': 'userSessions',
                 'ratings/:id': 'ratings',
                 'feedback/:id': 'feedback'
@@ -59,6 +59,7 @@ define(['jquery', 'backbone',
             },
 
             viewSession: function(id) {
+
                 require(["views/session","models/session"], function(SessionView, SessionModel) {
 
                     var sessionModel = new SessionModel({                        
@@ -91,15 +92,39 @@ define(['jquery', 'backbone',
                          });*/
             },
 
-            mySessions: function(id) {
-                console.log("my sessions");
-                var sessiondetails = new MySessionsDetails({
-                    collection: {
-                        sessions: new SessionCollection(),
-                        participants: new Participants()
-                    },
-                    mid: id
+            viewMySession: function(id) {
+
+                    require(["views/mySession","models/session", "appUser"], function(SessionView, SessionModel, appUser) {
+
+                    var sessionModel = new SessionModel({                        
+                            currentRoute: "/getMySession",
+                            id: id
+                        }
+                    );
+
+                    var sessionView = new SessionView({
+                        model : sessionModel                        
+                    });
+
+                    sessionModel.fetch({
+                        success: function(model, resp) {
+                            if(resp.errorMessage){
+                                sessionView.error = resp.errorMessage;
+                            }
+
+                            sessionView.render();
+                        },
+                        error : function(err, resp) {
+                            
+                            
+
+
+                        }
+                    })
+
                 });
+
+
             },
 
 

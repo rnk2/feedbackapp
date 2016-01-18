@@ -1,0 +1,96 @@
+<!-- Header -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active">Session Details</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row session-group">
+        <div class="col-md-6 details-section">
+            <div class='row session-title'>
+                <div class="col-md-12">
+                    <p>{{title}}</p>
+                </div>
+            </div>
+            <div class="row description">
+                <div class="col-md-6 col-sm-6">
+                    <h3>Description :</h3>
+                    <div id="description">
+                        <p>
+                            {{description}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    
+                </div>
+            </div>
+            <div class="row location">
+                
+                <div class="col-md-4 col-sm-6">
+                    <h3>Location : </h3>
+                    <div id="description">
+                        <p>
+                            {{location}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <h3>Date : </h3>
+                    <div id="date">
+                        <p>
+                            {{date}}
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    <h3>Status : </h3>
+                    <div id="date">
+                        <p>
+                            {{status}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Feedback</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Participants</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">Feedback</div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default ">
+                                        <div class="panel-heading">
+                                            Participants
+                                        </div>
+                                        <!-- Table -->
+                                        <table class="table table-hover table-responsive" id="sessionParticipants">
+                                            <tr>
+                                                <th>Sl.No</th>
+                                                <th>Participant Name</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

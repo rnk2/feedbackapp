@@ -7,7 +7,12 @@ exports.render = function(req, res, next) {
 };
 
 exports.errorRoute = function(req, res){
-    var errorMessage = req.flash("loginMessage")[0];
+    var errorMessage = req.flash("error")[0];
+    
+    if(!errorMessage) {
+        errorMessage = "Something went wrong. Please try again.";
+    }
+
     res.json({errorMessage : errorMessage});
     return;    
 }

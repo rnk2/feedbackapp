@@ -114,54 +114,57 @@ exports.init = function(app, passport, auth, smtpTransport) {
     //getting existing sessions
     app.get('/getSessions', function(req, resp) {
 
-        if(req.user){
-            var userId = req.user.id;       
+        if (req.user) {
+            var userId = req.user.id;
         }
         var sessionsQuery = "select sessions.id, sessions_status.name as status, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id";
-        db.config.query(sessionsQuery, function(err, rows) {            
-            function participantsCb(){                
-            }
+        db.config.query(sessionsQuery, function(err, rows) {
+            function participantsCb() {}
             async.each(rows, function(row, participantsCb) {
-                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";                
-                db.config.query(subscriptionQuery, [row.id, userId], function(err, participant) {                                        
-                        row.subscribed = !!participant.length;
-                   var feedbackQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";
-                    db.config.query(feedbackQuery, [row.id, userId], function(err, feedback) {                        
+                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";
+                db.config.query(subscriptionQuery, [row.id, userId], function(err, participant) {
+                    row.subscribed = !!participant.length;
+                    var feedbackQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";
+                    db.config.query(feedbackQuery, [row.id, userId], function(err, feedback) {
                         row.feedback = !!feedback.length;
-                        participantsCb();    
+                        participantsCb();
                     });
 
                 });
             }, function(err) {
-                if(err) throw err;                                
+                if (err) throw err;
                 resp.send(rows);
             });
         });
     });
 
+
+
+
+
+
     //getting own sessions
     app.get('/getMySessions', function(req, resp) {
 
-        if(req.user){
-            var userId = req.user.id;       
+        if (req.user) {
+            var userId = req.user.id;
         }
         var sessionsQuery = "select sessions.id, sessions_status.name as status, sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id where sessions.presenterId = ? ";
-        db.config.query(sessionsQuery, [userId], function(err, rows) {            
-            function participantsCb(){                
-            }
+        db.config.query(sessionsQuery, [userId], function(err, rows) {
+            function participantsCb() {}
             async.each(rows, function(row, participantsCb) {
-                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";                
-                db.config.query(subscriptionQuery, [row.id, userId], function(err, participant) {                                        
-                        row.subscribed = !!participant.length;
-                   var feedbackQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";
-                    db.config.query(feedbackQuery, [row.id, userId], function(err, feedback) {                        
+                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";
+                db.config.query(subscriptionQuery, [row.id, userId], function(err, participant) {
+                    row.subscribed = !!participant.length;
+                    var feedbackQuery = "select feedback.id FROM feedback where feedback.sessionId=? and feedback.participantId = ?";
+                    db.config.query(feedbackQuery, [row.id, userId], function(err, feedback) {
                         row.feedback = !!feedback.length;
-                        participantsCb();    
+                        participantsCb();
                     });
 
                 });
             }, function(err) {
-                if(err) throw err;                                
+                if (err) throw err;
                 resp.send(rows);
             });
         });
@@ -174,16 +177,45 @@ exports.init = function(app, passport, auth, smtpTransport) {
         var sessionQuery = "select sessions.id, sessions_status.name as status, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id where sessions.id=?";
         var sessionId = req.params.id;
         db.config.query(sessionQuery, [sessionId], function(err, rows) {
-             var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?";                
-                db.config.query(participantsQuery, [rows[0].id], function(err, participants) {                    
-                    rows[0].participants = participants;                    
-                    var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";
-                    db.config.query(subscriptionQuery, [rows[0].id, userId], function(err, participant) { 
-                        rows[0].subscribed = !!participant.length;
-                        resp.send(rows[0]);    
-                    });
-                                    
+            var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?";
+            db.config.query(participantsQuery, [rows[0].id], function(err, participants) {
+                rows[0].participants = participants;
+                var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";
+                db.config.query(subscriptionQuery, [rows[0].id, userId], function(err, participant) {
+                    rows[0].subscribed = !!participant.length;
+                    resp.send(rows[0]);
                 });
+
+            });
+        });
+    });
+
+
+
+    //getting existing sessions
+    app.get('/getMySession/:id', function(req, resp) {
+        var userId = req.user.id;
+        var sessionQuery = "select sessions.id, sessions_status.name as status, sessions.description,  sessions.title as title, users.firstName, users.lastName, locations.title as location, sessions.date FROM sessions JOIN users  ON sessions.presenterId = users.id JOIN locations ON sessions.locationId = locations.id JOIN sessions_status ON sessions.status = sessions_status.id where sessions.id=?";
+        var sessionId = req.params.id;
+        var presenterQuery = "select sessions.presenterId from sessions where sessions.id=?";
+        db.config.query(presenterQuery, [sessionId], function(err, rows) {
+            if (rows[0] && rows[0].presenterId == userId) {                
+                db.config.query(sessionQuery, [sessionId], function(err, rows) {
+                    var participantsQuery = "select participants.id, participants.userId as userId, users.firstName, users.lastName, users.email FROM participants JOIN users  ON participants.userId = users.id where participants.sessionId=?";
+                    db.config.query(participantsQuery, [rows[0].id], function(err, participants) {
+                        rows[0].participants = participants;
+                        var subscriptionQuery = "select participants.id FROM participants where participants.sessionId=? and participants.userId = ?";
+                        db.config.query(subscriptionQuery, [rows[0].id, userId], function(err, participant) {
+                            rows[0].subscribed = !!participant.length;
+                            resp.send(rows[0]);
+                        });
+
+                    });
+                });
+            } else {
+                resp.redirect('/errorRoute');
+                return;
+            }
         });
     });
 

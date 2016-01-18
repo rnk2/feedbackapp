@@ -2,9 +2,9 @@ define(['jquery', 'backbone', 'helpers',
     'templates/mySessionsList',
     'templates/session',
     'collections/sessions',
-    "views/mySessionRow"
+    "views/mySessionsRow"
 ], function($, Backbone, Helpers, mySessionsListTemp,
-    sessionsSubTemplate, SessionsCollection, MySessionRow) {
+    sessionsSubTemplate, SessionsCollection, MySessionsRow) {
 
     var MySessionsListView = Backbone.View.extend({
         
@@ -37,7 +37,7 @@ define(['jquery', 'backbone', 'helpers',
         },
 
         renderSessionRow: function(model) {
-            var sessionRow = new MySessionRow({
+            var sessionRow = new MySessionsRow({
                 model: model                
             });
             $(this.el).find("#currentSessions").append(sessionRow.el);
