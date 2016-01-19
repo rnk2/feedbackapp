@@ -4,25 +4,51 @@
         <li><a href="#/">Dashboard</a></li>
         <li class="active">Current sessions</li>
     </ol>
-    
-    <div class="row session-list-container">
-        <div class="col-md-12">
-            <div class="panel panel-default ">
-                <div class="panel-heading">Current Sessions</div>
-                <!-- Table -->
-                <table class="table table-hover table-responsive" id="currentSessions">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Presenter</th>                        
-                        <th>Locations</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th class="text-center">Subscription</th>
-                        <th class="text-center">Details</th>
-                    </tr>
-                </table>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+        <li><a data-toggle="tab" href="#subscribed">Subscribed</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="row session-list-container tab-pane fade in active" id="all">
+            <div class="col-md-12">
+                <div class="panel panel-default ">
+                    <div class="panel-heading">Current Sessions</div>
+                    <!-- Table -->
+                    <table class="table table-hover table-responsive" id="currentSessions">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Presenter</th>
+                            <th>Locations</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th class="text-center">Subscription</th>
+                            <th class="text-center">Details</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row session-list-container tab-pane fade" id="subscribed">
+            <div class="col-md-12">
+                <div class="panel panel-default ">
+                    <div class="panel-heading">Current Sessions</div>
+                    <!-- Table -->
+                    <table class="table table-hover table-responsive" id="subscribedSessions">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Presenter</th>
+                            <th>Locations</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th class="text-center">Details</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+    
+    
 </div>
