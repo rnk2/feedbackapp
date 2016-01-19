@@ -1,14 +1,18 @@
 define(['jquery', 'backbone', 'templates/session',
-        'templates/sessionDetailsSub', 'appUser', 'collections/participants',
+        'templates/sessionDetailsSub', 'appUser', 'collections/participants','models/subscription',
         'views/participantRow', 'templates/overlays/feedback'
     ],
     function($, Backbone, sessionTemplate, sessionDetailsSubTemplate, appUser,
-     ParticipantsCollection, ParticipantRowView, feedbackOverlayTemplate) {
+     ParticipantsCollection, SubscriptionModel, ParticipantRowView, feedbackOverlayTemplate) {
 
         var SessionDetailsView = Backbone.View.extend({
 
             initialize: function(options) {
-
+                
+                this.render();
+                
+                                  
+                
             },
 
 
@@ -23,16 +27,28 @@ define(['jquery', 'backbone', 'templates/session',
 
             el: "#section",
 
+            handleRerender : function(){                
+                var self =this;
+                $(this.el).html(this.template(this.model.toJSON()));
 
+                this.model.fetch({
+                    success : function(model){                        
+                        self.participantsCollection.reset(self.model.attributes.participants);
+                        self.participantsCollection.each(function(model, index) {
+                            model.attributes.index = index + 1;
+                            self.renderParticipantRow(model);
+                        });
+                    }
+                })
+            },
 
             render: function() {
-
-                var self = this;
-
+              
+                var self = this;                
                 $(this.el).html(this.template(this.model.toJSON()));
-                var participantsCollection = new ParticipantsCollection(this.model.attributes.participants);
+                self.participantsCollection = new ParticipantsCollection(this.model.attributes.participants);
 
-                participantsCollection.each(function(model, index) {
+                self.participantsCollection.each(function(model, index) {
                     model.attributes.index = index + 1;
                     self.renderParticipantRow(model);
                 });
@@ -45,14 +61,32 @@ define(['jquery', 'backbone', 'templates/session',
                 $(this.el).find("#sessionParticipants").append(participantRowView.el);
             },
 
-            handleSessionSubscription: function() {
+            handleSessionSubscription: function(e) {                
 
-                console.log(appUser);
-                console.log(this.model.attributes);
+                e.preventDefault();
+                var self = this;
+                var subscription = new SubscriptionModel({
+                    currentRoute : "/sessionSubscription"
+                });
 
+              
+                var answer = confirm("Are you sure ?");
+                
+                if(answer){
+                    subscription.set('userId', appUser.id);
+                    subscription.set('sessionId', self.model.attributes.id);                
 
-
-
+                    subscription.save({wait : true},{
+                        success: function(model, response) {
+                           self.model.set("subscribed" , true);
+                           self.handleRerender();
+                        },
+                        error: function() {
+                           
+                        }
+                    });
+                }
+                
             },
 
             handleSessionUnsubscription: function() {

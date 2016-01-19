@@ -23,6 +23,7 @@
     "session": {
         "create": "insert into sessions(title, presenterId, locationId, date, description ) values(?,?,?,?,?)",
         "getLocations": "SELECT * FROM locations where status = '1'",
+        "subscribe":"INSERT INTO participants (userId, sessionId, status) values (?,?,?)",
         "saveAdminProject": "INSERT INTO project(name  ,description ,startdate ,enddate , leadid ,createddate, category) VALUES  (?, ?, ?, ?, ?, now(), 0)",
         "editAdminProject": "UPDATE project SET name=?, description = ?, startdate = ?, enddate= ?, editdate = now() WHERE id = ?",
         "getUserProjects": "SELECT pr.id, pr.name FROM users as usr JOIN teamresource tr ON usr.id = tr.userid JOIN Team tm on tr.teamid = tm.id JOIN project pr on pr.leadid = tm.leadid or pr.category = 0 WHERE usr.id = ? AND pr.active = true",

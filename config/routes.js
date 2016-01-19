@@ -230,10 +230,10 @@ exports.init = function(app, passport, auth, smtpTransport) {
         });
     });
 
-
-
-
-
+    //user subscribing session
+    app.post('/sessionSubscription',function(req, resp){
+        session.subscribe(req, resp);
+    });
 
     //new updates of scheduled sessions before date
     app.put('/index/:id', function(request, response) {
